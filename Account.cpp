@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Account::Account(void):balance(0)
+Account::Account():balance(0)//initialization syntax.  can only be used with constructors.
 {
 }
 
@@ -11,7 +11,8 @@ vector<string> Account::Report()
   vector<string> report;
   report.push_back("Balance is " + to_string(balance));
   report.push_back("Transactions: ");
-  for(auto t:log)
+
+  for (auto t:log)
    {
      report.push_back(t.Report());
    }
@@ -36,9 +37,9 @@ bool Account::Deposit(int amt)
 
 bool Account::Withdraw(int amt)
 {
-  if(amt >= 0)
+  if (amt >= 0)
     {
-    if(balance >= amt)
+    if (balance >= amt)
       {
         balance -= amt;
         log.push_back(Transaction(amt,"Withdraw"));

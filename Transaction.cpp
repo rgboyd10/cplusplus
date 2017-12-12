@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Transaction::Transaction(int amt, std::string kind):amount(amt), type(kind)
+Transaction::Transaction(int amt, std::string kind):amount(amt),type(kind)
 {
 }
 
