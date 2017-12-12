@@ -11,9 +11,9 @@ int main()
 
   //requests input and reads into variables
   cout << "Please enter the first string: \n";
-  cin >> guess1;
+  getline(cin,guess1);
   cout << "Please enter the second string: \n";
-  cin >> guess2;
+  getline(cin,guess2);
 
   if(guess1.length() > guess2.length())
     {
