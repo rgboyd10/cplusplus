@@ -1,0 +1,6 @@
+i=static_cast<int>(4.9);
+
+static_cast<>
+dynamic_cast<>
+const_cast<>
+reinterpret_cast<>
