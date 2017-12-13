@@ -1,0 +1,22 @@
+Member functions
+       -Open, read, write a file
+       	      -Keep a file handle in a member variable
+       -Work with a database
+       	      -Keep an open database connection in a member variable
+
+Destructors
+	-Guarantees that cleanup gets a chance to happen
+	-Name is ~ and name of the class Eg ~Account()
+
+Scope
+{
+	int i;
+	Account a;
+	Transaction T(50,"Deposit");
+}
+from curly brace to curly brace
+
+-Constructor when object comes into scope.
+-Destructor runs when object goes out of scope.
+-Most common case - flow of control reaches closing brace.
+-Member variables go out of scope when the instance they belong to does.

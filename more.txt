@@ -1,0 +1,27 @@
+Exceptions
+	-Alternative to returning error codes.
+	-Can make neater and faster code when done right.
+
+The free store
+    -raw pointers
+    -std::shared_ptr and std::unique_ptr
+    -Memory management - and resource management in general
+    -Learn from modern material only
+    -RAII, Rule of 3, Rule of 5
+
+Lambdas
+	-A way to use a few lines of code as a parameter to a function, or something to store in a variable.
+
+-Inheritance
+-Virtual functions
+-Polymorphism
+-Multiple inheritance
+-enum keyword
+-Boolean operators && and ||, shortcutting
+-Interacting with the OS- eg calling a Windows API
+-Bitwise operators &|^!<<>>
+-switch statement
+-More punctuation - %&*->?
+-Default parameters to functions
+-Writing templates
+-Writing your own operator overloads
