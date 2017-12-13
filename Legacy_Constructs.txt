@@ -153,3 +153,20 @@ Incrementing a pointer makes it point somewhere else
 -> after a pointer to object is like (*pointer).
    -calling a member function
 
+Pointer arithmetic is a great source of bugs
+	-Don't copy and reuse such code
+	-Understand it and redo using constructs you know (eg string vector)
+
+Summary
+Old code has its uses
+    But when it uses old constructs, it can be hard to read.
+
+It can also be a great source of bugs
+   -Never copy and paste without understanding
+   -Try to represent your understanding using modern constructs.
+
+Much of C++'s reputation for difficulty came from these old constructs
+     You don't have to use them!
+     There are safer, easier alternatives available.
+
+Try looking for example code that uses a more modern approach.

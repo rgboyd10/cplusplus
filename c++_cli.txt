@@ -1,0 +1,13 @@
+C++/CLI
+Specialized variants of c++ are popular
+	    -Draw on a well understood syntax
+	    -Work with existing libraries
+	    -Leverage existing tools
+
+c++/CLI is a variant that makes managed code
+	-Like C#, or VB.NET
+	-Excellent for wrappers around native libraries so they can be called from .net
+	-Has a few extra pieces of syntax to support CLR concepts
+	-Out of scope here
+
+Learning C++ means you essentially known C++/CLI too

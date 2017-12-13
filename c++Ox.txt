@@ -1,0 +1,10 @@
+C++Ox
+C++ as a language belongs to no person or company.
+The standard that defines the language
+    -A standards committee updates it from time to time
+    -C++ 98, Cc++03
+    -New version C++11
+
+Compiler vendors implemented a lot of it in advance
+	 -Visual Studio 2010 supports all the library changes, and almost all the language changes, already
+
