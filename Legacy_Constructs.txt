@@ -1,0 +1,155 @@
+Legacy Constructs
+
+Pre C++ 11
+-No lambdas
+-No ranged for loops
+
+Written by someone who doesn't like templates
+-No std::vector
+-No static_cast
+
+Written when habits were different
+-No const
+-Lots of manual memory management
+-Pointers everywhere
+
+No Standard Library
+-No std::string
+-No std::cout
+
+C being compiled as C++
+-No classes
+---
+
+Casting
+old 
+int i = (int) 4.9;
+
+is the same as
+
+new
+ int i = static_cast<int>(4.9);
+
+Other kinds of casting  unfortunately also use the same syntax
+p = (Employee*) input;
+p = (Transaction) t;
+---
+
+Macros
+An old C construct
+#define Pi 3.14
+
+When defining a constant, use a const variable with a type
+const double Pi = 3.14;
+-Ideally in a class to avoid name collisions.
+
+Somtimes used to make "functions"
+#define SQR(x) (x*x)
+
+Nightmare if written wrongly
+SQR(1+1) will expand to (1+1*1+1) which is 3
+
+If inlining, use a function because it will be faster
+---
+
+C Style Arrays
+Declared with a type, and an extent known at compile time
+int numbers[4];
+
+Can be initiaalized when declared
+double morenumbers[] = {1.1, 2.2, 3.3, 4.4, 0};
+       -Extent is deduced by the compiler.
+
+These arrays do not know how many elements they hold and can't grow themselves.
+      -Developer needs to handle that somehow.
+
+When you see [], you probably think vector
+     -C Style arrays are reasonably similar
+     -But they can't grow themselves
+     -Can also be accessed with pointer manipulation
+     -Code that uses the array name alone is getting a pointer to the start of the array.
+---
+
+C Style strings
+Before std::string thre were still strings
+       -They were just way more work to use.
+
+A C-style array of char elements
+  -Sometimes called "char* strings"
+
+The character with the numeric value zero
+    -'\0'
+    -Not '0' or "0"
+    -Requires an extra space at the end to hold this null terminator.
+
+Dozens of functions to work with these kinds of strings
+       -strlen - returns the length of the string.
+       -strcpy - copies one string into another
+       -strcat - glues 2 strings together
+
+A literal string like "Hello" is actually represented like this
+  - But luckily std::string knows hot to construct from a char* string
+
+When you see char*, or char[], think "string"
+
+Also, when you see functions that start str
+---
+
+Printf
+The C way of writing to the screen
+    -Means "print with format"
+First paramtere is a "format string"
+      -Mix of literal text and placeholders
+
+printf("%s() called \nBaseaddress: 0x%08x\n", symbol_name, base_address);
+printf("Returnaddress: 0x08%x\n", return_address);
+printf("In File: %s (Line: %d)\n\n", file_name, line_number);
+
+When reading someone else's code, you can generally ignore the specific meaning of each placeholder (%d, %f, %x etc)
+---
+
+Typdef
+Sets up synonyms that appear to be new types, but are just new names for existing ones
+     typedef int BOOL
+
+You'll see this in code that predates the bool type in C++.
+
+Sometimes done to make code more portable
+	  In theory, you can just change the typedef and remaining code is unchanged.
+
+Sometimes done for expressivity
+	  Distinguish between an int that represents a size and one that represents a position
+
+Sometimes to reduce typing or <> fear
+
+typedef std::vector<int> VectorOfInt;
+VectorOfInt numbers;
+typedef std::vector<double> VectorOfDouble;
+VectorOfDouble morenumbers;
+---
+
+Pointers
+Too much here to cover but punctuation to look for:
+    -* in a declaration means pointer
+       int* pi; // pi is a pointer to int
+       int *pi; // no difference - pi is a pointer to an int
+
+pi is not an integer, it's a pointer to an integer
+
+& before a variable means "address of"
+int j = 4;
+pi = &j;
+
+pi is equal to the address of j
+
+You pass them to functions which turn around and use them.
+
+* before a variable means "content of"
+  *pi = 3; //changes j's value
+
+Incrementing a pointer makes it point somewhere else
+	     Generally only done with arrays
+
+-> after a pointer to object is like (*pointer).
+   -calling a member function
+
