@@ -1,0 +1,18 @@
+By default, what goes to the function is a copy.
+void foo(Transaction t);
+//...
+Transaction deposit(50, "Deposit");
+foo(deposit);
+	//Changes inside foo() will be to the local variable, not to deposit.
+
+You can arrange for the function to take the parameter by reference.
+void foo(Transaction$ t);
+     //Call it exactly the same way:foo(deposit);
+     //Changes to deposit will "stick"
+
+
+Even if you don't want to change the parameter, you might pass by reference
+     //Old school developers did this to save runtime "cost" of a copy operation
+     	   void foo(const Transaction& t);
+     //It expresses your intent, and ensures you won't accidentally change the parameter.
+
