@@ -1,0 +1,12 @@
+Scope
+Objects created like this have a lifetime
+- Constructors called when control reaches the line they're declared
+-Memory is llocated for the on the stack
+-Object goes out of scope - usually at a}
+-Memory is freed and desctructor runs
+
+Resource acquisition is initialization
+-Acquire resources in the constructor
+-Release them in the destructor
+-Ex) Open/close file, database connection, change Windows cursor,...
+

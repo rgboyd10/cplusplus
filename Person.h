@@ -1,5 +1,4 @@
 #include <string>
-
 class Person
 {
  private:
@@ -9,5 +8,5 @@ class Person
   
  public:
   Person(std::string first, std::string last, int arbitrary);
-  
+  ~Person();
 };
