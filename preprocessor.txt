@@ -1,0 +1,12 @@
+PreProcessor
+-Lines that start # are pre-processor directives
+       -#include
+
+-Can use to compile slightly different code under difference circumstances
+     -ex) a debug build
+
+-Can also use for convenience
+     -include guards with #ifndef/#endif and #define
+     #pragma once
+
+
