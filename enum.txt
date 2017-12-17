@@ -1,0 +1,4 @@
+enum
+
+	-give names to a set of constants
+	-names must be unique

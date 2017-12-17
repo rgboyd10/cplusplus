@@ -1,0 +1,4 @@
+namespaces
+	-prevent name collisions
+	-separate from class name with :: (eg std::string)
+

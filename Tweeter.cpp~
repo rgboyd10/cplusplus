@@ -1,0 +1,11 @@
+#include "Tweeter.h"
+
+Tweeter::Tweeter(void)
+{
+
+}
+
+Tweeter::~Tweeter(void)
+{
+  
+}

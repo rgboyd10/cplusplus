@@ -1,0 +1,5 @@
+inheritance
+
+	-key to oo design
+	-derived classes can add or override member variables and functions
+	
