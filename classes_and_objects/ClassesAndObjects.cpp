@@ -1,7 +1,11 @@
 //#include "Person.h"
 #include "Tweeter.h"
 #include "status.h"
+#include "Person.h"
 #include <iostream>
+
+using std::cout;
+using std::endl;
 
 using namespace std;
 
@@ -12,7 +16,9 @@ int main()
     Tweeter t1("Someone", "Else", 456, "@whoever");
   }
 
-  cout << "after innermost block" <<  std::endl;
+  cout << "after innermost block" << endl;
+  cout << "p1: " << p1.GetName() << " " << p1.GetNumber() << p1.SetNumber(124) << endl;
+  cout << "p1: " << p1.GetName() << " " << p1.GetNumber() << endl;
   Status s = Pending;
   s = Approved;
   return 0;
