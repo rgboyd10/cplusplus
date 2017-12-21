@@ -1,7 +1,0 @@
-#include "Person.h"
-class Tweeter :
-public Person
-{
-  public ::Tweeter(void);
-  ~Tweeter(void);
-};

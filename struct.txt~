@@ -1,5 +1,0 @@
-struct
-	-generallly used for plain data with little or no business logic
-	-can have member functions, constructor, desctructor
-	-only difference: default access is public
-
