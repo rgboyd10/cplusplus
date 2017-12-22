@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Utility.h"
+
 using namespace std;
 
 bool IsPrime(int x)
