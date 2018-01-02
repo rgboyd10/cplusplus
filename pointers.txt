@@ -1,0 +1,21 @@
+Pointers and References
+-Pointers hold the address of something else
+	 -One way to get one: & operator
+int* pA = &A;
+int *pA = &A;
+
+To get through the pointe to its target: * operator
+
+*pA = 5;
+
+Shortcut for (*p). is p->
+
+Developer needs to assign a value for "not pointing to anything"
+-0
+-NULL
+-nullptr(c++11)
+
+Reference is an alias for something else
+	  -Can only set its target when declaring it
+	  -All other actions go through the refernce to its target
+
