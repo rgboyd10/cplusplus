@@ -20,5 +20,11 @@ class Person
   bool operator<(Person& p);
   bool operator <(int i);
   friend bool operator<(int i, Person& p);
+
+
 };
+
+#endif
+
 bool operator <(int i, Person& p);
+

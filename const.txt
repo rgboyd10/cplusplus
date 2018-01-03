@@ -1,0 +1,13 @@
+CONST
+- A way to commit to the compiler that you won't change something
+  -When declaring a local variable
+  	const int zero = 0;
+  -As a function parameter
+      	int foo(const int i)
+	int something(const Person& p)
+
+  -MOdifier on a member function
+  	    int GetName() const;
+
+Const correctness can be difficult.
+

@@ -1,0 +1,12 @@
+CONST WITH POINTERS
+- You can declare the pointer to be const
+  int * const cpI
+  -Then you can't change it to point somewhere else.
+
+- Or that it points at something const
+ const int* cpI
+ -Then you can't use it to change the value of the target.
+
+- Or both if you really want
+  const int * const crazy
+

@@ -1,0 +1,14 @@
+THE FREE STORE
+-Local variables go out of scope when the function ends
+       -That's not always what you want
+-The free store is for longer lives variables
+     Create with new
+     -Returns a pointer to the object or instance
+     -Uses a constructor to initialize the object
+   
+     Tear down with delete
+     -uses the desctructor to clean up the object
+  
+      Slightly different syntax for "raw arrays"
+      -But modern C++ avoids "raw arrays"
+
