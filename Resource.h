@@ -7,5 +7,5 @@ class Resource
  public:
   Resource(std::string n);
   ~Resource(void);
-  std::stringGetName() const {return name;}
+  std::string GetName() const {return name;}
 };

@@ -1,0 +1,11 @@
+#include "Person.h"
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  Person Kate("Kate", "Gregory", 345);
+  Kate.AddResource();
+  return 0;
+}

@@ -1,6 +1,8 @@
 #include <string>
 #ifndef _Person_H
 #define _Person_H
+#include "Resource.h"
+#include <memory>
 
 class Person
 {
@@ -8,23 +10,23 @@ class Person
   std::string firstname;
   std::string lastname;
   int arbitrarynumber;
-  
+  Resource* pResource;
+
  public:
   Person(std::string first,
 	 std::string last,
 	 int arbitrary);
+  Person(const Person& p);
   ~Person();
-  std::string GetName();
-  int GetNumber() {return arbitrarynumber;}
+  std::string GetName() const;
+  int GetNumber() const {return arbitrarynumber;}
   void SetNumber(int number) {arbitrarynumber = number;}
+  void SetFirstName(std::string first) {firstname = first;}
   bool operator<(Person& p);
   bool operator <(int i);
   friend bool operator<(int i, Person& p);
-
-
+  Person& operator=(const Person& p);
+  void AddResource();
 };
-
-#endif
-
 bool operator <(int i, Person& p);
-
+#endif
