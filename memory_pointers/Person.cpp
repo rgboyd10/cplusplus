@@ -3,21 +3,9 @@
 
 using namespace std;
 
-Person::Person(string first, string last, int arbitrary) : firstname(first), lastname(last), arbitrarynumber(arbitrary), pResource(NULL)
+Person::Person(string first, string last, int arbitrary) : firstname(first), lastname(last), arbitrarynumber(arbitrary)
 {
   cout << "Constructing" << firstname << " " << lastname << endl;
-}
-
-Person::Person(const Person& p) : firstname(p.firstname), lastname(p.lastname), arbitrarynumber(p.arbitrarynumber), pResource(new Resource(p.pResource->GetName()))
-{
-  cout << "Constructing" << firstname << " " << lastname << endl;
-}
-
-
-Person::~Person()
-{
-cout << "Destructing" << firstname << " " << lastname << endl;
- delete pResource;
 }
 
 string Person::GetName() const
@@ -42,16 +30,6 @@ bool operator<(int i, Person& p)
 
 void Person::AddResource()
 {
-  delete pResource;
-  pResource = new Resource("Resource for " + GetName());
-}
-
-Person& Person::operator=(const Person& p)
-{
-  firstname = p.firstname; 
-  lastname = p.lastname;
-  arbitrarynumber = p.arbitrarynumber;
-  delete pResource;
-  pResource = new Resource(p.pResource->GetName());
-  return *this;
+  pResource.reset();
+  pResource = std::make_shared<Resource>("Resource for " + GetName());
 }

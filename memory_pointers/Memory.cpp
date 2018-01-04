@@ -11,5 +11,6 @@ int main()
   Kate.AddResource();
   Person Kate2 = Kate;
   Kate = Kate2;
+  string s1 = Kate.GetResourceName();
   return 0;
 }

@@ -19,3 +19,12 @@ Reference is an alias for something else
 	  -Can only set its target when declaring it
 	  -All other actions go through the refernce to its target
 
+SMART POINTERS
+-shared_ptr
+	-Reference counted
+-weak_ptr
+	-Lets you peek at a shared_ptr without bumping the reference count
+-unique_ptr
+	-Noncopyable (use std:move)
+
+
