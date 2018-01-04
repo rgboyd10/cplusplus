@@ -1,0 +1,14 @@
+OTHER COLLECTIONS
+
+list: a linked list
+	-faster than a vector for adding new elements
+	-slower than vector for acceessing elements
+
+queue, dequeue: push and pop from one or both ends, FIFO
+       -priority_queue
+
+set
+	-useful for mathematical operations like union or difference
+
+multimap
+	-map that can have more than one value for a given key

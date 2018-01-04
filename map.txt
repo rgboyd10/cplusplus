@@ -1,0 +1,10 @@
+map
+
+-set of key-value pairs
+-grows as needed
+-kept sorted internally to speed searches
+-add or access items with []
+     -or use pair <> template when adding
+     -can use fine() to access also
+
+#include <map>
