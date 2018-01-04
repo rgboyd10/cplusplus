@@ -1,6 +1,0 @@
-vector
-
--simple collection of items
--grows as needed when new items are added
-       -can cause a lot of copying
-

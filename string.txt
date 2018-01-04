@@ -1,0 +1,16 @@
+string
+
+-a string a characters like "hello"
+
+-can be cnstructed from literal "hello"
+     -wstring from L "hello"
+
+-operator overloads are natural
+	  - +,+=,<,==,etc
+	  - <<
+
+-has methods as well
+     -size(), substr() etc
+     -typically need to combine with iterators from more complex work
+
+#include <string>

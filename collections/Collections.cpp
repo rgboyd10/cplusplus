@@ -51,9 +51,9 @@ int main()
   for(auto ip = vp.begin(); ip != vp.end(); ip++)
     {
       cout << ip->GetName() << " ";
-
-      cout << endl << "----------------" << endl;
     }
+  
+  cout << endl << "----------------" << endl;
 
   map<int, Person> people;
   people[Kate.GetNum()] = Kate;
@@ -79,7 +79,7 @@ int main()
   cout << endl << "----------------" << endl;
 
   cout << "contents of v: ";
-  for_each(vbegin(), v.end(), print);
+  for_each(v.begin(), v.end(), print);
 
   cout << endl;
 
@@ -101,5 +101,8 @@ int main()
   int length = third.GetName().size();
   string firstfour = third.GetName().substr(0,4);
   cout << length << " " << firstfour;
-  
+
+  cout << endl;
+
+  return 0;
 }

@@ -1,7 +1,0 @@
-SORTING AND SEARCHING
-
--Implemented as functions that take a collection rather than as methods of the collection
-	     -Actually iterators that give access to the collection
-
-for_each
-find_if
