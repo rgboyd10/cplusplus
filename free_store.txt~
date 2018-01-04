@@ -1,5 +1,0 @@
-THE FREE STORE
--Local variables go out of scope when the function ends
-       -That's not always what you want
--The free store is for longer lives variables
-

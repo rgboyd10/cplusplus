@@ -21,7 +21,7 @@ int main()
    {
      cout << "resource can't be cast to tweeter" << endl;
 }
-  cout << pi->GetName() << endl;
+  cout << "resource can't be cast to tweeter"  << endl;
   
 
   return 0;

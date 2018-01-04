@@ -1,0 +1,10 @@
+vector
+
+-Simple collection of items
+-Grows as needed when new items are added
+       -Can cause a lot of copying
+-Strongly typed through templates
+-Access with iterators or []
+
+#include <vector> to use
+
