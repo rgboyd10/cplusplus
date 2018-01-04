@@ -1,0 +1,17 @@
+POINTERS AND INHERITANCE
+
+-A pointer to a derived class can be stored as a pointer to the base class istead
+   -Respects the "is a" relationship
+   -Vital to Liskov substitutatibility
+
+-Any base class function can then be called through the pointer
+     -Virtual function - derived  class function executes
+     -Nonvirtual function - base class function executes
+     -This is C++ - you get to choose.
+
+-Can't put a base class pointer into a derived class pointer
+      -Some member variables will be missing in the base class.
+
+-Same rules when using smart pointers
+      -Smart pointers act like regular pointers and that includes polymorphism
+
