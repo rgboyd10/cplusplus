@@ -1,0 +1,77 @@
+Lambda
+
+-an expression that represents doing something
+-imagine handing an operation or function(code) to some other operation or function
+	 -for generic work
+	 -for a functional style
+	 -for concurrency
+	 -for readability
+	      -eliminates tiny functions
+
+Tiny Functions
+void print(int i)
+{
+	cout << i << " ";
+}
+
+int main()
+{
+	vector <int> v;
+	//...
+	for_each(v.begin(), v.end(), print);
+}
+
+use a lambda istead
+
+int main()
+{
+	vector <int> v;
+	//...
+	for_each(v.begin(), v.end(),
+	[](int i) //beginning of the lambda
+	       {
+		cout << i << " ";
+	       }
+		);
+}
+--------------------------
+RETURNING
+-Lambdas may return a value
+-Only a return statement in the lambda
+      -Return type inferred by compiler
+
+-More than one statement
+      -Development must specify return type
+
+[](int n) -> double {/**/}
+-------------------------
+
+When you write a lambda, the compiler generates an anonymous function object
+     -Overrides(operator - the function call
+     -Parameters are in the () of the lambda
+     -Return type is after the -> of the lambda
+
+Has member variables that hold values the lambda might use
+    -controlled by info in the [] of the lambda
+
+
+You can keep this functin object in a variable or just use it right away as we've been doing.
+
+-------------------
+The capture
+-empty [] - captures nothing, works only with function parameters
+-[x,y] - capture x and y by value
+       -copies are made
+       -lambda can be use when x and y have gone out of scope
+
+-[&x,&y] - capture x and y by reference
+	 -no copies, changes affect the original
+	 -dangling references may be an issue
+
+-[=]-copy "everything" by value
+	  -actually it's everything use in the body of the lambda
+
+-[&]-copy "everything" by reference.
+
+'Mutable' keyword - don't make the member variables const
+
