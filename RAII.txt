@@ -1,0 +1,30 @@
+RAII - Resource Acquisition is Initialization
+
+try
+{
+	auto x = new X(Stuff);
+	//risky stuff
+	delete x;
+}
+catch(exection& e)
+{
+	//react
+}
+
+vs
+
+try
+{
+	auto x = make_shared<X>(Stuff);
+	     //risky stuff
+}
+catch(exception& e)
+{
+	//react
+}
+
+-There is no finally keyword or a need for one
+
+allocate local stack objects correctly
+
+

@@ -1,0 +1,67 @@
+TYPEDEF
+
+-Used to define your own types
+      typedef unsigned long DWORD;
+      typedef int BOOL;
+
+-Once very popular
+      -Added meaning to types
+      -In C, used to make using structs easier.
+      -Rampant in Windows development
+
+-Still used in function pointers
+
+FUNCTION POINTERS
+-Decide at runtime what function to execute: very powerful.
+-In C there was one way: function pointers.
+-C++ added polymorphism
+     Account->Update() will use right subclass's Update() method
+
+-c++11 added lambdas
+       put the actual code the execute as a parameter to another call
+
+-Function pointers are easy to set and use
+	  Method = CalculateSlowly;
+	  Method(a,b,c);
+
+A little tricky to declare, everyone uses a typedef
+  typedef int(*CHANGER)(int i);
+  CHANGER f;
+
+POINTER TO MEMBER FUNCTION
+-Include the class name when setting up the typedef
+	 typedef int(Utility::* UF)();
+
+-Use the class name and address-of operator when setting:
+     UF action;
+     action = &Utility::triplex;
+
+-Dereference when using(and lots of brackets)
+	     return (u.*action)();
+
+VOID*
+-used to indicate a pointer to anything
+-Any kind of pointer(char*, Employee*, int*, ...) can be cast to it.
+-Popular function parameter
+-Case it back to what you know it is.
+-In modern code, use a pointer to a base class
+    -Then polymorphism
+    -Or dynamic_cast<>
+    -Void* throws away type safety
+
+ARRAYS
+-Can be declared in local scope or the free store
+     -Whatever you new[] you must delete[]
+
+-Access elements with []
+	-2-d use [x][y] not [x,y]
+
+-Or use pointer manipulation
+
+-Don't know their size
+-Don't do bounds checking
+-Don't auto grow when you add more
+
+-In your own code, use vector<> or other collection
+
+

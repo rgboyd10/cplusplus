@@ -1,0 +1,85 @@
+Exceptions
+
+-Transfer flow of execution from the problem location to somewhere that can handle it.
+	  -Skips intervening code.
+
+-Developer can't forget to check return value.
+	   -The function doesn't return.
+
+-Continue to deal with things as close to the problem as possible.
+
+-you need to know about stack unwinding.
+
+TRY/CATCH
+-Wrap that might throw an exception in a try block.
+-Try/catch as close to the problem as possible.
+-Catch more specific exceptions first.
+-Catch exceptions by reference.
+       -Great for catching a dervied exception
+
+       try
+       {
+	//risky stuff
+       }
+       catch(out_of_range& oor)
+       {
+	//react
+       }
+       catch(exception& e)
+       {
+	//react
+       }
+       
+WHAT TO THROW AND CATCH
+-C++ allows you to throw and catch anything
+     -int, string, instance of a class
+
+-Puts quite a burden on the developer.
+      -If it exists
+      -If it mentions the exception
+
+-The Standard Library includes and exception class
+     -Base class to a hierarchy of exceptions.
+     -Uses classes dervied from it when it needs to throw.
+
+std::exception
+-has a member function: string what()
+-has a number of dervied clases
+     -logic_error:
+	-domain_error
+	-invalid_argument
+	-length_error
+	-out_of_range
+
+     -runtime_error
+	-overflow_error
+	-range_error
+	-underflow_error
+
+These are called "marker classes"
+
+UNWINDING THE STACK
+-When an excpetion is thrown
+-If in a try, everything local to try goes out of scope
+    -destructors go off
+    -control goes to the catch
+
+-If not, everything local to the function goes out of scope
+    -control returns to where that cuntion was called from
+    -recurse to an "if ina try" above
+
+-If you get all the way out of main(), the user gets a dialog
+    -But it's more interesting when you up in a catch
+
+Exceptions have a cost
+	   -Little or nor cost to set up a try/catch if the exception is not thrown.
+	   -If it's thrown, time is used up (much more than if)
+	   -Don't use for data entry validation(eg Feb 30th)
+	   	  -Test with if, show user error messae
+           -More useful with deep calling hierarchy
+	   	 -A calls b calls c calls d calls e
+		 - Each must test return value, prevent further calculations if something went wrong
+		 -That can take time too
+		 -Using exceptions make neater code that runs faster when everything goes well
+		 -Best for rare occurrences like disk full, network feel down etc
+

@@ -1,0 +1,12 @@
+RAII
+
+try
+{
+	auto x = new X(Stuff);
+	//risky stuff
+	delete x;
+}
+catch(exection& e)
+{
+	//react
+}
