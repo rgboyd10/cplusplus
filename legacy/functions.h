@@ -56,7 +56,7 @@ int Change(int i)
     ints[0] = 0;
     ints[1] = 1;
     *(ints+2) = 2;
-    *(ints+3) = 3;
+    //*(ints+3) = 3; triggers stack corruption error
 
     float floats[] = {1.0,2.0,3.0};
 
