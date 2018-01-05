@@ -138,7 +138,7 @@ cout << endl;
 	    y = old;
 	  });
 
- for_each(v.begin,v.end(),[](int n) {cout << n << " ";});
+ for_each(v.begin(),v.end(),[](int n) {cout << n << " ";});
  cout << endl;
  cout << "x,y: " << x << ", " << y << endl;
  cout << endl;
@@ -146,5 +146,14 @@ cout << endl;
 
  //capturing whole stack by reference (and a neater way to keep initializing)
  v.clear();
- 
+ int i = 0;
+ generate_n(back_inserter(v), 10, [&] {return i++;}); // [&]() {return i}
+ cout << "initializing" << endl;
+ for_each(v.begin(), v.end(), [](int n) {cout << n << " ";});
+ cout << endl;
+ cout << "i: " << i << endl;
+
+ cout << endl << "---------------" << endl;
+
+ return 0;
 }
