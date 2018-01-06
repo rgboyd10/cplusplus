@@ -1,0 +1,177 @@
+Overview
+Template features
+Class features
+Overhauled syntax for initialization
+
+Features
+-Variadic templates - allow templates to take an arbitrary number of arguments.
+-Template aliases - like type divs with partially-bound template parameters.
+-Proper parsing of multiple closing angle brackets
+-Local and unnamed types can be used as template arguments.
+-Extern templates
+-Default values for function template parameters.
+-Arbitrary expressions in template deduction contexts.
+
+Variadic templates
+	 -function<bool(int, double)>
+	 -function<int(double, double, double)>
+	 -function<void(string, int, string, int, string, int)>
+
+template<typename Strea, typename... Columns>
+class CSVPrinter
+{
+	public:
+		void output_line(const Columns&... columns);
+		//other methods, constructors etc. not shown
+};
+
+... - used to indicate 0 or more occurrencies of something
+Columns -  is a template parameter pack
+
+	-What are variadic templates good for?
+	      -Perform type computation at compile time
+	      -Generate type structure.
+	      -Implement type safe functions with arbitrary number of arguments
+	      -Perform argument forwarding - used to perfect forwarding.
+
+---------------------------
+Working with Parameter Packs
+
+void output_line(const Columns&... columns)
+{
+	write_line(validate(columns)...);
+}
+
+CSVPrinter<decltype(stream), int, double, string> printer;
+is equal to
+void output_line(const int& col1, const double& col2, const string& col3)
+{
+	write_line(validate(col1), validate(col2), validate(col3));
+}
+
+template<typename Value, typename... Values>
+void write_line(const Value& val, const Values&...values) const
+{
+	write_column(val, _sep);
+	write_line(values...);
+}
+
+template <typename Value>
+void write_line(const Value &val) const
+{
+	write_column(val, "\n");
+}
+
+void output_line(const Columns&... columns);
+
+template<typename Stream, typename... Columns>
+class CSVPrinter
+{
+	Stream& _stream;
+	array<string, sizeof...(Columns)> _headers;
+	//rest of implementation
+};
+
+-----------------------------------
+TRAVERSING TEMPLATE PARAMETER PACKS
+-Determine the memory requirements for a set of types like this.
+
+template<typename... Types> // allow zero parameters
+struct TupleSize();
+
+template<typename Head, typename... Tail> // traverse types
+struct TypleSize<Head, Tail...>
+{
+	static cost size_t value = sizeof(Head) + TupleSize<Tail...>::value;
+};
+
+template<> struct TupleSize<> // end recursion
+{
+	static const size_t value = 0;
+};
+
+TupleSize<>::value; //0
+TupleSize<int, double, char>::value; //13 on a 32-bit platform
+
+//if you want to create CSV files consisting entirely of strings, you could add something like this to the CSVPrinter class.
+
+template<typename... Strings>
+void output_strings(const string& s, const Strings&... strings) const
+{
+	write_column(s, _sep);
+	output_strings(strings...);
+	
+}
+
+void output_strings(const string& s) const
+{
+	write_columns(s, "\n");
+}
+
+Places to expand a parameter pack
+
+template<typename...Bases>
+class Derived : public Bases...
+{};
+------------------------------
+
+NESTED VARIADIC TEMPLATES
+
+template <typename... Args1>
+struct zip
+{
+	template<typename... Args2>
+	struct with
+	{
+	typedef tuple<pair<Args1, Args2>...> type;
+	};
+
+};
+
+typedef zip<short, int>::with<unsigned short, unsigned>::type T1;
+//T1 is a tuple <pair<short, unsigned short>, paid<int, unsigned>>
+
+typedef zip<short>::with<unsigned short, unsigned>::type T2;
+//error:different number of arguments specified for Args1 and Args2
+
+-----------------------
+ONE FUCTION TEMPLATE, TWO PARAMETER PACKS
+
+template <size_t... Ns>
+struct Indexes
+{};
+
+template<typename... Ts, size_t... Ns>
+auto cherry_pick(const tuple<Ts...>& t, Indexes<Ns...>) -> decltype(make_tuple(get<Ns>(t)...))
+{
+	return make_tuple(get<Ns>(t)...);
+}
+
+//construct tuple<int, int, const char*, const char & , int, int>
+auto data = make_tuple(10, 12012013, "B737", "Boeing 737", 2, 125000000);
+
+//construct a tuple of (10, "B737", 2)
+auto even_index_data = cherry_pick(data, Indexes<0,2,4>());
+------------------------
+TEMPLATE ALIASES
+ template<typename T>
+ using StrKeyMap = map<string, T>;
+
+template<typename Stream>
+struct StreamDeleter
+{
+	void operator()(Stream* os) const
+	{
+		os->close();
+		delete os;
+	}
+};
+
+template<typename Stream>
+using StreaPtr = unique_ptr<Stream, StreamDeleter<Stream>>;
+
+{
+	StreamPtr<ofstream> p_log(new ofstream("log.log"));
+	*p_log << "Log statement";
+}	//stream gets closed and deleted here
+
