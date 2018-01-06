@@ -1,0 +1,9 @@
+using namespace std;
+
+int main()
+{
+  typedef int (*Func)();
+  Func f = []{return 10;};
+
+  f(); // invoke lambda via function pointer
+}

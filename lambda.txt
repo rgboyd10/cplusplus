@@ -8,6 +8,23 @@ Lambda
 	 -for readability
 	      -eliminates tiny functions
 
+for_each(v.begin(), v.end(), [](const JetPlane &jet) {cout << jet.model() << endl;});
+
+[]-lambda introducer
+(const JetPlane &jet) - parameter list
+cout << jet.model() << endl; - body of the lambda expression
+
+class lambda0
+{
+	public:
+		void operator()(const JetPlan& jet) const
+		{
+		cout << jet.model() << endl;
+		}
+};
+
+for_each(v.begin(), v.end(), lambda0());
+
 Tiny Functions
 void print(int i)
 {
@@ -44,6 +61,22 @@ RETURNING
       -Development must specify return type
 
 [](int n) -> double {/**/}
+
+[](int i) -> double{ if(i> 10) return 0.0; return double(i);}
+-------------------------
+LAMBDA PARAMETERS
+-No default values for parameters
+-No variable length argument lists
+-No unnamed parameters
+
+[](JetPlan& jet, const date_t& date) {jet.require_server(date);}
+-------------------------
+STORING LAMBDAS
+??? f = [](int i) {return i > 10;};
+^Unknowable type
+
+auto f = [](int i) {return i > 10;};
+f(5); //returns false
 -------------------------
 
 When you write a lambda, the compiler generates an anonymous function object
@@ -74,4 +107,87 @@ The capture
 -[&]-copy "everything" by reference.
 
 'Mutable' keyword - don't make the member variables const
+
+[today](JetPlan& jet) {jet.require_service(today);}
+
+class lambda1
+{
+	date_t _today;
+	public:
+		lambda1(date_t today): _today(today) {}
+
+		void operator() (JetPlan& jet) const
+		{
+		jet.require_service(_today);
+		}
+};
+
+function<bool()> g()
+{
+	static auto a = 5;
+	static auto b = -3;
+	return[] () {return a + b > 0;};
+}
+
+function<bool()> f()
+{
+	auto a = 5;
+	auto b = -3;
+	//won't compile if a & b aren't captured
+	return [a, b](){return a + b > 0;};
+}
+------------------------------------------
+CAPTURING BY REFERENCE
+
+JetPlane jet;
+vector<Person> passengers;
+for_each(passengers.begin(), passengers.end(), [&jet](const Person& p) {jet.load_passenger(p);});
+
+class lambda1
+{
+	JetPlan& _jet;
+
+public:
+	lambda1(JetPlane& jet): _jet(jet) {}
+	void operator()(Person& p) const{_jet.load_passenger(p);}
+};
+
+int a, b, c, d;
+[a, &b, c, &d]() {};
+------------------------------
+DEFAULT CAPTURE MODES
+
+int a, b, c, d;
+[=]() {return (a>b) && (c < d);};
+
+[&]() {a = b = c = d = 10;};
+
+//override default capture by value
+[=, &a]() {a = 20;};
+
+//override default capture by reference
+[&, d]() {d = 20;}; //doesn't compile because d is captured by value 
+
+[&a, &b, &c, x, y, &z] can be simplified to [&, x, y]
+------------------------------
+CAPTURING CLASS MEMBERS
+
+class JetPlane
+{
+	const int _min_fuel_level;
+	vector<Tank> _tanks;
+
+	public:
+		bool is_fuel_level_safe()
+		{
+		return all_of(_tanks.begin(), _tanks.end(), [this](Tank& t){return t.fuel_level() > _min_fuel_level;});		
+		}
+
+		bool if_fuel_level_critical()
+		{
+		return any_of(_tanks.begin(), _tanks.end(), [=](Tank& t) {return t.fueld_level() <= _min_fuel_level;});
+		}
+};
+------------------------------------
+LAMBDAS AND RECURSION
 
