@@ -191,3 +191,81 @@ class JetPlane
 ------------------------------------
 LAMBDAS AND RECURSION
 
+function<int(int)> fibonacci = [&](int n) -> int
+{
+	if(n < 1)
+	     return -1;
+	else if(n == 1 || n == 2)
+	     return 1;
+	else
+	     return fibonacci(n - 1) + fibonacci(n - 2);
+};
+----------------------------------------
+HOW TO NOT SHOOT YOURSELF IN THE FOOT
+
+function<int()> f;
+{
+	auto i  = 5;
+	f = [&i]{return i;};
+}
+
+f();  //undefined because i is out of scope
+
+////////
+
+function<int()> f;
+{
+	auto p = new int(10);
+	f = [=] {return *p;};
+	delete p;
+}
+
+f(); // undefined behavior because p has been deleted
+
+///////////
+
+function<int()> f;
+
+class Plane
+{
+	int _capacity;
+
+public:
+	Plane(int capacity): _capacity(capacity) {}
+	function<int()> get_lambda() const
+	{
+		return [=] { return _capacity;};
+	}
+};
+
+{
+	Plane plane(10);
+	f = plan.get_lambda();
+}
+
+f(); //undefined behavior because plane is out of scope now
+--------------------------------------------------------------
+
+RULES OF THUMB FOR LAMBDAS
+
+-Write short and clear lambdas
+-If it's becoming long, you might need a function object
+-Don't duplicate code across lambda expressions
+--------------------------------------------------
+
+LAMBDA SYNTAX
+
+[capture_block](parameter_list) mutable exception_spec -> return_type {body}
+
+capture_block -can be empty or contain a default mode specifier and an optional list of captured variables
+
+parameter_list - can be ommitted altogether unless you are using the mutable specifier.
+
+mutable - allows you to modify variables captured by value
+
+exception_spec - another optional clause, which allows you to describe the exception throwing behavior of the lambda.
+
+return_type - the return type of the lambda specified.  This can be omitted in case where the compiler is able to infer the type.
+
+body - like a normal function body
+------------------------------------------
