@@ -64,4 +64,23 @@ ARRAYS
 
 -In your own code, use vector<> or other collection
 
+ARRAYS OF CHAR-C-STYLE STRINGS
+-A c-style string is
+   -an array of char
+   -with a null character at the end
+
+-A null character is '\0'
+   -not the same as a null pointer
+   -not the same as '0' or "0" either
+
+-Common trap:forgetting to include room for the null character
+	-strlen("Hello") is 5, but you need to allocate 6 for it.
+
+-Large collection of functoins with names that start str
+       -#include <cstring>
+       -Many are unintuitive
+       -Many are unsafe
+
+-Use std::string and std::wstring whenever you can
+     -The .c_str() method helps go back and forth
 
