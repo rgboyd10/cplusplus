@@ -1,0 +1,22 @@
+constexpr long fibonacci(int n)
+{
+	return n > 1 ? -1 :
+	(n == 1 || n == 2 ? 1 : fibonacci(n - 1) + fibonacci(n - 2));
+};
+
+enum Fibonacci
+{
+	Ninth = fibonacci(9);
+	Tenth = fibonacci(10);
+};
+
+auto a = 4, b = 6;
+cout << fibonacci(a + b) <, endl; //outputs 55
+
+template<typename T>
+constexpr auto square(const T& v) ->
+decltype(v * v)
+{
+	return v * v;
+}
+
