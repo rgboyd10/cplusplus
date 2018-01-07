@@ -121,3 +121,211 @@ class PropPlane : public Plane
 };
 
 PropPlan prop_plane("ATR");
+//////////////////
+
+Class Plane
+{
+	string _manufacturer;
+
+	public:
+		Plane(const string& manufacturer) : _manufacturer(manufacturer)
+		{}
+};
+
+class Boat
+{
+	string _boat_manufacturer;
+
+	public:
+		Boat(const string& manufacturer) : _boat_manufacturer(manufacturer)
+		{}
+};
+
+class FloatPlane : public Plane, Public Boat
+{
+	using Plane::Plane;
+	using Boat::Boat;
+
+FloatPlane(const string& manufacturer) : Plane(manufacturer), Boat("n/a")
+{}
+};
+/////////////
+
+Inheriting Constructors
+class PropPlane : public Plane
+{
+	size_t _prop_count;
+
+	public:
+		using Plane::Plane;
+};
+
+	//oops, _prop_count is not initialized
+	PropPlane prop_Plane("ATR");
+//////////////
+
+DELEGATING CONSTRUCTORS
+
+class JetPlane
+{
+	vector<Engine> _engines;
+	string _manufacturer;
+	string _model;
+
+public:
+	JetPlane() : _engines(2), _manufacturer("Unknown"), _model("Unknown")
+	{
+	configure_engines();
+	}
+
+	JetPlane(const string& manufacturer, const string& mode1) :
+	_engines(Lookup::engine_count(manufacturer, mode1)),
+	_manufacturer(manufacturer), _mode1(mode1)
+	{
+	configure_engines();
+	assign_tail_number();
+	}
+	//...
+};
+/////////////
+
+class JetPlane
+{
+	vector<Engine> _engines;
+	string _manufacturer;
+	string _model;
+
+public:
+	JetPlane() : JetPlan(2, "Unknown", "Unknown")
+	{}
+
+	JetPlane(const string& manufacturer, const string& mode1) :
+	JetPlan(Lookup::engine_count(manufacturer,mode1), manufacturer, mode1)
+	{
+	assign_tail_number();
+	}
+
+private:
+	JetPlane(size_t engine_count, const string& manufacturer, const string& mode1) :
+	_engines(engine_count), _manufacturer(manufacturer), _mode1(mode1)
+	{
+	configure_engines();
+	}
+//...
+
+};
+-------------------------
+
+DEFAULT METHODS
+
+class JetPlane
+{
+	public:
+		JetPlan() = default;
+		JetPlane(const(JetPlane& other);
+		JetPlan(JetPlan&&) = default;
+};
+
+class JetPlane
+{
+	public:
+		JetPlane() = default;
+
+		virtua ~JetPlane() = default;
+
+	protected:
+		JetPlan(const JetPlan& other) default;
+		JetPlane& operator = (const JetPlane&) = default;
+};
+
+--------------------------------
+
+DELETED METHODS
+
+class JetPlane
+{
+	public:
+		JetPlane() = default;
+		JetPlane(const JetPlane&) = delete;
+		JetPlane& operator = (const JetPlane&) = delete;
+		JetPlane(JetPlane&&) = default;
+		JetPlane& operator = (JetPlane&&) = default;
+};
+	-allows you to disable some instantiations of a template
+
+	template<typename t>
+	void serialize(const T& obj)
+	{
+		cout << obj.to_string();
+	};
+
+	//PasswordStore not allowed to be serialized
+	void serialize(const PasswordStore&) = delete;
+		
+	-allows you to disable unwanted conversion
+
+	class Altimeter
+	{
+	public:
+		Altimeter(double){}
+		Altimeter(int) = delete;
+	};
+	
+	-allows you to disable heap allocation
+
+	class StackOnly
+	{
+	public:
+		void* operator new(size_t) = delete;
+	};
+
+-------------------------------------
+
+OVERRIDE AND FINAL
+
+int override = 5; //ok
+int final = 10; // ok
+
+struct Base
+{
+	virtual void f(int)
+	{}
+};
+
+struct Dervied: public Base
+{
+	virtual void f(int) override //ok
+	{}
+
+	virtual void f(double) override // error
+	{}
+};
+
+/////
+
+struct Base final
+{};
+
+struct Derived : public Base //compile error, can't inherit from final class
+{};
+
+struct Interface
+{
+	virtual void f()
+	{}
+};
+
+struct Base : public Interface
+{
+	virtual void f() final
+	{}
+};
+
+struct Derived : public Base
+{
+	virtual void f() // compile error, can't override a final method
+	{}
+};
+--------------------------
+
+EXTENDED FRIEND DECLARATIONS
