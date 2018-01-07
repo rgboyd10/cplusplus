@@ -1,0 +1,10 @@
+CLASS FEATURES
+-In-class initializers for non-static data members
+-Delegating constructors
+-Inheriting constructors
+-Default methods
+-Deleted methods
+-Override and final specifiers
+-Extended friend declarations
+-Nested class access rights
+

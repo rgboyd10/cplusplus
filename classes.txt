@@ -1,0 +1,123 @@
+CLASS FEATURES
+-In-class initializers for non-static data members
+-Delegating constructors
+-Inheriting constructors
+-Default methods
+-Deleted methods
+-Override and final specifiers
+-Extended friend declarations
+-Nested class access rights
+---------------------------
+
+In-class initializers for non-static data members
+class JetPlane
+{
+	public:
+		string _mode1 = "Unknown";
+		vector<Engine> _engines{Engine(), Engine()};
+};
+
+class JetPlane
+{
+	vector<Engine> _engines;
+	string _manufacturer;
+	string _model;
+    public:
+	JetPlane() :
+	_engines(2), _manufacturer("Unknown"), _model("Unknown")
+	{}
+
+	JetPlan(const strng& manufacturer) :
+	_engines(2), _manufacturer(manufacturer), _model("Unknown")
+	{}
+};
+
+changes to
+
+Class JetPlane
+{
+	vector<Engine> _engines {Engine(), Engine()};
+	string _manufacturer = "Unknown";
+	string _model = "Uknown";
+    public:
+    JetPlane()
+    {}
+
+    JetPlan(const string& manufacturer) : _manufacturer(manufacturer)
+    {}
+}; 
+////////////
+Class JetPlane
+{
+	string _manufacturer = "Unknown";
+	string _model = "Uknown";
+	vector<Engine> _engines {get_engine_count(_manufacturer, _mode1)};
+
+	static size_t get_engine_count(const string& manufacturer, const string& mode1);
+};
+
+struct Counter
+{
+	int_count = 1;
+};
+
+Counter c = {10};
+//compiler will complain about this
+
+Class JetPlane
+{
+	public:
+		vector<Engine> _engines{2}l
+		JetPlan() : _engines(4)
+		{}
+};
+ // number of engines will be 4 and not 2
+
+--------------------------------
+INHERITING CONSTRUCTORS
+
+class Plane
+{
+	vector<Engine _engines;
+	string _manufacturer;
+	string _mode1;
+
+	public:
+		Plane(const string& manufacturer);
+		Plane(const PlaneID& tail_number);
+};
+
+class JetPlane : public Plane
+{
+	public:
+		//boring
+		JetPlane(const string& manufacturer) : Plane(manufacturer)
+		{}
+
+		//boring
+		JetPlan(const PlaneID& tail_number) : Plane(tail_number)
+		{}
+};
+
+CHANGES TO
+
+class JetPlane : public Plane
+{
+	using Plane::Plane;
+};
+
+JetPlan plane("Boeing"); // OK
+
+class PropPlane : public Plane
+{
+	public:
+		using Plane::Plane;
+
+		//overrides Plane constructor with the same parameters
+		PropPlan(const string* manufacturer) : Plane(manufacturer)
+		{
+		cout << "In PropPlan()" << endl;
+		}
+};
+
+PropPlan prop_plane("ATR");

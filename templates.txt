@@ -175,3 +175,109 @@ using StreaPtr = unique_ptr<Stream, StreamDeleter<Stream>>;
 	*p_log << "Log statement";
 }	//stream gets closed and deleted here
 
+---------------------------
+USING USING INSTEAD OF TYPEDEF
+
+using PlaneID = int;
+using Func = int(*)(douboe, double);
+---------------------------
+
+CLOSING ANGLE BRACKETS ARE ALLOWED TO TAIL-GATE
+
+vector<vector<int>> v;
+map<int, vector<vector<int>>> m;
+------------------------
+LOCAL AND UNNAMED TYPES AS TEMPLATE ARGUMENTS
+{
+	struct A
+	{
+	string name() const {return "I'm A!";}
+	};
+
+vector<A> v(10);
+cout << v[0].name() << endl;
+}
+
+template<typename T>
+void print(const T& t)
+{
+	t.print();
+}
+
+struct
+{
+int x = 10;
+void print() const
+{
+	cout << x;
+} 
+}a;
+print(a);
+
+----------------------------
+EXTERN TEMPLATES
+-purpose is to speed up compile time and reduce object file sizes by preventing redundant template instantiations.
+
+//--file1.h --
+template<typename T>
+T templated_func(const T& t)
+{
+	return t;
+}
+
+//--file1.cpp--
+using namespace std;
+
+void f()
+{
+	cout << templated_func(10);
+}
+
+//--file2.cpp--
+using namespace std;
+
+extern template int templated_func(const int&);
+
+void g()
+{
+	cout << templated_func(1234);
+}
+
+extern template vector<int>;
+extern template vector<int>::size_type vector<int>::size() const;
+------------------------------
+
+DEFAULT VALUES FOR FUNCTION TEMPLATE PARAMETERS
+
+template<typename T, typename Cont = vector<T>>
+Cont get_batch(T seed)
+{
+	Cont batch;
+	/*...populate batch using seed value...*/
+	return batch;
+}
+
+vector<int> batch_vector = get_batch(1234);
+list<double>batch_list = get_batch<double, list <double>>(50.37);
+----------------------------
+EXPRESSIONS IN TEMPLATE DEDUCTION CONTEXTS
+
+template<int N>
+struct A
+{
+	static int size() {return N;}
+};
+
+int f(int);
+double f(double);
+
+template <typename T>
+A<sizeof(f((T)0))>calc_size(T)
+{
+	return A<sizeof(f((T)0))>();
+}
+
+Errors will still be caused by:
+       -Processing external entities
+       -Implementation limits
+       -Access violations
