@@ -1,0 +1,24 @@
+INLINE NAMESPACES
+-provide a way to implement versioning for libraries.
+
+namespace API
+{
+	inline namespace v2
+	{
+	//v2 processes doubles instead of ints
+	void process(vector<double>)
+	{}
+	}
+
+	namespace v2
+	{
+	void process(vector<int>)
+	{}
+	}
+}
+
+vector<double> doubles;
+API::process(doubles);
+
+vector<int> ints;
+API::v1::process(ints);
