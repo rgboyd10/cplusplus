@@ -329,3 +329,160 @@ struct Derived : public Base
 --------------------------
 
 EXTENDED FRIEND DECLARATIONS
+
+class A;
+class B;
+
+class Friend
+{
+	friend class A; //old declarations are stll ok
+	friend B; //you can also do this now
+};
+
+class Amigo
+{
+	friend class D; // OK: declares new class D
+	friend D;    //error:undeclared class D
+};
+
+class B;
+typedef B B2;
+
+class Amigo
+{
+	friend B2; // OK
+};
+
+////////////////
+Template parameters can be declared as friends.
+
+template <typename T, typename U>
+class Ami
+{
+	friend T; // OK
+	friend class U; //still an error, can't use an elaborate specifier in a template.
+};
+
+Ami<string, string> rc; // OK
+Ami<char, string> f; //OK, "friend char" has no effect in the template.
+
+-----------------------
+
+NESTED CLASS ACCESS RIGHTS
+
+class JetPlane
+{
+	//...
+	private:
+		int _flap_angle;
+
+		GPSNavigator{};
+
+	class Autopilot
+	{
+		GPSNavigator _gps_navigator;	//OK, JetPlane::AUtopilot can access.
+			     			//JetPlane::GPSNavigator
+		void adjust_flaps(JetPlane& plane, int flap_angle)
+		{
+		plan._flap_angle = flap_angle; //OK, JetPlane::Autopilot can access JetPlane::_flap_angle
+		}
+	};
+};
+
+-------------------
+
+THE DREAM OF UNIFORM INITIALIZATION
+
+class Point
+{
+	public:
+		int _x, _y;
+		Point(int x, int y) : _x(x), _y(y)
+		{}
+};
+Point p = {10, 20};
+Point p(10, 20); //have to use this instead
+
+int value[] = {1,2,3}; // ok
+int* p_values = new int[3] {1,2,3}; // not going to happen
+
+class Hexagon
+{
+	int _points[6];
+
+	Hexagon() // no way to initialize _points in initialization list
+	{}
+};
+
+/////
+
+direct initialization - int x(10);
+copy initialization - int y = 20;
+brace initialization - int values[] = {1,2,3};
+
+--------------------
+
+EMBRACING BRACES
+
+int x {5};
+int* p_values = new int[3] {1,2,3};
+
+class Point
+{
+	public:
+		int _x, _y;
+		Point(int x, int y) : _x(x), _y(y)
+		{}
+};
+Point p1 {10, 20};
+Point p = {10, 20};
+
+class Hexagon
+{
+	int _points[6];
+
+	Hexagon() : _points{1,2,3,4,5,6}
+	{}
+};
+
+////////////
+
+vector<int> v {1,2,3,4};
+
+vector<int> extract_core_points(const vector<int>& v)
+{
+	return {v.front(), v[v.size() / 2], v.back()};
+}
+
+vector<int> core_points = extract_core_points({1,2,3,4,5});
+
+///////////
+
+initializer_list
+
+#include <initializer_list>
+
+Polygon(initializer_list<int> point_indexes)
+{
+	if(point_indexes.size() < 3)
+	{
+		throw Error("Polygons require 3 or more points");
+	}
+	for_each(point_indexes.begin(), point_indexes.end(),
+					[=](int index) {_points.push_back(Lookup::point(index)); });
+}
+
+const int * p = point_indexes.begin();
+cout << p[1] << endl;
+
+vector<int> core_points;
+core_points.insert(core_points.end(), {7,9,11});
+------------------------------
+
+NARROWING CONVERSIONS
+
+int x[] = {1,2.5,3};
+2.5 is reduced to 2
+
+---------------------------
+
