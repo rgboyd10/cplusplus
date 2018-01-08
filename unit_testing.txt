@@ -223,3 +223,150 @@ CATCH_TRANSLATE_EXCEPTION(MyType& ex)
 }
 
 ----
+
+Unit Tests vs. Integration Tests
+Unit Tests
+-Focused
+-Isolated
+-Fast
+
+Integration Tests
+-Extensive
+-Depends on Environment
+-Usually slower
+
+----
+
+Duplication in unit tests
+-Initializing test subject
+-Common operations
+
+Duplcation in integration tests
+-Creating environment
+-Common operations
+-Cleanup
+
+----
+
+DRY VS DAMP - must avoid writing the same code over and over
+
+DRY - Don't repeat yourself
+-Avoid duplication
+-Increases maintainability
+-Isolate change
+
+DAMP - Descriptive and meaningful phrases
+-Promote code readability
+-Reduce the time it takes to read and uderstand the code
+
+DAMP > DRY when writing unit tests
+
+Test Suite == exe/dll
+Fixture == class
+Test Case == method
+
+----
+
+Creating Test Fixtures
+
+class MyFixture
+{
+	MyFixture()
+	{//Common setup code}
+	~MyFixture()
+	{//Common teardown code}
+};
+
+
+TEST_CAST_METHOD(MyFixture, "Test1")
+{...}
+
+Using Test Fixtures
+-Reduce code duplication
+-Preconditions
+-Cleanup after each test
+-Provide common operation
+-Common state/environment
+
+Group code in logical units
+-Group related tests
+-Use inheritance for utility code
+
+Hide uninteresting code
+-Usually in Integration tests
+
+----
+
+The problem with using fixtues
+-Divided test logic
+-Hard to read and understand
+-Difficult to fix failures
+-Hides some of the test's logic
+
+Setup/Teardown for all tests
+-Increased complexity
+-Violate SRP
+-Shared logic between tests
+
+When to use test fixtures
+-Integration tests
+-Create hierarchy
+
+----
+
+Introducing SECTIONS
+TEST_CASE("This is a test case"
+{
+	SECTION("Test section 1")
+	{
+	//test code
+	}
+
+	SECTION("Test section 2")
+	{
+	//test code
+	}
+}
+
+Benefits of using sections
+-each section is executed independently
+-enable reuse
+-easy to read and maintain
+-supports nested sections
+
+Given the initial state
+When event occurs
+Then desired outcome
+
+
+     / Scenario1 - Give, When, Then
+STORY
+     \ Scenario2 - Give, When, Then
+
+----
+
+Behavior Driven Development (BDD) benefits
+-Use tests to descrbe the behavior of the system
+-Given When Then
+-Create executable specification
+-Clear confusion
+
+SCENARIO("First roll is strike", "[Strike][Bowling]")
+{
+	GIVEN("Bowled strike on first turn")
+	{
+	Game game;
+	game.Roll(10);
+	}
+
+	WHEN("All rest rolls are gutter balls")
+	{
+	RollSeveral(game, 18, 0);
+	THEN("Total score is 10")
+	{
+	REQUIRE(game.Score() == 10);
+	}
+	}
+
+WHEN("Next two rolls are not spare or strike")...
+}
