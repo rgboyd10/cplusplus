@@ -115,6 +115,111 @@ More Command Line Arguments
 
 ASSERTING USING CATCH
 
+REQUIRE
+-Single macro for all/most assertions needs
+-Write the assertion in plain code
+-Excellent failure messages
 
+Why care about failure messages?
+-understand why the test failed
+-reduce debugging time
+-it's the purpose of the test
+
+The Problem with Multiple Assertions
+-When it fails, you lose information about the rest of the calls
+-Testing more than one aspect
+-Create complicated tests
+
+When to use Multiple Assertions?
+-Multiple checks for single "concept"
+-Checking related logic
+-Always be pragmatic
+
+REQUIRE and CHECK
+
+-REQUIRE(2 + 2 == 5); //Abort test -->Test fail
+-CHECK(2 + 2 == 5); //Continue test --> Test fail
+
+-REQUIRE_FALSE(MethodReturnsFalse);
+-CHECK_FALSE(MethodReturnsFalse);
+
+Handling Multiple Assertions in One Test
+-Split to multiple tests
+-Use CHECK
+-Override operator ==
+-Compare Collections
+-Use Multiple asserts
+
+Asserting for Exceptions
+
+-REQUIRE_THROWS(expression)
+-CHECK_THROWS(expression)
+
+-REQUIRE_THROWS_AS(expression, type)
+-CHECK_THROWS_AS(expression, type)
+
+-REQUIRE_NOTHROW(expression)
+-CHECK_NOTHROW(expression)
+
+Adding more information to test run
+-INFO
+-WARN
+-FAIL
+-CAPTURE
+
+----
+
+Simple information from complex types
+
+class SomeClass
+{
+	public:
+		int my_int_;
+		double my_double_;
+};
+
+REQUIRE(result == expected);
+
+----
+
+STRING CONVERSIONS
+-operator <<
+-Catch::toString
+-Catch::StringMaker specialisation
+-CATCH_TRANSLATE_EXCEPTION
+
+Operator << Overloading for std::ostream
+ostream& operator << (ostream& os, MyType const& value)
+{
+	os << convert(value);
+	return os;
+}
+
+Catch::toString Overload
+namespace Catch
+{
+	string toString(MyType const& value)
+	{
+	return convert(value);
+	}
+}
+
+Catch::StringMaker Specialisation
+namespace Catch
+{
+	template<> struct StringMake<t>
+	{
+		static std::string convert(T const& value)
+		{
+			return convert(value);
+		}
+	};
+}
+
+Custom Exception Text
+CATCH_TRANSLATE_EXCEPTION(MyType& ex)
+{
+	return ex.message();
+}
 
 ----
