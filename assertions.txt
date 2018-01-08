@@ -1,0 +1,34 @@
+Assertions
+----
+-Assertions document and validate assumptions
+
+ASSERT(pointer);
+
+static_assert(sizeof(float) == 4, "I can't float like that!");
+
+-should not change the application state in any way
+
+----
+
+VERIFY
+rect RECT;
+VERIFY(GetClientRect(window,&rect));
+
+~Owner()
+{
+	VERIFY(CloseHandle(handle));
+}
+
+----
+
+TRACE
+
+-printf
+
+-OutputDebugString
+
+-Event Tracing
+
+----
+
+ 

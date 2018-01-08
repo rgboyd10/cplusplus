@@ -1,0 +1,7 @@
+#include "Precompiled.h"
+#include "assert.h"
+
+auto main() ->int
+{
+  static_assert(sizeof(double) == 4, "can't serialize floats!");  
+}

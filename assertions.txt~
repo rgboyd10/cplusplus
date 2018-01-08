@@ -1,0 +1,8 @@
+Assertions
+----
+-Assertions document and validate assumptions
+
+ASSERT(pointer);
+
+static_assert(sizeof(float) == 4, "I can't float like that!");
+

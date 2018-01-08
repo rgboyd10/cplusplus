@@ -27,4 +27,15 @@ SMART POINTERS
 -unique_ptr
 	-Noncopyable (use std:move)
 
+----------------------------------------
+
+ComPtr - Com Interface Pointers
+-don't use outside of windows
+----
+
+unique_ptr
+-exclusively owns object to which it points
+-can't be copied
+-can be moved
+-make_unique
 
