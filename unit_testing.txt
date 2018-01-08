@@ -23,3 +23,98 @@ Why Write Automated Tests?
 
 -----
 
+ARRANGE - where I set up everything I need for the test.
+ACT - where you run the actual test.
+ASSERT - where I check what the test did.
+
+-----
+
+Why do we need a good test name?
+-Understand what the test does
+-Execute a subset of your tests
+-Find the test you need
+-Failures help root cause analysis
+-A good test name will help you write a good test
+
+Good names include-
+-Express a specific requirement/behavior
+-Should include:
+	-The starting state
+	-given input
+	-expected result
+	-unless irrelevant
+
+-Should be easily found
+
+-Should not include "Test"
+
+Good unit test name examples are
+-If Age >18 IsAdult returns true
+-When called with xyz then return true
+-Should throw exception When invalid user
+-Given authenticated When invalid number used Then transaction will fail
+-Called with empty list -->> return nullptr
+
+----
+
+Test Name Related Arguments
+-Run Specific Tests
+     thisTest
+     "This Test"
+
+-Run Group of Test
+     Customer*
+     *Customer
+
+-Run all tests except
+     Exclude:otherTest
+     ~otherTest~*other*
+
+Mix commands
+a* ~ab* ab
+
+----
+
+Tags
+-A simple way to group tests
+-Additional strings associated with test case
+	    -Must begin with an alpha numeric character
+-Tag names are not case sensitive
+-Use to categorize tests
+     -Use code under test(DB,Model,Customer)
+     -By test type(Unit,Integration,Scenario)
+     -By execution speed(Slow,Fast)
+
+----
+
+Special Tags
+[!hide] or [.]	Skip/Ignore test
+[.][integration]->[.integration]
+[!throws]	Exclude if run catch with -e or --nothrow
+[!shouldfail]	Reverse failing logic(pass if fail)
+[!mayfail]	Does not fail the test if assertionfails
+[#<filename>]	Use -# to specify filename as tag
+
+----
+
+Create Tag Alias
+CATCH_REGISTER_TAG_ALIAS( "[@abc]","[a],[b]~[c]" )
+
+----
+
+More Command Line Arguments
+
+-h, -?, --help
+-f, --input file <filename>
+-o, --out <filename>
+-b, --break
+-a, --abort
+-x, --abortx[<threshold>]
+
+----
+
+ASSERTING USING CATCH
+
+
+
+----
