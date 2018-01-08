@@ -1,0 +1,25 @@
+UNIT TESTING
+unit test - is another piece of code that verifies my code. usually a method to check and see that the code does what it is intended to do. Tests a specific functionality. Should have a clear pass or fail criteria. Should run in isolation  - should not contain external component outside of my control.
+
+Simple Unit Test
+TEST_CLASS(MyUnitTest)
+{
+	public:
+		TEST_METHOD(TestMethod1)
+		{
+			//your test code here.
+		}
+}
+
+-----
+
+Why Write Automated Tests?
+-Quick feedback about your code.
+-Avoid bugs.
+-Immune to regression.
+-Change your code without fear.
+-In code documentation
+-You're already testing your code.
+
+-----
+

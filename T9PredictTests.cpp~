@@ -1,0 +1,7 @@
+#define CATCH_CONFIG_MAIN
+#include "Catch.h"
+
+TEST_CASE("This is a test!")
+{
+
+}
