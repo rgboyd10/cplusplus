@@ -38,4 +38,17 @@ unique_ptr
 -can't be copied
 -can be moved
 -make_unique
+-----
+
+Summary
+-unique_ptr - should be the first stop for pointers you use because it is efficient with flexible design modeling exclusive ownership.
+
+-shared_ptr - is for shared ownership scenarios and while it adds a bit of overhead, it certainly solves some awkward coding problems and saves you from having to write a lot of bookkeeping code yourself.
+
+-weak_ptr - solves the problem of circular references in various data structures in object models. Use it when you need to refer to an object managed by shared_ptr without taking a strong reference.
+
+-if dealing with com interface, use ComtPtr and do not use the pointer above.
+	-The Essentials of COM - Part 1 and 2
+	-http://pluralsight.com/Courses/com-essentials
+
 
