@@ -1,0 +1,24 @@
+Handles, Pointers, and Objects
+
+Handles vs interfaces
+
+auto h = HANDLE{CreateEvent(...)};
+SetEvent(h);
+CloseHandle(h);
+
+unique_handle<T>
+
+----
+
+Anatomy of a Smart Class
+-Constructors
+-Destructor
+-Mutability
+-Member functions
+-Helper functions - non-member
+-Static members - for if a function need access to some class internals, but not necessarily instance state.
+-Operator overloading
+-Namespaces
+
+----
+
