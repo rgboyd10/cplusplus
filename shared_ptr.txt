@@ -1,0 +1,11 @@
+shared_ptr
+-shares ownership of object to which it points
+-non-invasive reference counting
+-can be copied
+-can be moved
+-make_shared
+
+holds two pointers
+-one to the reference or use_count.  considered a control block. Has a strong and weak reference count, and is also an optional deleter.
+
+-one to the object

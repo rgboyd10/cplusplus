@@ -1,0 +1,5 @@
+weak_ptr
+
+-great for breaking loops and data structures.
+-allow you to refer to an object but only access it if the object still exists
+-
