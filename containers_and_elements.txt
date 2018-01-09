@@ -1,0 +1,11 @@
+Containers and Elements
+-Container holds a sequence of objects.
+-Container objects are called elements
+
+-Sequence containers: vector, list, etc.
+-Associative containers: map, set, etc.
+
+Element requirements
+-Copy and or move elements
+-Swap elements
+-Compare elements
