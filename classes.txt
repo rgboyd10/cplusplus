@@ -27,7 +27,7 @@ class JetPlane
 	_engines(2), _manufacturer("Unknown"), _model("Unknown")
 	{}
 
-	JetPlan(const strng& manufacturer) :
+	JetPlan(const string& manufacturer) :
 	_engines(2), _manufacturer(manufacturer), _model("Unknown")
 	{}
 };
