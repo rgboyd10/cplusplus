@@ -1,0 +1,15 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main()
+{
+  if(strcmp("",argv[1]))
+    {
+      cout << "You figured it out!\n" << endl;
+    }
+ else
+   {
+     cout << "Sorry :-(\n" << endl;
+   }
+}
