@@ -1,0 +1,6 @@
+Sorting
+
+sort(item1, item2)
+
+Overload operator <
+

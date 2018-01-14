@@ -67,3 +67,25 @@ Nonmember
 Finding
 -First element with a specific value: find()
 -First element meeting a condition: find_if()
+
+Variations on Finding
+-find_if_not
+-find_first_of
+-search
+-find_end
+-search_n
+-adjacent_find
+
+SUmmary
+-a well named function says far more than a comment
+-Algorithms work with any collection that provide the right iterators
+	    -or part of a collection
+
+Use begin(v) instead of v.begin
+
+Iterators can be incremeted, decremented, dereferened, and passed to other functions
+
+Many variations on finding and counting mean you don't need to build your own
+     -Use what is there
+     -Use cppreference.com!
+
