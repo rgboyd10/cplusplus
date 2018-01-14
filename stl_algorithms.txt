@@ -1,0 +1,69 @@
+Discoverability
+-not everything is a member function. Just because it's not a member fuction, doesn't mean it doesn't exist.
+
+Collections, Algorithms, Iterators
+
+Algorithms
+-work on any container
+-doesn't matter what those containers contain
+-work on ranges
+-algorithms typically work through iterators
+-iterators provides significant functionality
+-algorithms live in their own header file, <algorithm>
+
+Headers to know
+#include <algorithm>
+#include <vector>
+#include <array>
+#include <list>
+#include <stack>
+#include <map>
+#include <queue>
+#include <string>
+#include <iterator>
+#include <utility>
+#include <tuple>
+#include <numeric>
+#include <complex>
+#include <cmath>
+#include <regex>
+#include <chrono>
+
+Don't write raw loops
+-When you write a loop, you have to write a comment and people have to check if you are right.
+
+Use stl algorithms instead!
+
+You want to loop through a collection and count- how many meet a criteria?
+-count or count_if
+
+You want to find the first element in a collection with a particular value?
+-find or find_if
+
+You want to create a copy of a collection that only has particular elements?
+-copy_if
+
+ToDo in the course
+-Counting and finding
+-Sorting
+-Comparing and Accumulating
+-Generating and manipulating collections
+-Using the power of iterators
+-Unexpectedly useful operations
+-Conventions
+
+Member vs nonmember begin and end
+Member
+-v.begin, v.end()
+-Available for all collections in the library including vector, string, map
+
+Nonmember
+-begin(v), end(v)
+-Calls v.begin() or v.end() if it exists
+-Works for c-style arrays too
+-You can write a free function for a collection without member begin() and end()
+-The safest choice and a good habit
+
+Finding
+-First element with a specific value: find()
+-First element meeting a condition: find_if()

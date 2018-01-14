@@ -1,7 +1,0 @@
-shared_ptr
--shares ownership of object to which it points
--non-invasive reference counting
--can be copied
--can be moved
--make_shared
-
