@@ -4,3 +4,58 @@ sort(item1, item2)
 
 Overload operator <
 
+sort(item1, item2, lambda)
+
+Stable Sort
+-Sort, then sort again by another property
+-Should "ties" on the second sort be in their original order
+	-You can decide.
+
+Is it sorted?
+-use
+is_sorted(item1, item2)
+is_sorted(item1, item2, lambda)
+
+to find out
+
+Fing the largest or smallest or...
+If working with unsorted collection
+-check every element
+       -max_element()
+       -min_element()
+-find()
+
+If working with sorted collection
+-largest is last, smallest is first
+-just use their position in the collection
+-can do a binary search for any value
+     lower_bound()
+     upper_bound()
+
+Shuffle
+#include <random>			//bring in another header
+//...	 				//once your collection is in place
+random_device randomdevice;		//create a random device
+
+mt19937 generator(randomdevice());	//Create a Mersenne Twister to use as a generator
+
+shuffle(item1, item2, generator);	//pass the generator to shuffle
+
+Partial Sorting
+partial_sort()
+-you can sort only part of a collection.
+-is_sorted_until
+-partial_sort_copy()
+
+Nth Element
+-start with a collection of elements
+-pick a place within the collection
+
+Summary
+-Sorting is trivial for elements with <
+-Provide a lambda for complete control
+-When sorting multiple times, consider stable_sort
+-Want to know if it's sorted? is_sorted()
+-In a sorted collection, faster searches are available
+-You can easily shuffle(unsort) as well
+-You can also do partial sorts and rough groupings if that's all you need.
