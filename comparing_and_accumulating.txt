@@ -15,3 +15,10 @@ A Loop in Disguise
 -touches each element once
 -does not have to apply to the entire collection
 
+Summary
+-Comparing two collections is easy
+-The pair class is very useful
+     -not just when comparing
+-Adding up or combining all the elements of a collection is just one line of code
+-If you're sure you need a loop, consider for_each instead
+

@@ -1,0 +1,14 @@
+Generating and Manipulating Collections
+
+Copying
+-operator=
+-You could write your own loop.
+-copy()
+-copy_if()
+-copy_n()
+-copy_backward()
+
+Collection of Noncopyable Types
+-move()
+-move_backward()
+-
