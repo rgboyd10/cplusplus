@@ -1,0 +1,17 @@
+Comparing and Accumulating
+-std::pair - can hold any combination of types.
+-strongly typed
+-get the elements with .first and .second
+
+Total the Elements of a Collection
+-accumulate()
+	-uses the operator +
+
+-or use a lambda - total does not have to be the same type as elements
+
+A Loop in Disguise
+-for_each()
+-takes a lambda
+-touches each element once
+-does not have to apply to the entire collection
+
