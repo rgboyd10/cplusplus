@@ -1,5 +1,5 @@
 #include <vector>
-#include <algorithms>
+#include <algorithm>
 
 using namespace std;
 
@@ -27,5 +27,22 @@ int main()
 
   //copy(begin(source), end(source) - 1, begin(source) + 1);
 
-  
+  copy_backward(begin(source),end(source) - 1, end(source));
+
+  auto newend = remove(begin(source), end(source), 3);
+  int s = source.size();
+  int logicalsize = newend - begin(source);
+  source.erase(newend,end(source));
+
+  source = v3;
+  source.erase(remove(begin(source), end(source), 3), end(source));
+
+  vector<Resource> vr(2);
+  vr[0].setValue(8);
+  vr[1].setValue(9);
+
+  auto newend2 = remove(if(begin(vr), end(vr), [](const Resource& r) {return r.getvalue() == 8;}
+vr.erase(newend2, end(vr))));
+
+
 }
