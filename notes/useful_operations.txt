@@ -1,0 +1,45 @@
+Useful Operations
+----
+
+Remember partial_sort_copy?
+
+----
+
+Swapping
+
+swap()
+
+iter_swap()
+
+swap_ranges() - works within or between collections
+
+---
+
+Reordering Elements by Hand
+
+Rotate
+
+----
+
+Advantages of Algorithms
+-Quicker to write
+-Quick for everyone else to read for the rest of time
+-Probably faster
+-Better tested
+
+----
+
+Partition
+----
+
+Summary
+-Some <algorithm> functins have odd names
+      -What they do, not what they're for
+
+Think of
+      -partial_sort_copy as top_n
+      -rotate as move_within)collection
+      -stable_partition as gather
+
+Knowing they exist makes the difference
+

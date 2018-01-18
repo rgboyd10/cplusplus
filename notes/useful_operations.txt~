@@ -1,0 +1,18 @@
+Useful Operations
+----
+
+Remember partial_sort_copy?
+
+----
+
+Swapping
+
+swap()
+
+iter_swap()
+
+swap_ranges() - works within or between collections
+
+---
+
+Reordering Elements by Hand

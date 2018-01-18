@@ -1,0 +1,55 @@
+Conventions
+----
+
+Reduce Mental Effort
+-Paramteres are consistent
+-Integer parameters are rare, well named
+-Prefixes and suffixes are consistent
+-Good documentation exists
+
+----
+
+Iterator Parameters
+-Two iterators
+-Iterator and a number
+-Three iterators
+-Four iterators
+
+----
+
+Exceptions
+-rotate(first, new first, last)
+-rotate_copy(first,newfirst,last,destfirst)
+-partial_sort(first, middle, last)
+-nth_element(first, nth, last)
+-inplace_merge(first, middle, last)
+
+----
+
+Integer Parameters
+-Size only for functions with _n
+-Value for <int>
+-Starting value for <int>
+
+----
+
+Predicate Last
+-Overloads with and without predicate having same leading parameters.
+-Overloads replace "value" with "predicate" parameter.
+-Both replace_if and replace_copy_if have value/predicate 3rd, new value 4th.
+
+----
+
+-Ends if _if - Add a predicate or, if original takes value, replace with predicate.
+-Ends with _n - Replace first, last with first, size
+-Starts with is_ - returns bool unless is_X_until: this returns an iterator
+-No function name change for "From the end" or "From last to first" - use a different iterator.
+-Starts with stable_ - elements keep their relative order if the functions has no reason to swap them.
+
+----
+
+cppreference.com
+
+----
+
+
