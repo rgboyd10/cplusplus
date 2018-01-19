@@ -1,0 +1,23 @@
+
+for(const auto& child : tag.children)
+  {
+    os << child;
+  }
+
+os << "</" << tag.name << "<" << endl;
+}
+
+return os'
+}
+};
+
+int main()
+{
+cout << 
+P{
+}
+
+getchar();
+
+return 0;
+}
