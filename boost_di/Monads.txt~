@@ -1,0 +1,8 @@
+Monads
+----
+Monads are deisng patters in funtional programming
+-Much more usable in fuctional languages due to
+      -better treatment of functional objects
+      -useful auxiliary constructs(e.g., pattern matching)
+
+-Somewhat implementable in OOP languages
