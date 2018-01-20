@@ -1,0 +1,29 @@
+Overview
+-Motivation
+-Point Initialization Example
+-Factory Method
+-Factory External Class
+-Factory Inner Class
+-Abstract Factory
+
+Motivation
+-Object creation logic becomes too convoluted
+-Constructor is not descriptive because
+	     -Name mandated by name of containing type
+	     -Cannot overload with same set of arguments with different names
+	     -Can turn into 'optional parameter hell'
+
+-Object creation(non-piecewise, unlike Builder) can be outsource to
+	-A separate function(Factory Method)
+	-That may exist in a separate class(Factory)
+	-You can even have a hierarchy of class with Abstract Factory
+
+Factory
+-A separate component responsible solely for the wholesale (not piecewise) creation of objects.
+
+Abstract Factory
+-A factory construct used to construct objects in hierarchies.
+
+Factory Method
+-A function that helps create objects.Like a constructor but more descriptive.
+
