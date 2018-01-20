@@ -5,9 +5,25 @@
 
 class Point
 {
+  Point(const float x, const float y)
+    : x{x}, y{y}
+  {}
+
 public:
   float x, y;
 
+  friend std::ostream& operator<<(std::ostream& os, const Point& obj)
+  {
+    return os << " x: " << obj.x << " y: " << obj.y;
+  }
+
+  friend class PointFactory;
+  
+};
+
+class PointFactory
+{
+public:
   static Point NewCartesian(const float x, const float y)
   {
     return{x, y};
@@ -17,26 +33,18 @@ public:
   {
     return {r * cos(theta), r * sin(theta) };
   }
-
-  friend std::ostream& operator<<(std::ostream& os, const Point& obj)
-  {
-    os << " x: " << obj.x << " y: " << obj.y;
-  }
-  
-private:
-  Point(const float x, const float y) : x{x}, y{y}
-  {}
   
 };
 
 int main()
 {
   //  Point p {1, 2};
-
-  auto c = Point::NewCartesian(1, 2);
+  PointFactory pf;
+  pf.
+  auto c = PointFactory::NewCartesian(1, 2);
   std::cout << c << std::endl;
 
-  auto p = Point::NewPolar(5, M_PI_4);
+  auto p = PointFactory::NewPolar(5, M_PI_4);
   std::cout << p << std::endl;
   
   getchar();
