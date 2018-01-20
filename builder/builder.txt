@@ -1,0 +1,7 @@
+Summary
+-A builder is a separate component for building up a complex object
+-You can give the builder a public constructor or return it via a static function
+-To make a fluent builder, return this or *this
+-Initializer lists let you implement Groovy-style builders with ease
+-Different facets of an object can be built with different builders working in tandem.
+
