@@ -27,3 +27,9 @@ Abstract Factory
 Factory Method
 -A function that helps create objects.Like a constructor but more descriptive.
 
+Module Overview
+-A factory method is a function that creates objects.
+-A factor can take care of object creation.
+-A factory can reside inside object or be external.
+-Hierarchies of factories can be used to create related objects.
+
