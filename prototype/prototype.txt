@@ -1,0 +1,8 @@
+Prototype
+
+Overview
+-Motivation for using
+-Contact Records
+-Shallow vs Deep Copy
+-A Prototype Factory
+-Boost Serialization
