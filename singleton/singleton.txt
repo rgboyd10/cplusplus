@@ -1,0 +1,38 @@
+Singleton
+-not a good practice in modern development
+
+An author of the big 4 book says they want to drop the Singleton.
+
+-Motivation
+-Naive Implementation
+-Laziness and Thread Safety
+-Testability Issues
+-Dependency Injection
+
+Motivation
+-For some components(classes) it only makes sense to have one in the system
+     -Database repository
+     -Object factory
+-E.g., the constructor call is expensive
+       -We only do it once.
+       -We provide everyone with the same instance.
+-Want to prevent anyone from creating additional copies.
+-Trivial concerns: lazy instantiation and multithreading
+
+Singleton - a component which is instantiated only once.
+
+Approaches
+-Global variable
+	-Not really a singleton
+-Global static variable
+	-Still have to prevent construction
+-Completely static class
+	    -Loses OOP functionality
+-Nonstatic class with some static members
+	   -Lose some OOP functionality; Monostate pattern
+-A more sophisticated approach
+
+Summary
+-A safe singleton is easy to construct: you just make a static variable and return a reference to it.
+-Singletons are difficult to test.
+-Consider defining singleton lifetime with a dependency injection container.
