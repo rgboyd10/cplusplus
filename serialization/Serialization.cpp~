@@ -1,0 +1,36 @@
+#include <string>
+#include <iostream>
+#include <memory>
+#include <functional>
+#include <sstream>
+#include <boost/serialization/serialization.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+using namespace std;
+
+struct Address
+{
+  string street, city;
+  int suite;
+
+  friend std::ostream& operator<<(std::ostream& os, const Address& obj)
+  {
+    return os
+      << "street: " << obj.street
+      << " city: " << obj.city
+      << " suite: " << obj.suite;
+  }
+};
+
+struct Contact
+{
+  string name;
+  Address address;
+};
+int main()
+{
+  
+  
+  getchar();
+  return 0;
+}
