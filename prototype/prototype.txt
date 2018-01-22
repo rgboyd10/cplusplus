@@ -6,3 +6,18 @@ Overview
 -Shallow vs Deep Copy
 -A Prototype Factory
 -Boost Serialization
+
+Motivation
+-Complicated objects(e.g., cars) aren't designed from scratch
+	     -The reiterate existingg designs
+
+-An existing(partially constructed dedesign) is a Prototype
+
+-We make a copy(clone) the prototype and customize it.
+    -Requires deep copy cupport
+    -Painful without metadata!
+
+-We make the cloning convenient with a Factory.
+
+Prototype - a partially or fully initialized objects that you copy(clone) and make use of.
+
