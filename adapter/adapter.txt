@@ -1,0 +1,20 @@
+-Motivation
+-Stack as an Adapter
+-Simple String Adapter
+-Vector/Raster Demo
+-Adapter Caching
+----
+Eletrical devices have differen power interface requirements
+	  -Voltage(5V, 220V)
+	  -Socket/plug type(Europe, UK, USA)
+
+We cannot modify our gadgets to support every possible interface.
+   -Some support possible (120/220V)
+
+Thus we use a device(an adapter) that gives us the interface we require.
+
+Adapter - a construct which adapts an existing interface X to confirm to the required interface Y.
+
+----
+
+
