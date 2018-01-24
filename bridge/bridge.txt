@@ -1,0 +1,26 @@
+Bridge
+-motivation
+-shape sizing
+-pimpl idiom
+----------
+UML Diagram - Non-bridge
+
+UnixPTS-> PreemptiveThreadSChedule->ThreadScheduler
+WindowsPTS->ThreadScheduler
+
+UnixCTS->CooperativeThreadScheduler->Thread Scheduler
+WindowsCTS->CooperativeThreadScheduler
+
+UML Diagram - bridge
+
+CooperativeThreadScheduler->ThreadScheduler->ThreadSchedulerImplementation
+PreemptiveThreadScheduler
+
+WindowsSchedulerImpl->ThreadSchedulerImplementation
+UnixSchedulerImpl
+
+----
+Bridge - a mechanism that decouples an interface(hierarchy) from an implementation(hierarchy).
+-Argues that you simply split hierarchies and then build a bridge between them.
+----
+
