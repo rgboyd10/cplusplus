@@ -1,0 +1,11 @@
+#include <vector>
+
+int main()
+{
+  std::stack<int> s;
+  s.push(123);
+  int x = s.top();
+  s.pop();
+  
+  return 0;
+}
