@@ -1,0 +1,20 @@
+Composite
+-Motivation
+-Object Composition
+-Geometric Shapes
+-Neural Networks
+
+----
+
+Motivation
+-Objects can use other object's fields and function through inheritance and composition.
+-Composition lets us make compound objects.
+	     -A mathematical expression composed of simpler expressions.
+	     -A grouping of shapes that make up several shapes
+
+Composite design pattern is used to treat both single and composite objects uniformly (e.g., with idential APIs.
+
+----
+Composite
+-A mechanism for treating individual(scalar) and compositions of objects in a uniform manner.
+-
