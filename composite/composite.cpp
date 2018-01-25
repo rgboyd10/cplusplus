@@ -3,23 +3,32 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+#include <boost/accumulators/accumulators.hpp>
+#include <boost/accumulators/statistics.hpp>
+using namespace boost::accumulators;
 
 //2+(3+4)
 struct Expression
 {
   virtual double eval() = 0;
-  
+  virtual void collection(vector<double>& v) = 0;
 };
 
 struct Literal : Expression
 {
   double value;
+
   explicit Literal(const double value) : value{value}
   {}
 
   double eval() override;
   {
     return value;
+  }
+
+  void collect(vector<double>& v) override
+  {
+    v.push_back(value);
   }
 };
 
@@ -34,6 +43,12 @@ struct AdditionExpression : Expression
   {
     return left->eval() + right->eval();
   }
+
+  void collect(vector<double>& v) override
+  {
+    left->collect(v);
+    right->collect(v);
+  }
 };
 
 int main()
@@ -41,10 +56,35 @@ int main()
   AdditionExpression sum
   {
     make_shared<Literal>(2),
-      make_shared<AdditionExpression>(make_shared<Literal>(3),make_shared<Literal>(4))
+      make_shared<AdditionExpression>
+      (make_shared<Literal>(3),
+       make_shared<Literal>(4))
       };
 
-  cout << "2+(3+4)" << sum.eval() << endl;  
+  cout << "2+(3+4) = " << sum.eval() << endl;  
+
+  vector<double> v;
+  sum.collect(v);
+  for(auto x: v)
+    {
+      cout << x << "\t";
+    }
+  cout << endl;
+
+  vector<double> values{1,2,3,4};
+  double s = 0;
+  for(auto x : values)
+    {
+      s += x;
+    }
+  cout << "average is " << (s / values.size()) << endl;
+
+  accumulator_set<double, stats<tag::mean>> acc;
+  for(auto x : values)
+    {
+      acc(x);
+    }
+  cout << "average is " << mean(acc) << endl;
   
   getchar();
   return 0;
