@@ -1,0 +1,44 @@
+
+struct Neuron
+{
+  vector<Neuron*> in, out;
+  int id;
+
+  Neuron() // constructor to initialize
+  {
+    static int id = 1;
+    this->id = id++;
+  }
+
+  void connect_to(Neuron& other)
+  {
+    out.push_back(&other);
+    other.in.push_back(this);
+  }
+
+  struct Neuron Layer : vector<Neuron>
+  {
+    NeuronLayer(int count)
+      {
+	while(count --> 0)
+	  {
+	    emplace_back(Neuron{});
+	  }
+      }
+
+    friend ostream& operator << (ostream& os, const NeuronLayer& obj)
+    {
+      for(auto& n : obj)
+	{
+	  os << n;
+	}
+      return os;
+    }
+  };
+  
+};
+int main()
+{
+  getchar();
+  return 0;
+}

@@ -17,4 +17,12 @@ Composite design pattern is used to treat both single and composite objects unif
 ----
 Composite
 -A mechanism for treating individual(scalar) and compositions of objects in a uniform manner.
--
+-----
+
+Summary
+-Objects can use either objects either via inheritance or composition.
+-Some composed and singular objects need similar/identical behaviors/
+-Composite design pattern lets us treat both type of objects uniformly.
+-C++ has no special support for the idea of enumeration of objects.
+-A single objects can masquerade to become suitable for begin/end iteration.
+
