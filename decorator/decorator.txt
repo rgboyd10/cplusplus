@@ -18,4 +18,8 @@ Decorator
 -Allows for adding behavior to individual objects without affecting the behavior of other objects of the same class.
 ---
 
+Summary
+-Functional decorators let you wrap functions with before/after code (for, eg., logging)
+-An aggregate decorator does not give you the underlying object's features, but can be composed at runtime
+-A decorator based on mixing inheritance is more flexible, exposes underlying object's but is only constructible at compile time.
 

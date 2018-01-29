@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 
 struct Shape
 {
@@ -17,6 +19,8 @@ struct Circle : Shape
 {
   float radius;
 
+  Circle(){}
+
   explicit Circle(const float radius) : radius{radius}
   {}
 
@@ -31,7 +35,11 @@ struct Circle : Shape
     oss << "A circle of radius " << radius;
     return oss.str();
   }
+};
 
+struct Square:Shape
+  {
+    float side;
   explicit Square(const float side) : side{side}
   {
   }
@@ -79,19 +87,53 @@ struct TransparentShape : Shape
   }
 };
 
+template <typename T> struct ColoredShape2 : T
+{
+
+  static_assert(is_base_of<Shape,T>::value,
+		"Template argument must be a Shape");
+
+  string color;
+
+  ColoredShape2()
+  {}
+  
+  explicit ColoredShape2(const string& color) : color{color}
+  {}
+
+  string str() const override
+  {
+    ostringstream oss;
+    oss << shape.str()<< " has the color " << color;
+    return oss.str();
+  }
+};
+
+template <typename T> struct TransparentShape2 : T
+{
+  uint8_t transparency;
+
+  template<typename...Args>
+  
+  TransparentShape2(const uint8_t transparency, Args...args) : T::T(args...), transparency{transparency}
+  {
+  }
+
+  string str() const override
+  {
+    ostringstream oss;
+    oss << T::str() << " has "
+	<< static_cast<float>(transparency) / 255.f*100.f
+	<< "% transparency";
+    return oss.str();
+  }
+};
+
 int main()
 {
-  Circle circle{5};
-  cout << circle.str() << endl;
 
-  ColoredShape red_circle{circle, "red"};
-  cout << red_circle.str() << endl;
-
-  TransparentShape half_transparent_circle{circle, 128};
-  cout << half_transparent_circle.str() << endl;
-
-  TransparentShape half_tr_red_circle{red_circle, 128};
-  cout << half_tr_red_circle.str() << endl;
+  TransparentShape2<Square> hidden_square{0,15};
+  cout << hidden_square.str() << endl; 
   
   getchar();
   return 0;
