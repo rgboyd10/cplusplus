@@ -1,0 +1,20 @@
+Facade
+----
+
+Why?
+-Balance complexity and presentation/usability
+-Typical home
+	 -Many subsystems (electrical sanitation)
+	 -Complex internal structure(e.g., floor layers)
+	 -End user not exposed to internals
+
+Same with software!
+-Many systems working together provide flexibility but API consumers want it to just work.
+
+Facade - provides a simple, easy to understand/user interface over a large and sophisticated body of code.
+
+-Make a library easier to understand and test.
+-Reduce dependencies of user code on internal APIS that may change
+	-Allows more flexibility in developing/refactoring the library
+
+-Wrap a poorly deisgn collectino of APIs with a single well-deisgned API.
