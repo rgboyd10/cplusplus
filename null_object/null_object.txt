@@ -1,0 +1,26 @@
+Null Object Pattern
+----
+
+When component A uses component b, if typically assumes that B is actually present
+     -You inject B, not e.g., optional <B>
+     -You do not inject a pointer and then check for nullptr everywhere
+
+There is no option of telling A not to use an instance of B.
+      -Its use is hard-coded
+
+Thus, we build a no-op, non-functioning inheritor of B and pass that into A
+
+Structural or Behavioral?
+
+----
+
+Null Object - A no-op object that satisfies the dependency requirement of some other object.
+----
+
+Summary
+-Inherit from the required object.
+-Implement the functions with empty bodies.
+	   -Return default values
+	   -If those values are used, you are in trouble
+
+Supply an instance of the Null Object in lieu of an actual object.
