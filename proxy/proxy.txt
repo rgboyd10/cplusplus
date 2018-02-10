@@ -1,0 +1,27 @@
+Proxy
+----
+-Motivation
+-Standard Library Smart Pointers
+-Virtual Proxy
+-Communication Proxy
+-Proxy vs Decorator
+----
+
+-You are calling foo.bar()
+-This assumes that foo resides in the same process as bar.
+-What if, later on, you want to put all Foo related operations into a separate process?
+      -How can you avoid changing all your code?
+
+Proxy to the rescue!
+      -same interface, different behavior.
+
+This is a communication proxy
+     -Others:logging, virtual, guarding...
+
+----
+
+Proxy
+A class that is functioning as an interface to a particular resource. That resource may be remote, expensive to construct, or may require logging or some other added functionality.
+
+----
+
