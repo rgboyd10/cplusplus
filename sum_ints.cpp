@@ -37,5 +37,12 @@ int main()
             sum += values[x];
           }
 
-      cout << sum << endl;
+        cout << "The sum of the first " << userin << " numbers ( ";
+
+        for(int x = 0; x < userin; x++)
+            {
+              cout << values[x] << " ";
+            }
+        cout << ") is " << sum << "." << endl; 
+        
 }
