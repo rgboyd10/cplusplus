@@ -13,5 +13,5 @@ int main()
   int x5 = area(10.7, 9.3);
   char x6 = area(100,9999);
 
-  cout << x4 << "\n" << x5 << "\n" << x6 << "\n" << endl;
+  cout << 
 }
