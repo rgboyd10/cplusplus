@@ -3,20 +3,36 @@ using namespace std;
 
 int main()
 {
-  cout << "Please enter expression (we can handle + and -):";
+  cout << "Please enter expression (we can handle +, -, *, and /)\n";
   int lval = 0;
   int rval;
-  char op;
-  int res;
-  cin >> lval >> op >> rval; //read something like 1+3
+  cin >> lval; //read leftmost operand
+  if(!cin) throw("No first operand");
+  for(char op; cin >> op;)
+    {
+      //read operator and right-hand operand repeatedly
+      if(op!='x') cin >> rval;
+      if(!cin) throw("no second operand");
+      switch(op)
+        {
+        case '+':
+          lval += rval;
+          break;
+        case '-':
+          lval -= rval;
+          break;
+        case '*':
+          lval *= rval;
+          break;
+        case '/':
+          lval /= rval;
+          break;
+        default:
+          cout << "Result: " << lval << '\n';
 
-  if(op == '+')
-    res = lval + rval; //addition
-  else if(op=='-')
-    res = lval - rval; //subtraction
+          return 0;
+        }
+    }
+  throw("bad expression");
 
-  cout << "Result : " << res << '\n';
-
-  return 0;
 }
-
