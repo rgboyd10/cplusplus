@@ -10,7 +10,7 @@ int main()
   double plusx, minusx, a, b, c;
  
   //get values from the user
-  cout << "The quadratic equation is x = (-b +- sqrt(b^2 - 4ac)) / 2a. Please enter your values for each variable below." << endl;
+  cout << "The quadratic equation is x = (-b +- sqrt(b^2 - 4ac)) / 2a. \nPlease enter your values for each variable below. Be sure to add a negative value for variable c so that roots are shown." << endl;
   cout << "a: "; cin >> a;
   cout << "b: "; cin >> b;
   cout << "c: "; cin >> c;
