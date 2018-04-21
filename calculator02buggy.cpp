@@ -1,3 +1,4 @@
+
 //
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
@@ -25,9 +26,9 @@ public:
   char kind;        // what kind of token
   double value;     // for numbers: a value
   bool full;
-    Token(char ch)    // make a Token from a char
+  Token(char ch)    // make a Token from a char
         :kind(ch), value(0) { }    
-    Token(char ch, double val)     // make a Token from a char and a double
+  Token(char ch, double val)     // make a Token from a char and a double
         :kind(ch), value(val) { }
 };
 
@@ -63,7 +64,7 @@ void Token_stream::putback(Token t)
 
 //------------------------------------------------------------------------------
 
-Token get()
+Token Token_stream::get()
 {
     if (full) {       // do we already have a Token ready?
         // remove token from buffer
