@@ -23,7 +23,7 @@ int factorial(int x)
 int main()
 {
   //declare variables
-  int num1, num1factorial, num2, num2factorial, iterator, lowerresult, result;
+  int num1, num2, result;
   char computation;
 
   //request numbers and desired computation from the user and read into variables
@@ -36,14 +36,17 @@ int main()
   if(computation == 'p')
     {
       result = factorial(num1) / factorial((num1-num2));
+      cout << "For the permutation of " << num1 << " & " << num2 << "the answer is " << result << "." << endl;
     }
   else if(computation == 'c')
     {
       result = (factorial(num1) / factorial((num1-num2))) / factorial(num2);
+      cout << "For the combination of " << num1 << " & " << num2 << "the answer is " << result << "." << endl;
     }
   else //TODO:figure out how to allow them to try again.
     {
       cout << "You've entered an incorrect value, goodbye." << endl;
     }
-}
 
+    return 0;
+}
