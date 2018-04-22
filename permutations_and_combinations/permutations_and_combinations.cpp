@@ -6,7 +6,7 @@ using namespace std;
 double factorial(double x)
 {
   double result = x;
-  double iterator = x;
+  double iterator = x-1;
 
   while(iterator > 0)
     {
@@ -33,12 +33,12 @@ int main()
   //perform calculations and display result
   if(computation == 'p')
     {
-      result = factorial(num1) / factorial((num1-num2));
+      result = factorial(num1) / (factorial((num1-num2)));
       cout << "For the permutation of " << num1 << " & " << num2 << " the answer is " << result << "." << endl;
     }
   else if(computation  == 'c')
     {
-      result = (factorial(num1) / factorial((num1-num2))) / factorial(num2);
+      result = (factorial(num1) / (factorial((num1-num2)))) / factorial(num2);
       cout << "For the combination of " << num1 << " & " << num2 << " the answer is " << result << "." << endl;
     }
   else //TODO:figure out how to allow them to try again.
