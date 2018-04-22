@@ -18,6 +18,7 @@
 */
 
 #include <iostream>
+
 using namespace std;
 //------------------------------------------------------------------------------
 
@@ -113,7 +114,7 @@ double primary()
         {    
             double d = expression();
             t = ts.get();
-            if (t.kind != ')') throw(')' expected);
+            if (t.kind != ')') throw("')' expected");
             return d;
         }
     case '8':            // we use '8' to represent a number
@@ -156,7 +157,7 @@ double term()
 // deal with + and -
 double expression()
 {
-    double left = term(;      // read and evaluate a Term
+  double left = term();      // read and evaluate a Term
     Token t = ts.get();        // get the next token from token stream
 
     while(true) {    
@@ -179,29 +180,29 @@ double expression()
 //------------------------------------------------------------------------------
 
 int main()
+{
+  cout << "Welcome to our simple calculator.  Please enter expressions using floating point numbers." << endl;
+  cout << "You can use 'x' to quit and '=' to print." << endl;
 try
 {
     while (cin) {
         Token t = ts.get();
 
-        if (t.kind == 'q') break; // 'q' for quit
-        if (t.kind == ';')        // ';' for "print now"
-            cout << "=" << val << '\n';
+        if (t.kind == 'x') break; // 'x' for quit
+        if (t.kind == '=')        // '=' for "print now"
+            cout << "=" << t.value << '\n';
         else
             ts.putback(t);
-        val = expression();
+        t.value = expression();
     }
-	keep_window_open();
 }
 catch (exception& e) {
     cerr << "error: " << e.what() << '\n'; 
-	keep_window_open();
     return 1;
 }
 catch (...) {
     cerr << "Oops: unknown exception!\n"; 
-	keep_window_open();
     return 2;
 }
-
+}
 //------------------------------------------------------------------------------
