@@ -36,15 +36,53 @@ int main()
 {
   //declare vars
   string userin;
-  int answer = 1;
+  int ball_location = 1;
   
   //prompt user
   cout << "Please enter either an individual character or a sequence of characters.";
   cin >> userin;
 
-  if(userin == 'A')
+  for(int x = 1; x < userin.length(); x++)
     {
-      answer == 
+      //ball_location 1 possible moves
+      if(ball_location == 1 && userin.at(x) == 'A')
+	{
+	  ball_location = 2;
+	}
+      else if(ball_location == 1 && userin.at(x) == 'B')
+	{
+	  ball_location = 1;
+	}
+      else if(ball_location == 1 && userin.at(x) == 'C')
+	{
+	  ball_location = 3;
+	}
+      //ball_location 2 possible moves
+      else if(ball_location == 1 && userin.at(x) == 'A')
+	{
+	  ball_location = 2;
+	}
+      else if(ball_location == 1 && userin.at(x) == 'B')
+	{
+	  ball_location = 1;
+	}
+      else if(ball_location == 1 && userin.at(x) == 'C')
+	{
+	  ball_location = 3;
+	}
+      //ball_location 3 possible moves
+       if(ball_location == 1 && userin.at(x) == 'A')
+	{
+	  ball_location = 2;
+	}
+      else if(ball_location == 1 && userin.at(x) == 'B')
+	{
+	  ball_location = 1;
+	}
+      else if(ball_location == 1 && userin.at(x) == 'C')
+	{
+	  ball_location = 3;
+	}
     }
     
   
