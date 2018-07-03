@@ -42,7 +42,7 @@ int main()
   cout << "Please enter either an individual character or a sequence of characters. Choices are A, B or C.";
   cin >> userin;
 
-  for(int x = 1; x < userin.length(); x++)
+  for(int x = 0; x < userin.length(); x++)
     {
       //ball_location 1 possible moves
       if(ball_location == 1 && userin.at(x) == 'A')
@@ -71,7 +71,7 @@ int main()
 	  ball_location = 2;
 	}
       //ball_location 3 possible moves
-       if(ball_location == 3 && userin.at(x) == 'A')
+      else if(ball_location == 3 && userin.at(x) == 'A')
 	{
 	  ball_location = 3;
 	}
