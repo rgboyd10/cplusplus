@@ -39,7 +39,7 @@ int main()
   int ball_location = 1;
   
   //prompt user
-  cout << "Please enter either an individual character or a sequence of characters.";
+  cout << "Please enter either an individual character or a sequence of characters. Choices are A, B or C.";
   cin >> userin;
 
   for(int x = 1; x < userin.length(); x++)
@@ -58,34 +58,33 @@ int main()
 	  ball_location = 3;
 	}
       //ball_location 2 possible moves
-      else if(ball_location == 1 && userin.at(x) == 'A')
-	{
-	  ball_location = 2;
-	}
-      else if(ball_location == 1 && userin.at(x) == 'B')
+      else if(ball_location == 2 && userin.at(x) == 'A')
 	{
 	  ball_location = 1;
 	}
-      else if(ball_location == 1 && userin.at(x) == 'C')
+      else if(ball_location == 2 && userin.at(x) == 'B')
 	{
 	  ball_location = 3;
+	}
+      else if(ball_location == 2 && userin.at(x) == 'C')
+	{
+	  ball_location = 2;
 	}
       //ball_location 3 possible moves
-       if(ball_location == 1 && userin.at(x) == 'A')
-	{
-	  ball_location = 2;
-	}
-      else if(ball_location == 1 && userin.at(x) == 'B')
-	{
-	  ball_location = 1;
-	}
-      else if(ball_location == 1 && userin.at(x) == 'C')
+       if(ball_location == 3 && userin.at(x) == 'A')
 	{
 	  ball_location = 3;
 	}
+      else if(ball_location == 3 && userin.at(x) == 'B')
+	{
+	  ball_location = 2;
+	}
+      else if(ball_location == 3 && userin.at(x) == 'C')
+	{
+	  ball_location = 1;
+	}
     }
-    
-  
-  //logic
+
+  cout << "The ball is under cup: " << ball_location << endl; 
   
 }
