@@ -38,8 +38,7 @@ int main()
   string userin;
   int ball_location = 1;
   
-  //prompt user
-  cout << "Please enter either an individual character or a sequence of characters. Choices are A, B or C.";
+  //read in the user inputted value
   cin >> userin;
 
   for(int x = 0; x < userin.length(); x++)
@@ -85,6 +84,6 @@ int main()
 	}
     }
 
-  cout << "The ball is under cup: " << ball_location << endl; 
+  cout << ball_location << endl; 
   
 }
