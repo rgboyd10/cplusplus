@@ -11,7 +11,8 @@ The first and only line of output must contain the required value from the task.
 */
 
 #include <iostream>
-using namepsace std;
+#include <vector>
+using namespace std;
 
 int main()
 {
@@ -19,20 +20,22 @@ int main()
   int megabyte_limit = 0;
   int mb_values = 0;
   int result = 0;
-  vector <int> megabytes_used_history = 0;
+  vector <int> megabytes_used_history;
   
   //read in values
   cin >> megabyte_limit;
-  while(cin)
+  while(cin >> mb_values)
     {
+      if(mb_values >= megabyte_limit) mb_values = 0;
+
       megabytes_used_history.push_back(mb_values);
     }
 
   //calculate output and print
-  for(int x = 0; x < megabytes_used_history.length(); x++)
+  for(int x = 0; x < megabytes_used_history.size(); x++)
     {
-      result += (megabyte_limit - megabytes_used_history[x])
+      result += (megabyte_limit - megabytes_used_history[x]);
     }
 
-  cout << result;
+  cout << result << endl;
 }
