@@ -20,22 +20,29 @@ int main()
   int megabyte_limit = 0;
   int mb_values = 0;
   int result = 0;
+  int month_counter;
   vector <int> megabytes_used_history;
+  int total_mb_used = 0;
+  int total_mb_available = 0;
   
   //read in values
   cin >> megabyte_limit;
   while(cin >> mb_values)
     {
       if(mb_values >= megabyte_limit) mb_values = 0;
-
       megabytes_used_history.push_back(mb_values);
+      month_counter++;
     }
 
   //calculate output and print
   for(int x = 0; x < megabytes_used_history.size(); x++)
     {
-      result += (megabyte_limit - megabytes_used_history[x]);
+      total_mb_used += megabytes_used_history[x];
     }
 
+  //other method
+  total_mb_available = megabyte_limit * month_counter;
+  cout << total_mb_available << endl;
+  result = total_mb_available - total_mb_used;
   cout << result << endl;
 }
