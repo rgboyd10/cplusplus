@@ -16,6 +16,7 @@ For each match, in the order they were given in the input, output on a separate 
 
 #include <iostream>
 #include <cmath>
+#include <vector>
 using namespace std;
 
 int main()
@@ -26,26 +27,25 @@ int main()
   int number_of_matches = 0;
   int width;
   int height;
-
+  int x = 0;
   //read in values
   cin >> number_of_matches >> width >> height;
-  while(cin >> lengths && number_of_matches <= 50)
+
+  while(x < number_of_matches)
     {
+      cin >> lengths;
       match_length.push_back(lengths);
-      number_of_matches++;
+      x++;
     }
 
-  //write the number of matches, width, and height
-  cout << number_of_matches << " " << width << " " << height << endl;
-
   //compute and write the lengths and DA or NE
-  for(int x = 0; x < match_length.length(); x++)
+  for(int x = 0; x < match_length.size(); x++)
     {
-      if(Math.sqrt(Math.pow(width,2) + Math.pow(height,2)) >= match_length[x])
+      if(sqrt(pow(width,2) + pow(height,2)) >= match_length[x])
 	{
-	  cout << match_length[x] << " DA " << endl;
+	  cout << "DA" << endl;
 	}
       else
-	cout << match_length[x] << " NE " << endl;
+	cout << "NE" << endl;
     }
 }
