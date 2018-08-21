@@ -37,13 +37,34 @@ Sample Input 1 	Sample Output 1
 */
 
 #include <iostream>
-  using namespace std;
-  int main()
+#include <string>
+using namespace std;
+
+int main()
 {
+  int number_of_values;
+  int counter;
   int value;
+  string strvalue;
   int exponent;
   int result;
+  vector<int> values;
 
-  cin >> value;
-  exponent = 
+  cin >> number_of_values;
+
+  while(counter <= number_of_values)
+    {
+      cin >> value;
+      values.push_back(value);
+      counter++;
+    }
+  
+  exponent = stoi(strvalue);
+
+  for(int x = 0; x < number_of_values.length(); x++)
+    {
+      result+= 
+      
+    }
+  cout <<  << endl;
 }
