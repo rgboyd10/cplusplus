@@ -36,4 +36,14 @@ Sample Input 1 	Sample Output 1
 1953566
 */
 
-  
+#include <iostream>
+  using namespace std;
+  int main()
+{
+  int value;
+  int exponent;
+  int result;
+
+  cin >> value;
+  exponent = 
+}
