@@ -58,12 +58,12 @@ int main()
       values.push_back(value);
       counter++;
     }
-  
-  exponent = stoi(strvalue);
 
-  for(int x = 0; x < number_of_values.length(); x++)
+  for(int x = 0; x < values.length(); x++)
     {
-      result+= 
+      exponent = stoi(values[x]);
+      value = str_va
+      result+= number_of 
       
     }
   cout <<  << endl;
