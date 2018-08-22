@@ -45,26 +45,32 @@ int main()
   int number_of_values;
   int counter;
   int value;
-  string strvalue;
   int exponent;
+  string strvalue;
+  string strexponent;
   int result;
   vector<int> values;
-
+  vector<string> strvalues;
+  vector<int> exponents;
+    
   cin >> number_of_values;
 
   while(counter <= number_of_values)
     {
-      cin >> value;
+      cin >> strvalue;
+      strvalues.push_back(strvalue);
+      value = stoi(strvalue);
       values.push_back(value);
+      strexponent = strvalue.at(strvalue.length());
+      exponent = stoi(strexponent);
+      exponents.push_back(exponent);
       counter++;
     }
-
+  
   for(int x = 0; x < values.length(); x++)
     {
-      exponent = stoi(values[x]);
-      value = str_va
-      result+= number_of 
       
+      result += pow(values[x].at(value.length()),exponents[x]);
     }
-  cout <<  << endl;
+  cout <<  result << endl;
 }
