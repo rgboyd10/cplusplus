@@ -38,12 +38,14 @@ Sample Input 1 	Sample Output 1
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <cmath>
 using namespace std;
 
 int main()
 {
   int number_of_values;
-  int counter;
+  int counter = 0;
   int value;
   int exponent;
   string strvalue;
@@ -55,7 +57,7 @@ int main()
     
   cin >> number_of_values;
 
-  while(counter <= number_of_values)
+  while(counter < number_of_values)
     {
       cin >> strvalue;
       strvalues.push_back(strvalue);
@@ -67,10 +69,9 @@ int main()
       counter++;
     }
   
-  for(int x = 0; x < values.length(); x++)
+  for(int x = 0; x < values.size(); x++)
     {
-      
-      result += pow(values[x].at(value.length()),exponents[x]);
+      result += pow(values[x]-exponents[x],exponents[x]);
     }
   cout <<  result << endl;
 }
