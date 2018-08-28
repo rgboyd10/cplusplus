@@ -33,6 +33,7 @@ int main()
   int number_of_values;
   int counter;
   int value;
+  char exp;
   int exponent;
   int result;
   int base;
@@ -46,7 +47,11 @@ int main()
     {
       cin >> value;
       exponent = value % 10;
-      base = ;
+      base = 
+      // - ideas for how to calculate the base number
+      // - integer parser to get everything except the last value
+      // - mathematical formula??
+      
       result = pow(base, exponent);
       counter++;
     }
