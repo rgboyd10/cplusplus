@@ -7,7 +7,7 @@ http://www.hpinfotech.com
 Project : 
 Version : 
 Date    : 9/4/2018
-Author  : 
+Author  : Russell Boyd
 Company : 
 Comments: 
 
@@ -18,7 +18,7 @@ AVR Core Clock frequency: 2.000000 MHz
 Memory model            : Small
 Data Stack size         : 2048
 *******************************************************/
-
+#include <stdint.h>
 // I/O Registers definitions
 #include <xmega128b1.h>
 
@@ -78,6 +78,13 @@ tcc0_init();
 while (1)
       {
       // Place your code here
-
+		if(getTime()& 0c200)
+		{
+			PORTB.OUT=0xF0;
+		}
+		else
+		{
+			PORTB.OUT=0x00;
+		}
       }
 }

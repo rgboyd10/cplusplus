@@ -9,6 +9,7 @@ Project :
 
 // I/O Registers definitions
 #include <xmega128b1.h>
+#include <io.h>
 
 // Ports initialization
 void ports_init(void)
@@ -82,7 +83,7 @@ PORTA.INT1MASK=0x00;
 
 // PORTB initialization
 // OUT register
-PORTB.OUT=0x00;
+PORTB.OUT=0xF0;
 // Pin0: Input
 // Pin1: Input
 // Pin2: Input

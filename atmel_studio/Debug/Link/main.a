@@ -7,7 +7,7 @@
 ;Project :
 ;Version :
 ;Date    : 9/4/2018
-;Author  :
+;Author  : Russell Boyd
 ;Company :
 ;Comments:
 ;
@@ -18,7 +18,7 @@
 ;Memory model            : Small
 ;Data Stack size         : 2048
 ;*******************************************************/
-;
+;#include <stdint.h>
 ;// I/O Registers definitions
 ;#include <xmega128b1.h>
 ;
@@ -99,11 +99,27 @@
 ;PCODE: $00000011 VOL: 0
 ; 0000 004F       {
 ; 0000 0050       // Place your code here
-; 0000 0051 
-; 0000 0052       }
+; 0000 0051 		if(getTime()& 0c200)
 ;PCODE: $00000012 VOL: 0
 ;PCODE: $00000013 VOL: 0
-; 0000 0053 }
 ;PCODE: $00000014 VOL: 0
 ;PCODE: $00000015 VOL: 0
+; 0000 0052 		{
 ;PCODE: $00000016 VOL: 0
+; 0000 0053 			PORTB.OUT=0xF0;
+;PCODE: $00000017 VOL: 0
+;PCODE: $00000018 VOL: 1
+; 0000 0054 		}
+; 0000 0055 		else
+; 0000 0056 		{
+; 0000 0057 			PORTB.OUT=0x00;
+;PCODE: $00000019 VOL: 0
+;PCODE: $0000001A VOL: 1
+; 0000 0058 		}
+; 0000 0059       }
+;PCODE: $0000001B VOL: 0
+;PCODE: $0000001C VOL: 0
+; 0000 005A }
+;PCODE: $0000001D VOL: 0
+;PCODE: $0000001E VOL: 0
+;PCODE: $0000001F VOL: 0
