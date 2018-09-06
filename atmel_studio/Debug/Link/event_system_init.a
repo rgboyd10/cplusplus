@@ -1,0 +1,73 @@
+;/*******************************************************
+;Event System initialization created by the
+;CodeWizardAVR V3.32 Automatic Program Generator
+;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+;http://www.hpinfotech.com
+;
+;Project :
+;*******************************************************/
+;
+;// I/O Registers definitions
+;#include <xmega128b1.h>
+;
+;// Event System initialization
+;void event_system_init(void)
+; 0002 000F {
+
+	.CSEG
+;PCODE: $00000000 VOL: 0
+;PCODE: $00000001 VOL: 0
+; 0002 0010 // Event System Channel 0 source: Port A, Pin0
+; 0002 0011 EVSYS.CH0MUX=EVSYS_CHMUX_PORTA_PIN0_gc;
+;PCODE: $00000002 VOL: 0
+;PCODE: $00000003 VOL: 1
+; 0002 0012 // Event System Channel 1 source: None
+; 0002 0013 EVSYS.CH1MUX=EVSYS_CHMUX_OFF_gc;
+;PCODE: $00000004 VOL: 0
+;PCODE: $00000005 VOL: 1
+; 0002 0014 // Event System Channel 2 source: None
+; 0002 0015 EVSYS.CH2MUX=EVSYS_CHMUX_OFF_gc;
+;PCODE: $00000006 VOL: 0
+;PCODE: $00000007 VOL: 1
+; 0002 0016 // Event System Channel 3 source: None
+; 0002 0017 EVSYS.CH3MUX=EVSYS_CHMUX_OFF_gc;
+;PCODE: $00000008 VOL: 0
+;PCODE: $00000009 VOL: 1
+; 0002 0018 // Event System Channel 0 Digital Filter Coefficient: 8 Samples
+; 0002 0019 // Quadrature Decoder: Off
+; 0002 001A EVSYS.CH0CTRL=(EVSYS.CH0CTRL & (~(EVSYS_QDIRM_gm | EVSYS_QDIEN_bm | EVSYS_QDEN_bm | EVSYS_DIGFILT_gm))) |
+; 0002 001B 	EVSYS_DIGFILT_8SAMPLES_gc;
+;PCODE: $0000000A VOL: 1
+;PCODE: $0000000B VOL: 0
+;PCODE: $0000000C VOL: 0
+;PCODE: $0000000D VOL: 1
+; 0002 001C // Event System Channel 1 Digital Filter Coefficient: 1 Sample
+; 0002 001D EVSYS.CH1CTRL=EVSYS_DIGFILT_1SAMPLE_gc;
+;PCODE: $0000000E VOL: 0
+;PCODE: $0000000F VOL: 1
+; 0002 001E // Event System Channel 2 Digital Filter Coefficient: 1 Sample
+; 0002 001F // Quadrature Decoder: Off
+; 0002 0020 EVSYS.CH2CTRL=(EVSYS.CH2CTRL & (~(EVSYS_QDIRM_gm | EVSYS_QDIEN_bm | EVSYS_QDEN_bm | EVSYS_DIGFILT_gm))) |
+; 0002 0021 	EVSYS_DIGFILT_1SAMPLE_gc;
+;PCODE: $00000010 VOL: 1
+;PCODE: $00000011 VOL: 0
+;PCODE: $00000012 VOL: 0
+;PCODE: $00000013 VOL: 1
+; 0002 0022 // Event System Channel 3 Digital Filter Coefficient: 1 Sample
+; 0002 0023 EVSYS.CH3CTRL=EVSYS_DIGFILT_1SAMPLE_gc;
+;PCODE: $00000014 VOL: 0
+;PCODE: $00000015 VOL: 1
+; 0002 0024 
+; 0002 0025 // Event System Channel output: Disabled
+; 0002 0026 PORTCFG.CLKEVOUT&= ~PORTCFG_EVOUT_gm;
+;PCODE: $00000016 VOL: 1
+;PCODE: $00000017 VOL: 0
+;PCODE: $00000018 VOL: 1
+; 0002 0027 PORTCFG.EVOUTSEL&= ~PORTCFG_EVOUTSEL_gm;
+;PCODE: $00000019 VOL: 1
+;PCODE: $0000001A VOL: 0
+;PCODE: $0000001B VOL: 1
+; 0002 0028 }
+;PCODE: $0000001C VOL: 0
+;PCODE: $0000001D VOL: 0
+;

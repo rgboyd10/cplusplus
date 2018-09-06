@@ -9,7 +9,6 @@ Project :
 
 // I/O Registers definitions
 #include <xmega128b1.h>
-#include <io.h>
 
 // Ports initialization
 void ports_init(void)
@@ -26,22 +25,22 @@ PORTA.OUT=0xF0;
 // Pin6: Output
 // Pin7: Output
 PORTA.DIR=0xF0;
-// Pin0 Output/Pull configuration: Totempole/No
-// Pin0 Input/Sense configuration: Sense both edges
+// Pin0 Output/Pull configuration: Totempole/Pull-up (on input)
+// Pin0 Input/Sense configuration: Sense falling edge
 // Pin0 Inverted: Off
-PORTA.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
-// Pin1 Output/Pull configuration: Totempole/No
+PORTA.PIN0CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_FALLING_gc;
+// Pin1 Output/Pull configuration: Totempole/Pull-up (on input)
 // Pin1 Input/Sense configuration: Sense both edges
 // Pin1 Inverted: Off
-PORTA.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
-// Pin2 Output/Pull configuration: Totempole/No
+PORTA.PIN1CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_BOTHEDGES_gc;
+// Pin2 Output/Pull configuration: Totempole/Pull-up (on input)
 // Pin2 Input/Sense configuration: Sense both edges
 // Pin2 Inverted: Off
-PORTA.PIN2CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
-// Pin3 Output/Pull configuration: Totempole/No
+PORTA.PIN2CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_BOTHEDGES_gc;
+// Pin3 Output/Pull configuration: Totempole/Pull-up (on input)
 // Pin3 Input/Sense configuration: Sense both edges
 // Pin3 Inverted: Off
-PORTA.PIN3CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+PORTA.PIN3CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_BOTHEDGES_gc;
 // Pin4 Output/Pull configuration: Totempole/No
 // Pin4 Input/Sense configuration: Sense both edges
 // Pin4 Inverted: Off
@@ -83,7 +82,7 @@ PORTA.INT1MASK=0x00;
 
 // PORTB initialization
 // OUT register
-PORTB.OUT=0xF0;
+PORTB.OUT=0x00;
 // Pin0: Input
 // Pin1: Input
 // Pin2: Input

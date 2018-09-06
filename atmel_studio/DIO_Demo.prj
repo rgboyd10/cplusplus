@@ -6,11 +6,11 @@ CV=3.32 Evaluation
 A=
 C=
 D=9/4/2018
-Files=4
+Files=5
 F1=main.c
 F2=clock_init.c
-F3=ports_init.c
-F4=timers_init.c
+F3=event_system_init.c
+F4=ports_init.c
 OpenedFiles=1
 OF1=main.c
 ActiveTab=1
@@ -24,6 +24,7 @@ OutputExecutableFilesDirectory=Release\Exe
 OutputLinkerFilesDirectory=Release\Link
 AllowDisplayFunctionCallTree=0
 CleanUp=2
+F5=timers_init.c
 [CompilerDebug]
 Chip=ATxmega128B1
 CPUClock=2000000
@@ -126,10 +127,10 @@ DebugBootLoader=0
 WatchAVR8LAutoVariables=0
 UseEEPROMLocation0=1
 DisplayCodeSizeError=1
-RebuildAll=0
+RebuildAll=1
 LinkageInformationPresent=1
-COFFileTimeStamp=1294247270
-Build=2
+COFFileTimeStamp=-1
+Build=1
 GlobalVarAddr=10240
 EEPROMVarAddr=0
 [DefinedSymbolsDebug]
@@ -239,7 +240,7 @@ DisplayCodeSizeError=1
 RebuildAll=1
 LinkageInformationPresent=0
 COFFileTimeStamp=-1
-Build=2
+Build=1
 [DefinedSymbols]
 Count=0
 [CompilerAdvanced]
@@ -343,19 +344,6 @@ PreserveEEPROM=0
 VerifyProgramming=1
 ProgrammingCounter=0
 RunUserProg=0
-[HeadersList]
-Files=4
-F1=C:\Users\russe\Documents\code\studying\atmel_studio\main.c
-F2=C:\Users\russe\Documents\code\studying\atmel_studio\clock_init.c
-F3=C:\Users\russe\Documents\code\studying\atmel_studio\ports_init.c
-F4=C:\Users\russe\Documents\code\studying\atmel_studio\timers_init.c
-[Header2]
-Files=5
-F1=C:\cvavreval\inc\xmega128b1.h
-F2=C:\cvavreval\inc\xmstruct.h
-F3=C:\cvavreval\inc\xmbits_b1.h
-F4=C:\cvavreval\inc\iobits.h
-F5=C:\cvavreval\inc\stddef.h
 [BuildInfoCompiler]
 L1=Build configuration: Debug
 L2=Chip: ATxmega128B1
@@ -373,10 +361,10 @@ L13=Enhanced function parameters passing: Mode 2
 L14=Automatic register allocation: Yes
 L15=Smart register allocation: Yes
 L16=
-L17=Build: 2
-L18=15922 line(s) compiled
-L19=3 error(s)
-L20=2 warning(s)
+L17=Build: 1
+L18=36325 line(s) compiled
+L19=2 error(s)
+L20=No warnings
 L21=
 L22=Bit variables size: 0 byte(s)
 L23=
@@ -409,31 +397,48 @@ L10=[.dseg] 0x002000 0x002800      0      0      0    8192   0.0%
 L11=[.eseg] 0x000000 0x000000      0      0      0    2048   0.0%
 L12=
 Lines=0
-[Header3]
+[HeadersList]
+Files=5
+F1=C:\Users\russe\Documents\code\studying\atmel_studio\main.c
+F2=C:\Users\russe\Documents\code\studying\atmel_studio\clock_init.c
+F3=C:\Users\russe\Documents\code\studying\atmel_studio\event_system_init.c
+F4=C:\Users\russe\Documents\code\studying\atmel_studio\ports_init.c
+F5=C:\Users\russe\Documents\code\studying\atmel_studio\timers_init.c
+[Header1]
+Files=11
+F1=C:\cvavreval\inc\xmega128b1.h
+F2=C:\cvavreval\inc\xmstruct.h
+F3=C:\cvavreval\inc\xmbits_b1.h
+F4=C:\cvavreval\inc\iobits.h
+F5=C:\cvavreval\inc\stdio.h
+F6=C:\cvavreval\inc\io.h
+F7=C:\cvavreval\inc\stdarg.h
+F8=clock_init.h
+F9=event_system_init.h
+F10=ports_init.h
+F11=timers_init.h
+[Header2]
 Files=5
 F1=C:\cvavreval\inc\xmega128b1.h
 F2=C:\cvavreval\inc\xmstruct.h
 F3=C:\cvavreval\inc\xmbits_b1.h
 F4=C:\cvavreval\inc\iobits.h
-F5=C:\cvavreval\inc\io.h
-[Header1]
-Files=11
-F1=C:\cvavreval\inc\stdint.h
-F2=C:\cvavreval\inc\xmega128b1.h
-F3=C:\cvavreval\inc\xmstruct.h
-F4=C:\cvavreval\inc\xmbits_b1.h
-F5=C:\cvavreval\inc\iobits.h
-F6=C:\cvavreval\inc\stdio.h
-F7=C:\cvavreval\inc\io.h
-F8=C:\cvavreval\inc\stdarg.h
-F9=clock_init.h
-F10=ports_init.h
-F11=timers_init.h
-[Header4]
-Files=6
+F5=C:\cvavreval\inc\stddef.h
+[Header3]
+Files=4
 F1=C:\cvavreval\inc\xmega128b1.h
 F2=C:\cvavreval\inc\xmstruct.h
 F3=C:\cvavreval\inc\xmbits_b1.h
 F4=C:\cvavreval\inc\iobits.h
-F5=C:\cvavreval\inc\io.h
-F6=C:\cvavreval\inc\stdint.h
+[Header4]
+Files=4
+F1=C:\cvavreval\inc\xmega128b1.h
+F2=C:\cvavreval\inc\xmstruct.h
+F3=C:\cvavreval\inc\xmbits_b1.h
+F4=C:\cvavreval\inc\iobits.h
+[Header5]
+Files=4
+F1=C:\cvavreval\inc\xmega128b1.h
+F2=C:\cvavreval\inc\xmstruct.h
+F3=C:\cvavreval\inc\xmbits_b1.h
+F4=C:\cvavreval\inc\iobits.h

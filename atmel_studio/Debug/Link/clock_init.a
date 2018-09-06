@@ -1,20 +1,20 @@
-;/*******************************************************
-;System clock initialization created by the
-;CodeWizardAVR V3.32 Automatic Program Generator
-;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
-;http://www.hpinfotech.com
-;
-;Project :
-;*******************************************************/
-;
-;// I/O Registers definitions
-;#include <xmega128b1.h>
-;
-;// Standard definitions
-;#include <stddef.h>
-;
-;// System Clocks initialization
-;void system_clocks_init(void)
+; 0001 0001 /*******************************************************
+; 0001 0002 System clock initialization created by the
+; 0001 0003 CodeWizardAVR V3.32 Automatic Program Generator
+; 0001 0004 © Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+; 0001 0005 http://www.hpinfotech.com
+; 0001 0006 
+; 0001 0007 Project :
+; 0001 0008 *******************************************************/
+; 0001 0009 
+; 0001 000A // I/O Registers definitions
+; 0001 000B #include <xmega128b1.h>
+; 0001 000C 
+; 0001 000D // Standard definitions
+; 0001 000E #include <stddef.h>
+; 0001 000F 
+; 0001 0010 // System Clocks initialization
+; 0001 0011 void system_clocks_init(void)
 ; 0001 0012 {
 
 	.CSEG
