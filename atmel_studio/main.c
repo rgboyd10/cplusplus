@@ -86,6 +86,27 @@ tcc1_init();
 
 while (1)
       {
+		  static uint32_t turnOffLedTime = 0;
+		  static uint16_t lastRotationCount = 0;
+		  
+		  if(getTime() >= turnOffLedTime)
+		  {
+			PORTB.OUT=0xF0; 
+		 }
+		 else
+		 {
+			 PORTB.OUT=0x00;
+		 }
+		 
+		 if(wheelRotationCaptured())
+		 {
+			uint32_t newRotationCount;
+			uint32_t rotationDuration;
+			newRotationCount = getWheelRotationCount();
+			rotationDuration = newRotationCount - lastRotationCount;
+			lastRotationCount = newRotationCount;
+			turnOffLedTime	= 250 + getTime();
+		 }
       // Place your code here
 	  if((PORTE.IN & 0x01) && (getTime() & 0x100))
 	  {
