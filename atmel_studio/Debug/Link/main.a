@@ -22,9 +22,6 @@
 ;// I/O Registers definitions
 ;#include <xmega128b1.h>
 ;
-;// Standard Input/Output functions
-;#include <stdio.h>
-;
 ;// Clock System initialization function
 ;#include "clock_init.h"
 ;
@@ -36,6 +33,9 @@
 ;
 ;// Timers/Counters initialization functions
 ;#include "timers_init.h"
+;
+;// USARTs initialization functions
+;#include "usarts_init.h"
 ;
 ;// Declare your global variables here
 ;
@@ -102,39 +102,23 @@
 ; 0000 0052 tcc1_init();
 ;PCODE: $00000011 VOL: 0
 ; 0000 0053 
-; 0000 0054 // Globally enable interrupts
-; 0000 0055 #asm("sei")
+; 0000 0054 // USARTC0 initialization
+; 0000 0055 usartc0_init();
 ;PCODE: $00000012 VOL: 0
 ; 0000 0056 
-; 0000 0057 while (1)
+; 0000 0057 // Globally enable interrupts
+; 0000 0058 #asm("sei")
 ;PCODE: $00000013 VOL: 0
-; 0000 0058       {
-; 0000 0059       // Place your code here
-; 0000 005A 	  if((PORTE.IN & 0x01) && (getTime() & 0x100))
-;PCODE: $00000014 VOL: 1
+; 0000 0059 
+; 0000 005A while (1)
+;PCODE: $00000014 VOL: 0
+; 0000 005B       {
+; 0000 005C       // Place your code here
+; 0000 005D 
+; 0000 005E       }
 ;PCODE: $00000015 VOL: 0
 ;PCODE: $00000016 VOL: 0
+; 0000 005F }
 ;PCODE: $00000017 VOL: 0
 ;PCODE: $00000018 VOL: 0
 ;PCODE: $00000019 VOL: 0
-;PCODE: $0000001A VOL: 0
-;PCODE: $0000001B VOL: 0
-;PCODE: $0000001C VOL: 0
-;PCODE: $0000001D VOL: 0
-;PCODE: $0000001E VOL: 0
-; 0000 005B 	  {
-;PCODE: $0000001F VOL: 0
-;PCODE: $00000020 VOL: 0
-; 0000 005C 		PORTB.OUT=0xF0;
-;PCODE: $00000021 VOL: 0
-;PCODE: $00000022 VOL: 1
-; 0000 005D 	  }
-; 0000 005E 
-; 0000 005F 	  }
-;PCODE: $00000023 VOL: 0
-;PCODE: $00000024 VOL: 0
-; 0000 0060       }
-;PCODE: $00000025 VOL: 0
-;PCODE: $00000026 VOL: 0
-;PCODE: $00000027 VOL: 0
-;}

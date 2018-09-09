@@ -1,0 +1,2714 @@
+
+AVRASM ver. 2.1.30  C:\Users\russe\Documents\code\studying\atmel_studio\Debug\List\DIO_Demo.asm Sun Sep 09 10:20:30 2018
+
+                 
+                 
+                 ;CodeVisionAVR C Compiler V3.32 Evaluation
+                 ;(C) Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+                 ;http://www.hpinfotech.com
+                 
+                 ;Build configuration    : Debug
+                 ;Chip type              : ATxmega128B1
+                 ;Program type           : Application
+                 ;Clock frequency        : 2.000000 MHz
+                 ;Memory model           : Small
+                 ;Optimize for           : Size
+                 ;(s)printf features     : int, width
+                 ;(s)scanf features      : int, width
+                 ;External RAM size      : 0
+                 ;Data Stack size        : 2048 byte(s)
+                 ;Heap size              : 0 byte(s)
+                 ;Promote 'char' to 'int': Yes
+                 ;'char' is unsigned     : Yes
+                 ;8 bit enums            : Yes
+                 ;Global 'const' stored in FLASH: Yes
+                 ;Enhanced function parameter passing: Mode 2
+                 ;Enhanced core instructions: On
+                 ;Automatic register allocation for global variables: On
+                 ;Smart register allocation: On
+                 
+                 	#define _MODEL_SMALL_
+                 
+                 	#pragma AVRPART ADMIN PART_NAME ATxmega128B1
+                 	#pragma AVRPART MEMORY PROG_FLASH 139264
+                 	#pragma AVRPART MEMORY EEPROM 2048
+                 	#pragma AVRPART MEMORY INT_SRAM SIZE 8192
+                 	#pragma AVRPART MEMORY INT_SRAM START_ADDR 0x2000
+                 
+                 	#define CALL_SUPPORTED 1
+                 
+                 	.LISTMAC
+                 	.EQU CCP=0x34
+                 	.EQU RAMPD=0x38
+                 	.EQU RAMPX=0x39
+                 	.EQU RAMPY=0x3A
+                 	.EQU RAMPZ=0x3B
+                 	.EQU EIND=0x3C
+                 	.EQU WDT_CTRL=0x80
+                 	.EQU PMIC_CTRL=0xA2
+                 	.EQU NVM_ADDR0=0x01C0
+                 	.EQU NVM_ADDR1=NVM_ADDR0+1
+                 	.EQU NVM_ADDR2=NVM_ADDR1+1
+                 	.EQU NVM_DATA0=NVM_ADDR0+4
+                 	.EQU NVM_CMD=NVM_ADDR0+0xA
+                 	.EQU NVM_CTRLA=NVM_ADDR0+0xB
+                 	.EQU NVM_CTRLB=NVM_ADDR0+0xC
+                 	.EQU NVM_STATUS=NVM_ADDR0+0xF
+                 	.EQU SPL=0x3D
+                 	.EQU SPH=0x3E
+                 	.EQU SREG=0x3F
+                 	.EQU GPIO0=0x00
+                 	.EQU GPIO1=0x01
+                 	.EQU GPIO2=0x02
+                 	.EQU GPIO3=0x03
+                 
+                 	.DEF R0X0=R0
+                 	.DEF R0X1=R1
+                 	.DEF R0X2=R2
+                 	.DEF R0X3=R3
+                 	.DEF R0X4=R4
+                 	.DEF R0X5=R5
+                 	.DEF R0X6=R6
+                 	.DEF R0X7=R7
+                 	.DEF R0X8=R8
+                 	.DEF R0X9=R9
+                 	.DEF R0XA=R10
+                 	.DEF R0XB=R11
+                 	.DEF R0XC=R12
+                 	.DEF R0XD=R13
+                 	.DEF R0XE=R14
+                 	.DEF R0XF=R15
+                 	.DEF R0X10=R16
+                 	.DEF R0X11=R17
+                 	.DEF R0X12=R18
+                 	.DEF R0X13=R19
+                 	.DEF R0X14=R20
+                 	.DEF R0X15=R21
+                 	.DEF R0X16=R22
+                 	.DEF R0X17=R23
+                 	.DEF R0X18=R24
+                 	.DEF R0X19=R25
+                 	.DEF R0X1A=R26
+                 	.DEF R0X1B=R27
+                 	.DEF R0X1C=R28
+                 	.DEF R0X1D=R29
+                 	.DEF R0X1E=R30
+                 	.DEF R0X1F=R31
+                 
+                 	.EQU __SRAM_START=0x2000
+                 	.EQU __SRAM_END=0x3FFF
+                 	.EQU __DSTACK_SIZE=0x0800
+                 	.EQU __HEAP_SIZE=0x0000
+                 	.EQU __CLEAR_SRAM_SIZE=__SRAM_END-__SRAM_START+1
+                 
+                 	.MACRO __CPD1N
+                 	CPI  R30,LOW(@0)
+                 	LDI  R26,HIGH(@0)
+                 	CPC  R31,R26
+                 	LDI  R26,BYTE3(@0)
+                 	CPC  R22,R26
+                 	LDI  R26,BYTE4(@0)
+                 	CPC  R23,R26
+                 	.ENDM
+                 
+                 	.MACRO __CPD2N
+                 	CPI  R26,LOW(@0)
+                 	LDI  R30,HIGH(@0)
+                 	CPC  R27,R30
+                 	LDI  R30,BYTE3(@0)
+                 	CPC  R24,R30
+                 	LDI  R30,BYTE4(@0)
+                 	CPC  R25,R30
+                 	.ENDM
+                 
+                 	.MACRO __CPWRR
+                 	CP   R@0,R@2
+                 	CPC  R@1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __CPWRN
+                 	CPI  R@0,LOW(@2)
+                 	LDI  R30,HIGH(@2)
+                 	CPC  R@1,R30
+                 	.ENDM
+                 
+                 	.MACRO __ADDB1MN
+                 	SUBI R30,LOW(-@0-(@1))
+                 	.ENDM
+                 
+                 	.MACRO __ADDB2MN
+                 	SUBI R26,LOW(-@0-(@1))
+                 	.ENDM
+                 
+                 	.MACRO __ADDW1MN
+                 	SUBI R30,LOW(-@0-(@1))
+                 	SBCI R31,HIGH(-@0-(@1))
+                 	.ENDM
+                 
+                 	.MACRO __ADDW2MN
+                 	SUBI R26,LOW(-@0-(@1))
+                 	SBCI R27,HIGH(-@0-(@1))
+                 	.ENDM
+                 
+                 	.MACRO __ADDW1FN
+                 	SUBI R30,LOW(-2*@0-(@1))
+                 	SBCI R31,HIGH(-2*@0-(@1))
+                 	.ENDM
+                 
+                 	.MACRO __ADDD1FN
+                 	SUBI R30,LOW(-2*@0-(@1))
+                 	SBCI R31,HIGH(-2*@0-(@1))
+                 	SBCI R22,BYTE3(-2*@0-(@1))
+                 	.ENDM
+                 
+                 	.MACRO __ADDD1N
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	SBCI R22,BYTE3(-@0)
+                 	SBCI R23,BYTE4(-@0)
+                 	.ENDM
+                 
+                 	.MACRO __ADDD2N
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	SBCI R24,BYTE3(-@0)
+                 	SBCI R25,BYTE4(-@0)
+                 	.ENDM
+                 
+                 	.MACRO __SUBD1N
+                 	SUBI R30,LOW(@0)
+                 	SBCI R31,HIGH(@0)
+                 	SBCI R22,BYTE3(@0)
+                 	SBCI R23,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __SUBD2N
+                 	SUBI R26,LOW(@0)
+                 	SBCI R27,HIGH(@0)
+                 	SBCI R24,BYTE3(@0)
+                 	SBCI R25,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __ANDBMNN
+                 	LDS  R30,@0+(@1)
+                 	ANDI R30,LOW(@2)
+                 	STS  @0+(@1),R30
+                 	.ENDM
+                 
+                 	.MACRO __ANDWMNN
+                 	LDS  R30,@0+(@1)
+                 	ANDI R30,LOW(@2)
+                 	STS  @0+(@1),R30
+                 	LDS  R30,@0+(@1)+1
+                 	ANDI R30,HIGH(@2)
+                 	STS  @0+(@1)+1,R30
+                 	.ENDM
+                 
+                 	.MACRO __ANDD1N
+                 	ANDI R30,LOW(@0)
+                 	ANDI R31,HIGH(@0)
+                 	ANDI R22,BYTE3(@0)
+                 	ANDI R23,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __ANDD2N
+                 	ANDI R26,LOW(@0)
+                 	ANDI R27,HIGH(@0)
+                 	ANDI R24,BYTE3(@0)
+                 	ANDI R25,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __ORBMNN
+                 	LDS  R30,@0+(@1)
+                 	ORI  R30,LOW(@2)
+                 	STS  @0+(@1),R30
+                 	.ENDM
+                 
+                 	.MACRO __ORWMNN
+                 	LDS  R30,@0+(@1)
+                 	ORI  R30,LOW(@2)
+                 	STS  @0+(@1),R30
+                 	LDS  R30,@0+(@1)+1
+                 	ORI  R30,HIGH(@2)
+                 	STS  @0+(@1)+1,R30
+                 	.ENDM
+                 
+                 	.MACRO __ORD1N
+                 	ORI  R30,LOW(@0)
+                 	ORI  R31,HIGH(@0)
+                 	ORI  R22,BYTE3(@0)
+                 	ORI  R23,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __ORD2N
+                 	ORI  R26,LOW(@0)
+                 	ORI  R27,HIGH(@0)
+                 	ORI  R24,BYTE3(@0)
+                 	ORI  R25,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __DELAY_USB
+                 	LDI  R24,LOW(@0)
+                 __DELAY_USB_LOOP:
+                 	DEC  R24
+                 	BRNE __DELAY_USB_LOOP
+                 	.ENDM
+                 
+                 	.MACRO __DELAY_USW
+                 	LDI  R24,LOW(@0)
+                 	LDI  R25,HIGH(@0)
+                 __DELAY_USW_LOOP:
+                 	SBIW R24,1
+                 	BRNE __DELAY_USW_LOOP
+                 	.ENDM
+                 
+                 	.MACRO __GETD1S
+                 	LDD  R30,Y+@0
+                 	LDD  R31,Y+@0+1
+                 	LDD  R22,Y+@0+2
+                 	LDD  R23,Y+@0+3
+                 	.ENDM
+                 
+                 	.MACRO __GETD2S
+                 	LDD  R26,Y+@0
+                 	LDD  R27,Y+@0+1
+                 	LDD  R24,Y+@0+2
+                 	LDD  R25,Y+@0+3
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1S
+                 	STD  Y+@0,R30
+                 	STD  Y+@0+1,R31
+                 	STD  Y+@0+2,R22
+                 	STD  Y+@0+3,R23
+                 	.ENDM
+                 
+                 	.MACRO __PUTD2S
+                 	STD  Y+@0,R26
+                 	STD  Y+@0+1,R27
+                 	STD  Y+@0+2,R24
+                 	STD  Y+@0+3,R25
+                 	.ENDM
+                 
+                 	.MACRO __PUTDZ2
+                 	STD  Z+@0,R26
+                 	STD  Z+@0+1,R27
+                 	STD  Z+@0+2,R24
+                 	STD  Z+@0+3,R25
+                 	.ENDM
+                 
+                 	.MACRO __CLRD1S
+                 	STD  Y+@0,R30
+                 	STD  Y+@0+1,R30
+                 	STD  Y+@0+2,R30
+                 	STD  Y+@0+3,R30
+                 	.ENDM
+                 
+                 	.MACRO __POINTB1MN
+                 	LDI  R30,LOW(@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTW1MN
+                 	LDI  R30,LOW(@0+(@1))
+                 	LDI  R31,HIGH(@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTD1M
+                 	LDI  R30,LOW(@0)
+                 	LDI  R31,HIGH(@0)
+                 	LDI  R22,BYTE3(@0)
+                 	LDI  R23,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __POINTW1FN
+                 	LDI  R30,LOW(2*@0+(@1))
+                 	LDI  R31,HIGH(2*@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTD1FN
+                 	LDI  R30,LOW(2*@0+(@1))
+                 	LDI  R31,HIGH(2*@0+(@1))
+                 	LDI  R22,BYTE3(2*@0+(@1))
+                 	LDI  R23,BYTE4(2*@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTB2MN
+                 	LDI  R26,LOW(@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTW2MN
+                 	LDI  R26,LOW(@0+(@1))
+                 	LDI  R27,HIGH(@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTD2M
+                 	LDI  R26,LOW(@0)
+                 	LDI  R27,HIGH(@0)
+                 	LDI  R24,BYTE3(@0)
+                 	LDI  R25,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __POINTW2FN
+                 	LDI  R26,LOW(2*@0+(@1))
+                 	LDI  R27,HIGH(2*@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTD2FN
+                 	LDI  R26,LOW(2*@0+(@1))
+                 	LDI  R27,HIGH(2*@0+(@1))
+                 	LDI  R24,BYTE3(2*@0+(@1))
+                 	LDI  R25,BYTE4(2*@0+(@1))
+                 	.ENDM
+                 
+                 	.MACRO __POINTBRM
+                 	LDI  R@0,LOW(@1)
+                 	.ENDM
+                 
+                 	.MACRO __POINTWRM
+                 	LDI  R@0,LOW(@2)
+                 	LDI  R@1,HIGH(@2)
+                 	.ENDM
+                 
+                 	.MACRO __POINTBRMN
+                 	LDI  R@0,LOW(@1+(@2))
+                 	.ENDM
+                 
+                 	.MACRO __POINTWRMN
+                 	LDI  R@0,LOW(@2+(@3))
+                 	LDI  R@1,HIGH(@2+(@3))
+                 	.ENDM
+                 
+                 	.MACRO __POINTWRFN
+                 	LDI  R@0,LOW(@2*2+(@3))
+                 	LDI  R@1,HIGH(@2*2+(@3))
+                 	.ENDM
+                 
+                 	.MACRO __GETD1N
+                 	LDI  R30,LOW(@0)
+                 	LDI  R31,HIGH(@0)
+                 	LDI  R22,BYTE3(@0)
+                 	LDI  R23,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __GETD2N
+                 	LDI  R26,LOW(@0)
+                 	LDI  R27,HIGH(@0)
+                 	LDI  R24,BYTE3(@0)
+                 	LDI  R25,BYTE4(@0)
+                 	.ENDM
+                 
+                 	.MACRO __GETB1MN
+                 	LDS  R30,@0+(@1)
+                 	.ENDM
+                 
+                 	.MACRO __GETB1HMN
+                 	LDS  R31,@0+(@1)
+                 	.ENDM
+                 
+                 	.MACRO __GETW1MN
+                 	LDS  R30,@0+(@1)
+                 	LDS  R31,@0+(@1)+1
+                 	.ENDM
+                 
+                 	.MACRO __GETD1MN
+                 	LDS  R30,@0+(@1)
+                 	LDS  R31,@0+(@1)+1
+                 	LDS  R22,@0+(@1)+2
+                 	LDS  R23,@0+(@1)+3
+                 	.ENDM
+                 
+                 	.MACRO __GETBRMN
+                 	LDS  R@0,@1+(@2)
+                 	.ENDM
+                 
+                 	.MACRO __GETWRMN
+                 	LDS  R@0,@2+(@3)
+                 	LDS  R@1,@2+(@3)+1
+                 	.ENDM
+                 
+                 	.MACRO __GETWRZ
+                 	LDD  R@0,Z+@2
+                 	LDD  R@1,Z+@2+1
+                 	.ENDM
+                 
+                 	.MACRO __GETD2Z
+                 	LDD  R26,Z+@0
+                 	LDD  R27,Z+@0+1
+                 	LDD  R24,Z+@0+2
+                 	LDD  R25,Z+@0+3
+                 	.ENDM
+                 
+                 	.MACRO __GETB2MN
+                 	LDS  R26,@0+(@1)
+                 	.ENDM
+                 
+                 	.MACRO __GETW2MN
+                 	LDS  R26,@0+(@1)
+                 	LDS  R27,@0+(@1)+1
+                 	.ENDM
+                 
+                 	.MACRO __GETD2MN
+                 	LDS  R26,@0+(@1)
+                 	LDS  R27,@0+(@1)+1
+                 	LDS  R24,@0+(@1)+2
+                 	LDS  R25,@0+(@1)+3
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1MN
+                 	STS  @0+(@1),R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1MN
+                 	STS  @0+(@1),R30
+                 	STS  @0+(@1)+1,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1MN
+                 	STS  @0+(@1),R30
+                 	STS  @0+(@1)+1,R31
+                 	STS  @0+(@1)+2,R22
+                 	STS  @0+(@1)+3,R23
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1EN
+                 	LDI  R26,LOW(@0+(@1))
+                 	LDI  R27,HIGH(@0+(@1))
+                 	CALL __EEPROMWRB
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1EN
+                 	LDI  R26,LOW(@0+(@1))
+                 	LDI  R27,HIGH(@0+(@1))
+                 	CALL __EEPROMWRW
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1EN
+                 	LDI  R26,LOW(@0+(@1))
+                 	LDI  R27,HIGH(@0+(@1))
+                 	CALL __EEPROMWRD
+                 	.ENDM
+                 
+                 	.MACRO __PUTBR0MN
+                 	STS  @0+(@1),R0
+                 	.ENDM
+                 
+                 	.MACRO __PUTBMRN
+                 	STS  @0+(@1),R@2
+                 	.ENDM
+                 
+                 	.MACRO __PUTWMRN
+                 	STS  @0+(@1),R@2
+                 	STS  @0+(@1)+1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __PUTBZR
+                 	STD  Z+@1,R@0
+                 	.ENDM
+                 
+                 	.MACRO __PUTWZR
+                 	STD  Z+@2,R@0
+                 	STD  Z+@2+1,R@1
+                 	.ENDM
+                 
+                 	.MACRO __GETW1R
+                 	MOV  R30,R@0
+                 	MOV  R31,R@1
+                 	.ENDM
+                 
+                 	.MACRO __GETW2R
+                 	MOV  R26,R@0
+                 	MOV  R27,R@1
+                 	.ENDM
+                 
+                 	.MACRO __GETWRN
+                 	LDI  R@0,LOW(@2)
+                 	LDI  R@1,HIGH(@2)
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1R
+                 	MOV  R@0,R30
+                 	MOV  R@1,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTW2R
+                 	MOV  R@0,R26
+                 	MOV  R@1,R27
+                 	.ENDM
+                 
+                 	.MACRO __ADDWRN
+                 	SUBI R@0,LOW(-@2)
+                 	SBCI R@1,HIGH(-@2)
+                 	.ENDM
+                 
+                 	.MACRO __ADDWRR
+                 	ADD  R@0,R@2
+                 	ADC  R@1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __SUBWRN
+                 	SUBI R@0,LOW(@2)
+                 	SBCI R@1,HIGH(@2)
+                 	.ENDM
+                 
+                 	.MACRO __SUBWRR
+                 	SUB  R@0,R@2
+                 	SBC  R@1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __ANDWRN
+                 	ANDI R@0,LOW(@2)
+                 	ANDI R@1,HIGH(@2)
+                 	.ENDM
+                 
+                 	.MACRO __ANDWRR
+                 	AND  R@0,R@2
+                 	AND  R@1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __ORWRN
+                 	ORI  R@0,LOW(@2)
+                 	ORI  R@1,HIGH(@2)
+                 	.ENDM
+                 
+                 	.MACRO __ORWRR
+                 	OR   R@0,R@2
+                 	OR   R@1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __EORWRR
+                 	EOR  R@0,R@2
+                 	EOR  R@1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __GETWRS
+                 	LDD  R@0,Y+@2
+                 	LDD  R@1,Y+@2+1
+                 	.ENDM
+                 
+                 	.MACRO __PUTBSR
+                 	STD  Y+@1,R@0
+                 	.ENDM
+                 
+                 	.MACRO __PUTWSR
+                 	STD  Y+@2,R@0
+                 	STD  Y+@2+1,R@1
+                 	.ENDM
+                 
+                 	.MACRO __MOVEWRR
+                 	MOV  R@0,R@2
+                 	MOV  R@1,R@3
+                 	.ENDM
+                 
+                 	.MACRO __INWR
+                 	IN   R@0,@2
+                 	IN   R@1,@2+1
+                 	.ENDM
+                 
+                 	.MACRO __OUTWR
+                 	OUT  @2+1,R@1
+                 	OUT  @2,R@0
+                 	.ENDM
+                 
+                 	.MACRO __CALL1MN
+                 	LDS  R30,@0+(@1)
+                 	LDS  R31,@0+(@1)+1
+                 	ICALL
+                 	.ENDM
+                 
+                 	.MACRO __CALL1FN
+                 	LDI  R30,LOW(2*@0+(@1))
+                 	LDI  R31,HIGH(2*@0+(@1))
+                 	CALL __GETW1PF
+                 	ICALL
+                 	.ENDM
+                 
+                 	.MACRO __CALL2EN
+                 	PUSH R26
+                 	PUSH R27
+                 	LDI  R26,LOW(@0+(@1))
+                 	LDI  R27,HIGH(@0+(@1))
+                 	CALL __EEPROMRDW
+                 	POP  R27
+                 	POP  R26
+                 	ICALL
+                 	.ENDM
+                 
+                 	.MACRO __CALL2EX
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	CALL __EEPROMRDD
+                 	ICALL
+                 	.ENDM
+                 
+                 	.MACRO __GETW1STACK
+                 	IN   R30,SPL
+                 	IN   R31,SPH
+                 	ADIW R30,@0+1
+                 	LD   R0,Z+
+                 	LD   R31,Z
+                 	MOV  R30,R0
+                 	.ENDM
+                 
+                 	.MACRO __GETD1STACK
+                 	IN   R30,SPL
+                 	IN   R31,SPH
+                 	ADIW R30,@0+1
+                 	LD   R0,Z+
+                 	LD   R1,Z+
+                 	LD   R22,Z
+                 	MOVW R30,R0
+                 	.ENDM
+                 
+                 	.MACRO __NBST
+                 	BST  R@0,@1
+                 	IN   R30,SREG
+                 	LDI  R31,0x40
+                 	EOR  R30,R31
+                 	OUT  SREG,R30
+                 	.ENDM
+                 
+                 
+                 	.MACRO __PUTB1SN
+                 	LDD  R26,Y+@0
+                 	LDD  R27,Y+@0+1
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1SN
+                 	LDD  R26,Y+@0
+                 	LDD  R27,Y+@0+1
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1SN
+                 	LDD  R26,Y+@0
+                 	LDD  R27,Y+@0+1
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1SNS
+                 	LDD  R26,Y+@0
+                 	LDD  R27,Y+@0+1
+                 	ADIW R26,@1
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1SNS
+                 	LDD  R26,Y+@0
+                 	LDD  R27,Y+@0+1
+                 	ADIW R26,@1
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1SNS
+                 	LDD  R26,Y+@0
+                 	LDD  R27,Y+@0+1
+                 	ADIW R26,@1
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1PMN
+                 	LDS  R26,@0
+                 	LDS  R27,@0+1
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1PMN
+                 	LDS  R26,@0
+                 	LDS  R27,@0+1
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1PMN
+                 	LDS  R26,@0
+                 	LDS  R27,@0+1
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1PMNS
+                 	LDS  R26,@0
+                 	LDS  R27,@0+1
+                 	ADIW R26,@1
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1PMNS
+                 	LDS  R26,@0
+                 	LDS  R27,@0+1
+                 	ADIW R26,@1
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1PMNS
+                 	LDS  R26,@0
+                 	LDS  R27,@0+1
+                 	ADIW R26,@1
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1RN
+                 	MOVW R26,R@0
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1RN
+                 	MOVW R26,R@0
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1RN
+                 	MOVW R26,R@0
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1RNS
+                 	MOVW R26,R@0
+                 	ADIW R26,@1
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1RNS
+                 	MOVW R26,R@0
+                 	ADIW R26,@1
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1RNS
+                 	MOVW R26,R@0
+                 	ADIW R26,@1
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1RON
+                 	MOV  R26,R@0
+                 	MOV  R27,R@1
+                 	SUBI R26,LOW(-@2)
+                 	SBCI R27,HIGH(-@2)
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1RON
+                 	MOV  R26,R@0
+                 	MOV  R27,R@1
+                 	SUBI R26,LOW(-@2)
+                 	SBCI R27,HIGH(-@2)
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1RON
+                 	MOV  R26,R@0
+                 	MOV  R27,R@1
+                 	SUBI R26,LOW(-@2)
+                 	SBCI R27,HIGH(-@2)
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1RONS
+                 	MOV  R26,R@0
+                 	MOV  R27,R@1
+                 	ADIW R26,@2
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1RONS
+                 	MOV  R26,R@0
+                 	MOV  R27,R@1
+                 	ADIW R26,@2
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1RONS
+                 	MOV  R26,R@0
+                 	MOV  R27,R@1
+                 	ADIW R26,@2
+                 	CALL __PUTDP1
+                 	.ENDM
+                 
+                 
+                 	.MACRO __GETB1SX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	LD   R30,Z
+                 	.ENDM
+                 
+                 	.MACRO __GETB1HSX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	LD   R31,Z
+                 	.ENDM
+                 
+                 	.MACRO __GETW1SX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	LD   R0,Z+
+                 	LD   R31,Z
+                 	MOV  R30,R0
+                 	.ENDM
+                 
+                 	.MACRO __GETD1SX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	LD   R0,Z+
+                 	LD   R1,Z+
+                 	LD   R22,Z+
+                 	LD   R23,Z
+                 	MOVW R30,R0
+                 	.ENDM
+                 
+                 	.MACRO __GETB2SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	LD   R26,X
+                 	.ENDM
+                 
+                 	.MACRO __GETW2SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	LD   R0,X+
+                 	LD   R27,X
+                 	MOV  R26,R0
+                 	.ENDM
+                 
+                 	.MACRO __GETD2SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	LD   R0,X+
+                 	LD   R1,X+
+                 	LD   R24,X+
+                 	LD   R25,X
+                 	MOVW R26,R0
+                 	.ENDM
+                 
+                 	.MACRO __GETBRSX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@1)
+                 	SBCI R31,HIGH(-@1)
+                 	LD   R@0,Z
+                 	.ENDM
+                 
+                 	.MACRO __GETWRSX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@2)
+                 	SBCI R31,HIGH(-@2)
+                 	LD   R@0,Z+
+                 	LD   R@1,Z
+                 	.ENDM
+                 
+                 	.MACRO __GETBRSX2
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	LD   R@0,X
+                 	.ENDM
+                 
+                 	.MACRO __GETWRSX2
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@2)
+                 	SBCI R27,HIGH(-@2)
+                 	LD   R@0,X+
+                 	LD   R@1,X
+                 	.ENDM
+                 
+                 	.MACRO __LSLW8SX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	LD   R31,Z
+                 	CLR  R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	ST   X+,R30
+                 	ST   X+,R31
+                 	ST   X+,R22
+                 	ST   X,R23
+                 	.ENDM
+                 
+                 	.MACRO __CLRW1SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	ST   X+,R30
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __CLRD1SX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	ST   X+,R30
+                 	ST   X+,R30
+                 	ST   X+,R30
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTB2SX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	ST   Z,R26
+                 	.ENDM
+                 
+                 	.MACRO __PUTW2SX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	ST   Z+,R26
+                 	ST   Z,R27
+                 	.ENDM
+                 
+                 	.MACRO __PUTD2SX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@0)
+                 	SBCI R31,HIGH(-@0)
+                 	ST   Z+,R26
+                 	ST   Z+,R27
+                 	ST   Z+,R24
+                 	ST   Z,R25
+                 	.ENDM
+                 
+                 	.MACRO __PUTBSRX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@1)
+                 	SBCI R31,HIGH(-@1)
+                 	ST   Z,R@0
+                 	.ENDM
+                 
+                 	.MACRO __PUTWSRX
+                 	MOVW R30,R28
+                 	SUBI R30,LOW(-@2)
+                 	SBCI R31,HIGH(-@2)
+                 	ST   Z+,R@0
+                 	ST   Z,R@1
+                 	.ENDM
+                 
+                 	.MACRO __PUTB1SNX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	LD   R0,X+
+                 	LD   R27,X
+                 	MOV  R26,R0
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X,R30
+                 	.ENDM
+                 
+                 	.MACRO __PUTW1SNX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	LD   R0,X+
+                 	LD   R27,X
+                 	MOV  R26,R0
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X+,R30
+                 	ST   X,R31
+                 	.ENDM
+                 
+                 	.MACRO __PUTD1SNX
+                 	MOVW R26,R28
+                 	SUBI R26,LOW(-@0)
+                 	SBCI R27,HIGH(-@0)
+                 	LD   R0,X+
+                 	LD   R27,X
+                 	MOV  R26,R0
+                 	SUBI R26,LOW(-@1)
+                 	SBCI R27,HIGH(-@1)
+                 	ST   X+,R30
+                 	ST   X+,R31
+                 	ST   X+,R22
+                 	ST   X,R23
+                 	.ENDM
+                 
+                 	.MACRO __MULBRR
+                 	MULS R@0,R@1
+                 	MOVW R30,R0
+                 	.ENDM
+                 
+                 	.MACRO __MULBRRU
+                 	MUL  R@0,R@1
+                 	MOVW R30,R0
+                 	.ENDM
+                 
+                 	.MACRO __MULBRR0
+                 	MULS R@0,R@1
+                 	.ENDM
+                 
+                 	.MACRO __MULBRRU0
+                 	MUL  R@0,R@1
+                 	.ENDM
+                 
+                 	.MACRO __MULBNWRU
+                 	LDI  R26,@2
+                 	MUL  R26,R@0
+                 	MOVW R30,R0
+                 	MUL  R26,R@1
+                 	ADD  R31,R0
+                 	.ENDM
+                 
+                 ;GPIO0-GPIO3 INITIALIZATION VALUES
+                 	.EQU __GPIO0_INIT=0x00
+                 	.EQU __GPIO1_INIT=0x00
+                 	.EQU __GPIO2_INIT=0x00
+                 	.EQU __GPIO3_INIT=0x00
+                 
+                 ;GLOBAL REGISTER VARIABLES INITIALIZATION VALUES
+                 	.EQU __R2_INIT=0x00
+                 	.EQU __R3_INIT=0x00
+                 	.EQU __R4_INIT=0x00
+                 	.EQU __R5_INIT=0x00
+                 	.EQU __R6_INIT=0x00
+                 	.EQU __R7_INIT=0x00
+                 	.EQU __R8_INIT=0x00
+                 	.EQU __R9_INIT=0x00
+                 	.EQU __R10_INIT=0x00
+                 	.EQU __R11_INIT=0x00
+                 	.EQU __R12_INIT=0x00
+                 	.EQU __R13_INIT=0x00
+                 	.EQU __R14_INIT=0x00
+                 
+                 	.CSEG
+                 	.ORG 0x00
+                 
+                 ;START OF CODE MARKER
+                 __START_OF_CODE:
+                 
+                 ;INTERRUPT VECTORS
+000000 940c 00a2 	JMP  __RESET
+000002 940c 0000 	JMP  0x00
+000004 940c 0000 	JMP  0x00
+000006 940c 0000 	JMP  0x00
+000008 940c 0000 	JMP  0x00
+00000a 940c 0000 	JMP  0x00
+00000c 940c 0000 	JMP  0x00
+00000e 940c 0000 	JMP  0x00
+000010 940c 0000 	JMP  0x00
+000012 940c 0000 	JMP  0x00
+000014 940c 0000 	JMP  0x00
+000016 940c 0000 	JMP  0x00
+000018 940c 0000 	JMP  0x00
+00001a 940c 0000 	JMP  0x00
+00001c 940c 027c 	JMP  _tcc0_overflow_isr
+00001e 940c 0000 	JMP  0x00
+000020 940c 0000 	JMP  0x00
+000022 940c 0000 	JMP  0x00
+000024 940c 0000 	JMP  0x00
+000026 940c 0000 	JMP  0x00
+000028 940c 0000 	JMP  0x00
+00002a 940c 0000 	JMP  0x00
+00002c 940c 02b6 	JMP  _tcc1_compare_capture_a_isr
+00002e 940c 0000 	JMP  0x00
+000030 940c 0000 	JMP  0x00
+000032 940c 0000 	JMP  0x00
+000034 940c 0000 	JMP  0x00
+000036 940c 0000 	JMP  0x00
+000038 940c 0000 	JMP  0x00
+00003a 940c 0000 	JMP  0x00
+00003c 940c 0000 	JMP  0x00
+00003e 940c 0000 	JMP  0x00
+000040 940c 0000 	JMP  0x00
+000042 940c 0000 	JMP  0x00
+000044 940c 0000 	JMP  0x00
+000046 940c 0000 	JMP  0x00
+000048 940c 0000 	JMP  0x00
+00004a 940c 0000 	JMP  0x00
+00004c 940c 0000 	JMP  0x00
+00004e 940c 0000 	JMP  0x00
+000050 940c 0000 	JMP  0x00
+000052 940c 0000 	JMP  0x00
+000054 940c 0000 	JMP  0x00
+000056 940c 0000 	JMP  0x00
+000058 940c 0000 	JMP  0x00
+00005a 940c 0000 	JMP  0x00
+00005c 940c 0000 	JMP  0x00
+00005e 940c 0000 	JMP  0x00
+000060 940c 0000 	JMP  0x00
+000062 940c 0000 	JMP  0x00
+000064 940c 0000 	JMP  0x00
+000066 940c 0000 	JMP  0x00
+000068 940c 0000 	JMP  0x00
+00006a 940c 0000 	JMP  0x00
+00006c 940c 0000 	JMP  0x00
+00006e 940c 0000 	JMP  0x00
+000070 940c 0000 	JMP  0x00
+000072 940c 0000 	JMP  0x00
+000074 940c 0000 	JMP  0x00
+000076 940c 0000 	JMP  0x00
+000078 940c 0000 	JMP  0x00
+00007a 940c 0000 	JMP  0x00
+00007c 940c 0000 	JMP  0x00
+00007e 940c 0000 	JMP  0x00
+000080 940c 0000 	JMP  0x00
+000082 940c 0000 	JMP  0x00
+000084 940c 0000 	JMP  0x00
+000086 940c 0000 	JMP  0x00
+000088 940c 0000 	JMP  0x00
+00008a 940c 0000 	JMP  0x00
+00008c 940c 0000 	JMP  0x00
+00008e 940c 0000 	JMP  0x00
+000090 940c 0000 	JMP  0x00
+000092 940c 0000 	JMP  0x00
+000094 940c 0000 	JMP  0x00
+000096 940c 0000 	JMP  0x00
+000098 940c 0000 	JMP  0x00
+00009a 940c 0000 	JMP  0x00
+00009c 940c 0000 	JMP  0x00
+00009e 940c 0000 	JMP  0x00
+0000a0 940c 0000 	JMP  0x00
+                 
+                 __RESET:
+0000a2 94f8      	CLI
+0000a3 27ee      	CLR  R30
+                 
+                 ;MEMORY MAPPED EEPROM ACCESS IS USED
+0000a4 91f0 01cc 	LDS  R31,NVM_CTRLB
+0000a6 60f8      	ORI  R31,0x08
+0000a7 93f0 01cc 	STS  NVM_CTRLB,R31
+                 
+                 ;INTERRUPT VECTORS ARE PLACED
+                 ;AT THE START OF FLASH
+0000a9 edf8      	LDI  R31,0xD8
+0000aa bff4      	OUT  CCP,R31
+0000ab 93e0 00a2 	STS  PMIC_CTRL,R30
+                 
+                 ;CLEAR SRAM
+0000ad e080      	LDI  R24,LOW(__CLEAR_SRAM_SIZE)
+0000ae e290      	LDI  R25,HIGH(__CLEAR_SRAM_SIZE)
+0000af e0a0      	LDI  R26,LOW(__SRAM_START)
+0000b0 e2b0      	LDI  R27,HIGH(__SRAM_START)
+                 __CLEAR_SRAM:
+0000b1 93ed      	ST   X+,R30
+0000b2 9701      	SBIW R24,1
+0000b3 f7e9      	BRNE __CLEAR_SRAM
+                 
+0000b4 bf8b      	OUT  RAMPZ,R24
+                 
+                 ;GPIO0-GPIO3 INITIALIZATION
+0000b5 e0e0      	LDI  R30,__GPIO0_INIT
+0000b6 b9e0      	OUT  GPIO0,R30
+                 	;__GPIO1_INIT = __GPIO0_INIT
+0000b7 b9e1      	OUT  GPIO1,R30
+                 	;__GPIO2_INIT = __GPIO0_INIT
+0000b8 b9e2      	OUT  GPIO2,R30
+                 	;__GPIO3_INIT = __GPIO0_INIT
+0000b9 b9e3      	OUT  GPIO3,R30
+                 
+                 ;HARDWARE STACK POINTER INITIALIZATION
+0000ba efef      	LDI  R30,LOW(__SRAM_END-__HEAP_SIZE)
+0000bb bfed      	OUT  SPL,R30
+0000bc e3ef      	LDI  R30,HIGH(__SRAM_END-__HEAP_SIZE)
+0000bd bfee      	OUT  SPH,R30
+                 
+                 ;DATA STACK POINTER INITIALIZATION
+0000be e0c0      	LDI  R28,LOW(__SRAM_START+__DSTACK_SIZE)
+0000bf e2d8      	LDI  R29,HIGH(__SRAM_START+__DSTACK_SIZE)
+                 
+0000c0 940c 00c2 	JMP  _main
+                 
+                 	.ESEG
+                 	.ORG 0x00
+                 
+                 	.DSEG
+                 	.ORG 0x2800
+                 
+                 	.CSEG
+                 ;/*******************************************************
+                 ;This program was created by the CodeWizardAVR V3.32
+                 ;Automatic Program Generator
+                 ;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+                 ;http://www.hpinfotech.com
+                 ;
+                 ;Project :
+                 ;Version :
+                 ;Date    : 9/4/2018
+                 ;Author  :
+                 ;Company :
+                 ;Comments:
+                 ;
+                 ;
+                 ;Chip type               : ATxmega128B1
+                 ;Program type            : Application
+                 ;AVR Core Clock frequency: 2.000000 MHz
+                 ;Memory model            : Small
+                 ;Data Stack size         : 2048
+                 ;*******************************************************/
+                 ;
+                 ;// I/O Registers definitions
+                 ;#include <xmega128b1.h>
+                 ;
+                 ;// Clock System initialization function
+                 ;#include "clock_init.h"
+                 ;
+                 ;// Event System initialization function
+                 ;#include "event_system_init.h"
+                 ;
+                 ;// I/O Ports initialization function
+                 ;#include "ports_init.h"
+                 ;
+                 ;// Timers/Counters initialization functions
+                 ;#include "timers_init.h"
+                 ;
+                 ;// USARTs initialization functions
+                 ;#include "usarts_init.h"
+                 ;
+                 ;// Declare your global variables here
+                 ;
+                 ;void main(void)
+                 ; 0000 002B {
+                 
+                 	.CSEG
+                 _main:
+                 ; .FSTART _main
+                 ; 0000 002C // Declare your local variables here
+                 ; 0000 002D unsigned char n;
+                 ; 0000 002E 
+                 ; 0000 002F // Interrupt system initialization
+                 ; 0000 0030 // Optimize for speed
+                 ; 0000 0031 #pragma optsize-
+                 ; 0000 0032 // Make sure the interrupts are disabled
+                 ; 0000 0033 #asm("cli")
+                 ;	n -> R17
+0000c2 94f8      	CLI
+                 ; 0000 0034 // Low level interrupt: Off
+                 ; 0000 0035 // Round-robin scheduling for low level interrupt: Off
+                 ; 0000 0036 // Medium level interrupt: Off
+                 ; 0000 0037 // High level interrupt: On
+                 ; 0000 0038 // The interrupt vectors will be placed at the start of the Application FLASH section
+                 ; 0000 0039 n=(PMIC.CTRL & (~(PMIC_RREN_bm | PMIC_IVSEL_bm | PMIC_HILVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_LOLVLEN_bm))) |
+                 ; 0000 003A 	PMIC_HILVLEN_bm;
+0000c3 91e0 00a2 	LDS  R30,162
+0000c5 73e8      	ANDI R30,LOW(0x38)
+0000c6 60e4      	ORI  R30,4
+0000c7 2f1e      	MOV  R17,R30
+                 ; 0000 003B CCP=CCP_IOREG_gc;
+0000c8 ede8      	LDI  R30,LOW(216)
+0000c9 bfe4      	OUT  0x34,R30
+                 ; 0000 003C PMIC.CTRL=n;
+0000ca 9310 00a2 	STS  162,R17
+                 ; 0000 003D // Set the default priority for round-robin scheduling
+                 ; 0000 003E PMIC.INTPRI=0x00;
+0000cc e0e0      	LDI  R30,LOW(0)
+0000cd 93e0 00a1 	STS  161,R30
+                 ; 0000 003F // Restore optimization for size if needed
+                 ; 0000 0040 #pragma optsize_default
+                 ; 0000 0041 
+                 ; 0000 0042 // System clocks initialization
+                 ; 0000 0043 system_clocks_init();
+0000cf d009      	RCALL _system_clocks_init
+                 ; 0000 0044 
+                 ; 0000 0045 // Event system initialization
+                 ; 0000 0046 event_system_init();
+0000d0 d034      	RCALL _event_system_init
+                 ; 0000 0047 
+                 ; 0000 0048 // Ports initialization
+                 ; 0000 0049 ports_init();
+0000d1 d059      	RCALL _ports_init
+                 ; 0000 004A 
+                 ; 0000 004B // Virtual Ports initialization
+                 ; 0000 004C vports_init();
+0000d2 d13f      	RCALL _vports_init
+                 ; 0000 004D 
+                 ; 0000 004E // Timer/Counter TCC0 initialization
+                 ; 0000 004F tcc0_init();
+0000d3 d149      	RCALL _tcc0_init
+                 ; 0000 0050 
+                 ; 0000 0051 // Timer/Counter TCC1 initialization
+                 ; 0000 0052 tcc1_init();
+0000d4 d1a8      	RCALL _tcc1_init
+                 ; 0000 0053 
+                 ; 0000 0054 // USARTC0 initialization
+                 ; 0000 0055 usartc0_init();
+0000d5 d1f0      	RCALL _usartc0_init
+                 ; 0000 0056 
+                 ; 0000 0057 // Globally enable interrupts
+                 ; 0000 0058 #asm("sei")
+0000d6 9478      	SEI
+                 ; 0000 0059 
+                 ; 0000 005A while (1)
+                 _0x3:
+                 ; 0000 005B       {
+                 ; 0000 005C       // Place your code here
+                 ; 0000 005D 
+                 ; 0000 005E       }
+0000d7 cfff      	RJMP _0x3
+                 ; 0000 005F }
+                 _0x6:
+0000d8 cfff      	RJMP _0x6
+                 ; .FEND
+                 ;/*******************************************************
+                 ;System clock initialization created by the
+                 ;CodeWizardAVR V3.32 Automatic Program Generator
+                 ;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+                 ;http://www.hpinfotech.com
+                 ;
+                 ;Project :
+                 ;*******************************************************/
+                 ;
+                 ;// I/O Registers definitions
+                 ;#include <xmega128b1.h>
+                 ;
+                 ;// Standard definitions
+                 ;#include <stddef.h>
+                 ;
+                 ;// System Clocks initialization
+                 ;void system_clocks_init(void)
+                 ; 0001 0012 {
+                 
+                 	.CSEG
+                 _system_clocks_init:
+                 ; .FSTART _system_clocks_init
+                 ; 0001 0013 unsigned char n,s;
+                 ; 0001 0014 
+                 ; 0001 0015 // Optimize for speed
+                 ; 0001 0016 #pragma optsize-
+                 ; 0001 0017 // Save interrupts enabled/disabled state
+                 ; 0001 0018 s=SREG;
+0000d9 931a      	ST   -Y,R17
+0000da 930a      	ST   -Y,R16
+                 ;	n -> R17
+                 ;	s -> R16
+0000db b70f      	IN   R16,63
+                 ; 0001 0019 // Disable interrupts
+                 ; 0001 001A #asm("cli")
+0000dc 94f8      	CLI
+                 ; 0001 001B 
+                 ; 0001 001C // Internal 2 MHz RC oscillator initialization
+                 ; 0001 001D // Enable the internal 2 MHz RC oscillator
+                 ; 0001 001E OSC.CTRL|=OSC_RC2MEN_bm;
+0000dd 91e0 0050 	LDS  R30,80
+0000df 60e1      	ORI  R30,1
+0000e0 93e0 0050 	STS  80,R30
+                 ; 0001 001F // Wait for the internal 2 MHz RC oscillator to stabilize
+                 ; 0001 0020 while ((OSC.STATUS & OSC_RC2MRDY_bm)==0);
+                 _0x20003:
+0000e2 91e0 0051 	LDS  R30,81
+0000e4 70e1      	ANDI R30,LOW(0x1)
+0000e5 f3e1      	BREQ _0x20003
+                 ; 0001 0021 
+                 ; 0001 0022 // Disable the auto-calibration of the internal 2 MHz RC oscillator
+                 ; 0001 0023 DFLLRC2M.CTRL=0<<DFLL_ENABLE_bp;
+0000e6 e0e0      	LDI  R30,LOW(0)
+0000e7 93e0 0068 	STS  104,R30
+                 ; 0001 0024 
+                 ; 0001 0025 // System Clock prescaler A division factor: 1
+                 ; 0001 0026 // System Clock prescalers B & C division factors: B:1, C:1
+                 ; 0001 0027 // ClkPer4: 2000.000 kHz
+                 ; 0001 0028 // ClkPer2: 2000.000 kHz
+                 ; 0001 0029 // ClkPer:  2000.000 kHz
+                 ; 0001 002A // ClkCPU:  2000.000 kHz
+                 ; 0001 002B n=(CLK.PSCTRL & (~(CLK_PSADIV_gm | CLK_PSBCDIV1_bm | CLK_PSBCDIV0_bm))) |
+                 ; 0001 002C 	CLK_PSADIV_1_gc | CLK_PSBCDIV_1_1_gc;
+0000e9 91e0 0041 	LDS  R30,65
+0000eb 78e0      	ANDI R30,LOW(0x80)
+0000ec 2f1e      	MOV  R17,R30
+                 ; 0001 002D CCP=CCP_IOREG_gc;
+0000ed ede8      	LDI  R30,LOW(216)
+0000ee bfe4      	OUT  0x34,R30
+                 ; 0001 002E CLK.PSCTRL=n;
+0000ef 9310 0041 	STS  65,R17
+                 ; 0001 002F 
+                 ; 0001 0030 // Select the system clock source: 2 MHz Internal RC Osc.
+                 ; 0001 0031 n=(CLK.CTRL & (~CLK_SCLKSEL_gm)) | CLK_SCLKSEL_RC2M_gc;
+0000f1 91e0 0040 	LDS  R30,64
+0000f3 7fe8      	ANDI R30,LOW(0xF8)
+0000f4 2f1e      	MOV  R17,R30
+                 ; 0001 0032 CCP=CCP_IOREG_gc;
+0000f5 ede8      	LDI  R30,LOW(216)
+0000f6 bfe4      	OUT  0x34,R30
+                 ; 0001 0033 CLK.CTRL=n;
+0000f7 9310 0040 	STS  64,R17
+                 ; 0001 0034 
+                 ; 0001 0035 // Disable the unused oscillators: 32 kHz, 32 MHz, external clock/crystal oscillator, PLL
+                 ; 0001 0036 OSC.CTRL&= ~(OSC_RC32KEN_bm | OSC_RC32MEN_bm | OSC_XOSCEN_bm | OSC_PLLEN_bm);
+0000f9 91e0 0050 	LDS  R30,80
+0000fb 7ee1      	ANDI R30,LOW(0xE1)
+0000fc 93e0 0050 	STS  80,R30
+                 ; 0001 0037 
+                 ; 0001 0038 // ClkPer output disabled
+                 ; 0001 0039 PORTCFG.CLKEVOUT&= ~(PORTCFG_CLKOUTSEL_gm | PORTCFG_CLKOUT_gm);
+0000fe 91e0 00b4 	LDS  R30,180
+000100 7fe0      	ANDI R30,LOW(0xF0)
+000101 93e0 00b4 	STS  180,R30
+                 ; 0001 003A // Restore interrupts enabled/disabled state
+                 ; 0001 003B SREG=s;
+000103 bf0f      	OUT  0x3F,R16
+                 ; 0001 003C // Restore optimization for size if needed
+                 ; 0001 003D #pragma optsize_default
+                 ; 0001 003E }
+000104 c174      	RJMP _0x2000001
+                 ; .FEND
+                 ;
+                 ;/*******************************************************
+                 ;Event System initialization created by the
+                 ;CodeWizardAVR V3.32 Automatic Program Generator
+                 ;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+                 ;http://www.hpinfotech.com
+                 ;
+                 ;Project :
+                 ;*******************************************************/
+                 ;
+                 ;// I/O Registers definitions
+                 ;#include <xmega128b1.h>
+                 ;
+                 ;// Event System initialization
+                 ;void event_system_init(void)
+                 ; 0002 000F {
+                 
+                 	.CSEG
+                 _event_system_init:
+                 ; .FSTART _event_system_init
+                 ; 0002 0010 // Event System Channel 0 source: Port A, Pin0
+                 ; 0002 0011 EVSYS.CH0MUX=EVSYS_CHMUX_PORTA_PIN0_gc;
+000105 e5e0      	LDI  R30,LOW(80)
+000106 93e0 0180 	STS  384,R30
+                 ; 0002 0012 // Event System Channel 1 source: None
+                 ; 0002 0013 EVSYS.CH1MUX=EVSYS_CHMUX_OFF_gc;
+000108 e0e0      	LDI  R30,LOW(0)
+000109 93e0 0181 	STS  385,R30
+                 ; 0002 0014 // Event System Channel 2 source: None
+                 ; 0002 0015 EVSYS.CH2MUX=EVSYS_CHMUX_OFF_gc;
+00010b 93e0 0182 	STS  386,R30
+                 ; 0002 0016 // Event System Channel 3 source: None
+                 ; 0002 0017 EVSYS.CH3MUX=EVSYS_CHMUX_OFF_gc;
+00010d 93e0 0183 	STS  387,R30
+                 ; 0002 0018 // Event System Channel 0 Digital Filter Coefficient: 8 Samples
+                 ; 0002 0019 // Quadrature Decoder: Off
+                 ; 0002 001A EVSYS.CH0CTRL=(EVSYS.CH0CTRL & (~(EVSYS_QDIRM_gm | EVSYS_QDIEN_bm | EVSYS_QDEN_bm | EVSYS_DIGFILT_gm))) |
+                 ; 0002 001B 	EVSYS_DIGFILT_8SAMPLES_gc;
+00010f 91e0 0188 	LDS  R30,392
+000111 78e0      	ANDI R30,LOW(0x80)
+000112 60e7      	ORI  R30,LOW(0x7)
+000113 93e0 0188 	STS  392,R30
+                 ; 0002 001C // Event System Channel 1 Digital Filter Coefficient: 1 Sample
+                 ; 0002 001D EVSYS.CH1CTRL=EVSYS_DIGFILT_1SAMPLE_gc;
+000115 e0e0      	LDI  R30,LOW(0)
+000116 93e0 0189 	STS  393,R30
+                 ; 0002 001E // Event System Channel 2 Digital Filter Coefficient: 1 Sample
+                 ; 0002 001F // Quadrature Decoder: Off
+                 ; 0002 0020 EVSYS.CH2CTRL=(EVSYS.CH2CTRL & (~(EVSYS_QDIRM_gm | EVSYS_QDIEN_bm | EVSYS_QDEN_bm | EVSYS_DIGFILT_gm))) |
+                 ; 0002 0021 	EVSYS_DIGFILT_1SAMPLE_gc;
+000118 91e0 018a 	LDS  R30,394
+00011a 78e0      	ANDI R30,LOW(0x80)
+00011b 93e0 018a 	STS  394,R30
+                 ; 0002 0022 // Event System Channel 3 Digital Filter Coefficient: 1 Sample
+                 ; 0002 0023 EVSYS.CH3CTRL=EVSYS_DIGFILT_1SAMPLE_gc;
+00011d e0e0      	LDI  R30,LOW(0)
+00011e 93e0 018b 	STS  395,R30
+                 ; 0002 0024 
+                 ; 0002 0025 // Event System Channel output: Disabled
+                 ; 0002 0026 PORTCFG.CLKEVOUT&= ~PORTCFG_EVOUT_gm;
+000120 91e0 00b4 	LDS  R30,180
+000122 7cef      	ANDI R30,LOW(0xCF)
+000123 93e0 00b4 	STS  180,R30
+                 ; 0002 0027 PORTCFG.EVOUTSEL&= ~PORTCFG_EVOUTSEL_gm;
+000125 91e0 00b6 	LDS  R30,182
+000127 7fe3      	ANDI R30,LOW(0xF3)
+000128 93e0 00b6 	STS  182,R30
+                 ; 0002 0028 }
+00012a 9508      	RET
+                 ; .FEND
+                 ;
+                 ;/*******************************************************
+                 ;I/O Ports initialization created by the
+                 ;CodeWizardAVR V3.32 Automatic Program Generator
+                 ;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+                 ;http://www.hpinfotech.com
+                 ;
+                 ;Project :
+                 ;*******************************************************/
+                 ;
+                 ;// I/O Registers definitions
+                 ;#include <xmega128b1.h>
+                 ;
+                 ;// Ports initialization
+                 ;void ports_init(void)
+                 ; 0003 000F {
+                 
+                 	.CSEG
+                 _ports_init:
+                 ; .FSTART _ports_init
+                 ; 0003 0010 // PORTA initialization
+                 ; 0003 0011 // OUT register
+                 ; 0003 0012 PORTA.OUT=0xF0;
+00012b efe0      	LDI  R30,LOW(240)
+00012c 93e0 0604 	STS  1540,R30
+                 ; 0003 0013 // Pin0: Input
+                 ; 0003 0014 // Pin1: Input
+                 ; 0003 0015 // Pin2: Input
+                 ; 0003 0016 // Pin3: Input
+                 ; 0003 0017 // Pin4: Output
+                 ; 0003 0018 // Pin5: Output
+                 ; 0003 0019 // Pin6: Output
+                 ; 0003 001A // Pin7: Output
+                 ; 0003 001B PORTA.DIR=0xF0;
+00012e 93e0 0600 	STS  1536,R30
+                 ; 0003 001C // Pin0 Output/Pull configuration: Totempole/Pull-up (on input)
+                 ; 0003 001D // Pin0 Input/Sense configuration: Sense falling edge
+                 ; 0003 001E // Pin0 Inverted: Off
+                 ; 0003 001F PORTA.PIN0CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_FALLING_gc;
+000130 e1ea      	LDI  R30,LOW(26)
+000131 93e0 0610 	STS  1552,R30
+                 ; 0003 0020 // Pin1 Output/Pull configuration: Totempole/Pull-up (on input)
+                 ; 0003 0021 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 0022 // Pin1 Inverted: Off
+                 ; 0003 0023 PORTA.PIN1CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_BOTHEDGES_gc;
+000133 e1e8      	LDI  R30,LOW(24)
+000134 93e0 0611 	STS  1553,R30
+                 ; 0003 0024 // Pin2 Output/Pull configuration: Totempole/Pull-up (on input)
+                 ; 0003 0025 // Pin2 Input/Sense configuration: Sense both edges
+                 ; 0003 0026 // Pin2 Inverted: Off
+                 ; 0003 0027 PORTA.PIN2CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_BOTHEDGES_gc;
+000136 93e0 0612 	STS  1554,R30
+                 ; 0003 0028 // Pin3 Output/Pull configuration: Totempole/Pull-up (on input)
+                 ; 0003 0029 // Pin3 Input/Sense configuration: Sense both edges
+                 ; 0003 002A // Pin3 Inverted: Off
+                 ; 0003 002B PORTA.PIN3CTRL=PORT_OPC_PULLUP_gc | PORT_ISC_BOTHEDGES_gc;
+000138 93e0 0613 	STS  1555,R30
+                 ; 0003 002C // Pin4 Output/Pull configuration: Totempole/No
+                 ; 0003 002D // Pin4 Input/Sense configuration: Sense both edges
+                 ; 0003 002E // Pin4 Inverted: Off
+                 ; 0003 002F PORTA.PIN4CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00013a e0e0      	LDI  R30,LOW(0)
+00013b 93e0 0614 	STS  1556,R30
+                 ; 0003 0030 // Pin5 Output/Pull configuration: Totempole/No
+                 ; 0003 0031 // Pin5 Input/Sense configuration: Sense both edges
+                 ; 0003 0032 // Pin5 Inverted: Off
+                 ; 0003 0033 PORTA.PIN5CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00013d 93e0 0615 	STS  1557,R30
+                 ; 0003 0034 // Pin6 Output/Pull configuration: Totempole/No
+                 ; 0003 0035 // Pin6 Input/Sense configuration: Sense both edges
+                 ; 0003 0036 // Pin6 Inverted: Off
+                 ; 0003 0037 PORTA.PIN6CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00013f 93e0 0616 	STS  1558,R30
+                 ; 0003 0038 // Pin7 Output/Pull configuration: Totempole/No
+                 ; 0003 0039 // Pin7 Input/Sense configuration: Sense both edges
+                 ; 0003 003A // Pin7 Inverted: Off
+                 ; 0003 003B PORTA.PIN7CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000141 93e0 0617 	STS  1559,R30
+                 ; 0003 003C // Interrupt 0 level: Disabled
+                 ; 0003 003D // Interrupt 1 level: Disabled
+                 ; 0003 003E PORTA.INTCTRL=(PORTA.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 003F 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+000143 91e0 0609 	LDS  R30,1545
+000145 7fe0      	ANDI R30,LOW(0xF0)
+000146 93e0 0609 	STS  1545,R30
+                 ; 0003 0040 // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 0041 // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 0042 // Pin2 Pin Change interrupt 0: Off
+                 ; 0003 0043 // Pin3 Pin Change interrupt 0: Off
+                 ; 0003 0044 // Pin4 Pin Change interrupt 0: Off
+                 ; 0003 0045 // Pin5 Pin Change interrupt 0: Off
+                 ; 0003 0046 // Pin6 Pin Change interrupt 0: Off
+                 ; 0003 0047 // Pin7 Pin Change interrupt 0: Off
+                 ; 0003 0048 PORTA.INT0MASK=0x00;
+000148 e0e0      	LDI  R30,LOW(0)
+000149 93e0 060a 	STS  1546,R30
+                 ; 0003 0049 // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 004A // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 004B // Pin2 Pin Change interrupt 1: Off
+                 ; 0003 004C // Pin3 Pin Change interrupt 1: Off
+                 ; 0003 004D // Pin4 Pin Change interrupt 1: Off
+                 ; 0003 004E // Pin5 Pin Change interrupt 1: Off
+                 ; 0003 004F // Pin6 Pin Change interrupt 1: Off
+                 ; 0003 0050 // Pin7 Pin Change interrupt 1: Off
+                 ; 0003 0051 PORTA.INT1MASK=0x00;
+00014b 93e0 060b 	STS  1547,R30
+                 ; 0003 0052 
+                 ; 0003 0053 // PORTB initialization
+                 ; 0003 0054 // OUT register
+                 ; 0003 0055 PORTB.OUT=0x00;
+00014d 93e0 0624 	STS  1572,R30
+                 ; 0003 0056 // Pin0: Input
+                 ; 0003 0057 // Pin1: Input
+                 ; 0003 0058 // Pin2: Input
+                 ; 0003 0059 // Pin3: Input
+                 ; 0003 005A // Pin4: Input
+                 ; 0003 005B // Pin5: Input
+                 ; 0003 005C // Pin6: Input
+                 ; 0003 005D // Pin7: Input
+                 ; 0003 005E PORTB.DIR=0x00;
+00014f 93e0 0620 	STS  1568,R30
+                 ; 0003 005F // Pin0 Output/Pull configuration: Totempole/No
+                 ; 0003 0060 // Pin0 Input/Sense configuration: Sense both edges
+                 ; 0003 0061 // Pin0 Inverted: Off
+                 ; 0003 0062 PORTB.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000151 93e0 0630 	STS  1584,R30
+                 ; 0003 0063 // Pin1 Output/Pull configuration: Totempole/No
+                 ; 0003 0064 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 0065 // Pin1 Inverted: Off
+                 ; 0003 0066 PORTB.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000153 93e0 0631 	STS  1585,R30
+                 ; 0003 0067 // Pin2 Output/Pull configuration: Totempole/No
+                 ; 0003 0068 // Pin2 Input/Sense configuration: Sense both edges
+                 ; 0003 0069 // Pin2 Inverted: Off
+                 ; 0003 006A PORTB.PIN2CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000155 93e0 0632 	STS  1586,R30
+                 ; 0003 006B // Pin3 Output/Pull configuration: Totempole/No
+                 ; 0003 006C // Pin3 Input/Sense configuration: Sense both edges
+                 ; 0003 006D // Pin3 Inverted: Off
+                 ; 0003 006E PORTB.PIN3CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000157 93e0 0633 	STS  1587,R30
+                 ; 0003 006F // Pin4 Output/Pull configuration: Totempole/No
+                 ; 0003 0070 // Pin4 Input/Sense configuration: Sense both edges
+                 ; 0003 0071 // Pin4 Inverted: Off
+                 ; 0003 0072 PORTB.PIN4CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000159 93e0 0634 	STS  1588,R30
+                 ; 0003 0073 // Pin5 Output/Pull configuration: Totempole/No
+                 ; 0003 0074 // Pin5 Input/Sense configuration: Sense both edges
+                 ; 0003 0075 // Pin5 Inverted: Off
+                 ; 0003 0076 PORTB.PIN5CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00015b 93e0 0635 	STS  1589,R30
+                 ; 0003 0077 // Pin6 Output/Pull configuration: Totempole/No
+                 ; 0003 0078 // Pin6 Input/Sense configuration: Sense both edges
+                 ; 0003 0079 // Pin6 Inverted: Off
+                 ; 0003 007A PORTB.PIN6CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00015d 93e0 0636 	STS  1590,R30
+                 ; 0003 007B // Pin7 Output/Pull configuration: Totempole/No
+                 ; 0003 007C // Pin7 Input/Sense configuration: Sense both edges
+                 ; 0003 007D // Pin7 Inverted: Off
+                 ; 0003 007E PORTB.PIN7CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00015f 93e0 0637 	STS  1591,R30
+                 ; 0003 007F // Interrupt 0 level: Disabled
+                 ; 0003 0080 // Interrupt 1 level: Disabled
+                 ; 0003 0081 PORTB.INTCTRL=(PORTB.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 0082 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+000161 91e0 0629 	LDS  R30,1577
+000163 7fe0      	ANDI R30,LOW(0xF0)
+000164 93e0 0629 	STS  1577,R30
+                 ; 0003 0083 // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 0084 // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 0085 // Pin2 Pin Change interrupt 0: Off
+                 ; 0003 0086 // Pin3 Pin Change interrupt 0: Off
+                 ; 0003 0087 // Pin4 Pin Change interrupt 0: Off
+                 ; 0003 0088 // Pin5 Pin Change interrupt 0: Off
+                 ; 0003 0089 // Pin6 Pin Change interrupt 0: Off
+                 ; 0003 008A // Pin7 Pin Change interrupt 0: Off
+                 ; 0003 008B PORTB.INT0MASK=0x00;
+000166 e0e0      	LDI  R30,LOW(0)
+000167 93e0 062a 	STS  1578,R30
+                 ; 0003 008C // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 008D // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 008E // Pin2 Pin Change interrupt 1: Off
+                 ; 0003 008F // Pin3 Pin Change interrupt 1: Off
+                 ; 0003 0090 // Pin4 Pin Change interrupt 1: Off
+                 ; 0003 0091 // Pin5 Pin Change interrupt 1: Off
+                 ; 0003 0092 // Pin6 Pin Change interrupt 1: Off
+                 ; 0003 0093 // Pin7 Pin Change interrupt 1: Off
+                 ; 0003 0094 PORTB.INT1MASK=0x00;
+000169 93e0 062b 	STS  1579,R30
+                 ; 0003 0095 
+                 ; 0003 0096 // PORTC initialization
+                 ; 0003 0097 // OUT register
+                 ; 0003 0098 PORTC.OUT=0x08;
+00016b e0e8      	LDI  R30,LOW(8)
+00016c 93e0 0644 	STS  1604,R30
+                 ; 0003 0099 // Pin0: Input
+                 ; 0003 009A // Pin1: Input
+                 ; 0003 009B // Pin2: Input
+                 ; 0003 009C // Pin3: Output
+                 ; 0003 009D // Pin4: Input
+                 ; 0003 009E // Pin5: Input
+                 ; 0003 009F // Pin6: Input
+                 ; 0003 00A0 // Pin7: Input
+                 ; 0003 00A1 PORTC.DIR=0x08;
+00016e 93e0 0640 	STS  1600,R30
+                 ; 0003 00A2 // Pin0 Output/Pull configuration: Totempole/No
+                 ; 0003 00A3 // Pin0 Input/Sense configuration: Sense both edges
+                 ; 0003 00A4 // Pin0 Inverted: Off
+                 ; 0003 00A5 PORTC.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000170 e0e0      	LDI  R30,LOW(0)
+000171 93e0 0650 	STS  1616,R30
+                 ; 0003 00A6 // Pin1 Output/Pull configuration: Totempole/No
+                 ; 0003 00A7 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 00A8 // Pin1 Inverted: Off
+                 ; 0003 00A9 PORTC.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000173 93e0 0651 	STS  1617,R30
+                 ; 0003 00AA // Pin2 Output/Pull configuration: Totempole/No
+                 ; 0003 00AB // Pin2 Input/Sense configuration: Sense both edges
+                 ; 0003 00AC // Pin2 Inverted: Off
+                 ; 0003 00AD PORTC.PIN2CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000175 93e0 0652 	STS  1618,R30
+                 ; 0003 00AE // Pin3 Output/Pull configuration: Totempole/No
+                 ; 0003 00AF // Pin3 Input/Sense configuration: Sense both edges
+                 ; 0003 00B0 // Pin3 Inverted: Off
+                 ; 0003 00B1 PORTC.PIN3CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000177 93e0 0653 	STS  1619,R30
+                 ; 0003 00B2 // Pin4 Output/Pull configuration: Totempole/No
+                 ; 0003 00B3 // Pin4 Input/Sense configuration: Sense both edges
+                 ; 0003 00B4 // Pin4 Inverted: Off
+                 ; 0003 00B5 PORTC.PIN4CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000179 93e0 0654 	STS  1620,R30
+                 ; 0003 00B6 // Pin5 Output/Pull configuration: Totempole/No
+                 ; 0003 00B7 // Pin5 Input/Sense configuration: Sense both edges
+                 ; 0003 00B8 // Pin5 Inverted: Off
+                 ; 0003 00B9 PORTC.PIN5CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00017b 93e0 0655 	STS  1621,R30
+                 ; 0003 00BA // Pin6 Output/Pull configuration: Totempole/No
+                 ; 0003 00BB // Pin6 Input/Sense configuration: Sense both edges
+                 ; 0003 00BC // Pin6 Inverted: Off
+                 ; 0003 00BD PORTC.PIN6CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00017d 93e0 0656 	STS  1622,R30
+                 ; 0003 00BE // Pin7 Output/Pull configuration: Totempole/No
+                 ; 0003 00BF // Pin7 Input/Sense configuration: Sense both edges
+                 ; 0003 00C0 // Pin7 Inverted: Off
+                 ; 0003 00C1 PORTC.PIN7CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+00017f 93e0 0657 	STS  1623,R30
+                 ; 0003 00C2 // PORTC Peripheral Output Remapping
+                 ; 0003 00C3 // OC0A Output: Pin 0
+                 ; 0003 00C4 // OC0B Output: Pin 1
+                 ; 0003 00C5 // OC0C Output: Pin 2
+                 ; 0003 00C6 // OC0D Output: Pin 3
+                 ; 0003 00C7 // USART0 XCK: Pin 1
+                 ; 0003 00C8 // USART0 RXD: Pin 2
+                 ; 0003 00C9 // USART0 TXD: Pin 3
+                 ; 0003 00CA // SPI MOSI: Pin 5
+                 ; 0003 00CB // SPI SCK: Pin 7
+                 ; 0003 00CC PORTC.REMAP=(0<<PORT_SPI_bp) | (0<<PORT_USART0_bp) | (0<<PORT_TC0D_bp) | (0<<PORT_TC0C_bp) | (0<<PORT_TC0B_bp) | (0<<POR ...
+000181 93e0 064e 	STS  1614,R30
+                 ; 0003 00CD // Interrupt 0 level: Disabled
+                 ; 0003 00CE // Interrupt 1 level: Disabled
+                 ; 0003 00CF PORTC.INTCTRL=(PORTC.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 00D0 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+000183 91e0 0649 	LDS  R30,1609
+000185 7fe0      	ANDI R30,LOW(0xF0)
+000186 93e0 0649 	STS  1609,R30
+                 ; 0003 00D1 // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 00D2 // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 00D3 // Pin2 Pin Change interrupt 0: Off
+                 ; 0003 00D4 // Pin3 Pin Change interrupt 0: Off
+                 ; 0003 00D5 // Pin4 Pin Change interrupt 0: Off
+                 ; 0003 00D6 // Pin5 Pin Change interrupt 0: Off
+                 ; 0003 00D7 // Pin6 Pin Change interrupt 0: Off
+                 ; 0003 00D8 // Pin7 Pin Change interrupt 0: Off
+                 ; 0003 00D9 PORTC.INT0MASK=0x00;
+000188 e0e0      	LDI  R30,LOW(0)
+000189 93e0 064a 	STS  1610,R30
+                 ; 0003 00DA // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 00DB // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 00DC // Pin2 Pin Change interrupt 1: Off
+                 ; 0003 00DD // Pin3 Pin Change interrupt 1: Off
+                 ; 0003 00DE // Pin4 Pin Change interrupt 1: Off
+                 ; 0003 00DF // Pin5 Pin Change interrupt 1: Off
+                 ; 0003 00E0 // Pin6 Pin Change interrupt 1: Off
+                 ; 0003 00E1 // Pin7 Pin Change interrupt 1: Off
+                 ; 0003 00E2 PORTC.INT1MASK=0x00;
+00018b 93e0 064b 	STS  1611,R30
+                 ; 0003 00E3 
+                 ; 0003 00E4 // PORTD initialization
+                 ; 0003 00E5 // OUT register
+                 ; 0003 00E6 PORTD.OUT=0x00;
+00018d 93e0 0664 	STS  1636,R30
+                 ; 0003 00E7 // Pin0: Input
+                 ; 0003 00E8 // Pin1: Input
+                 ; 0003 00E9 // Pin2: Input
+                 ; 0003 00EA PORTD.DIR=0x00;
+00018f 93e0 0660 	STS  1632,R30
+                 ; 0003 00EB // Pin0 Output/Pull configuration: Totempole/No
+                 ; 0003 00EC // Pin0 Input/Sense configuration: Sense both edges
+                 ; 0003 00ED // Pin0 Inverted: Off
+                 ; 0003 00EE PORTD.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000191 93e0 0670 	STS  1648,R30
+                 ; 0003 00EF // Pin1 Output/Pull configuration: Totempole/No
+                 ; 0003 00F0 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 00F1 // Pin1 Inverted: Off
+                 ; 0003 00F2 PORTD.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000193 93e0 0671 	STS  1649,R30
+                 ; 0003 00F3 // Pin2 Output/Pull configuration: Totempole/No
+                 ; 0003 00F4 // Pin2 Input/Sense configuration: Sense both edges
+                 ; 0003 00F5 // Pin2 Inverted: Off
+                 ; 0003 00F6 PORTD.PIN2CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000195 93e0 0672 	STS  1650,R30
+                 ; 0003 00F7 // Interrupt 0 level: Disabled
+                 ; 0003 00F8 // Interrupt 1 level: Disabled
+                 ; 0003 00F9 PORTD.INTCTRL=(PORTD.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 00FA 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+000197 91e0 0669 	LDS  R30,1641
+000199 7fe0      	ANDI R30,LOW(0xF0)
+00019a 93e0 0669 	STS  1641,R30
+                 ; 0003 00FB // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 00FC // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 00FD // Pin2 Pin Change interrupt 0: Off
+                 ; 0003 00FE PORTD.INT0MASK=0x00;
+00019c e0e0      	LDI  R30,LOW(0)
+00019d 93e0 066a 	STS  1642,R30
+                 ; 0003 00FF // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 0100 // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 0101 // Pin2 Pin Change interrupt 1: Off
+                 ; 0003 0102 PORTD.INT1MASK=0x00;
+00019f 93e0 066b 	STS  1643,R30
+                 ; 0003 0103 
+                 ; 0003 0104 // PORTE initialization
+                 ; 0003 0105 // OUT register
+                 ; 0003 0106 PORTE.OUT=0x00;
+0001a1 93e0 0684 	STS  1668,R30
+                 ; 0003 0107 // Pin0: Input
+                 ; 0003 0108 // Pin1: Input
+                 ; 0003 0109 // Pin2: Input
+                 ; 0003 010A // Pin3: Input
+                 ; 0003 010B // Pin4: Input
+                 ; 0003 010C // Pin5: Output
+                 ; 0003 010D // Pin6: Input
+                 ; 0003 010E // Pin7: Input
+                 ; 0003 010F PORTE.DIR=0x20;
+0001a3 e2e0      	LDI  R30,LOW(32)
+0001a4 93e0 0680 	STS  1664,R30
+                 ; 0003 0110 // Pin0 Output/Pull configuration: Totempole/No
+                 ; 0003 0111 // Pin0 Input/Sense configuration: Sense both edges
+                 ; 0003 0112 // Pin0 Inverted: Off
+                 ; 0003 0113 PORTE.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001a6 e0e0      	LDI  R30,LOW(0)
+0001a7 93e0 0690 	STS  1680,R30
+                 ; 0003 0114 // Pin1 Output/Pull configuration: Totempole/No
+                 ; 0003 0115 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 0116 // Pin1 Inverted: Off
+                 ; 0003 0117 PORTE.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001a9 93e0 0691 	STS  1681,R30
+                 ; 0003 0118 // Pin2 Output/Pull configuration: Totempole/No
+                 ; 0003 0119 // Pin2 Input/Sense configuration: Sense both edges
+                 ; 0003 011A // Pin2 Inverted: Off
+                 ; 0003 011B PORTE.PIN2CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001ab 93e0 0692 	STS  1682,R30
+                 ; 0003 011C // Pin3 Output/Pull configuration: Totempole/No
+                 ; 0003 011D // Pin3 Input/Sense configuration: Sense both edges
+                 ; 0003 011E // Pin3 Inverted: Off
+                 ; 0003 011F PORTE.PIN3CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001ad 93e0 0693 	STS  1683,R30
+                 ; 0003 0120 // Pin4 Output/Pull configuration: Totempole/No
+                 ; 0003 0121 // Pin4 Input/Sense configuration: Sense both edges
+                 ; 0003 0122 // Pin4 Inverted: Off
+                 ; 0003 0123 PORTE.PIN4CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001af 93e0 0694 	STS  1684,R30
+                 ; 0003 0124 // Pin5 Output/Pull configuration: Totempole/No
+                 ; 0003 0125 // Pin5 Input/Sense configuration: Sense both edges
+                 ; 0003 0126 // Pin5 Inverted: Off
+                 ; 0003 0127 PORTE.PIN5CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001b1 93e0 0695 	STS  1685,R30
+                 ; 0003 0128 // Pin6 Output/Pull configuration: Totempole/No
+                 ; 0003 0129 // Pin6 Input/Sense configuration: Sense both edges
+                 ; 0003 012A // Pin6 Inverted: Off
+                 ; 0003 012B PORTE.PIN6CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001b3 93e0 0696 	STS  1686,R30
+                 ; 0003 012C // Pin7 Output/Pull configuration: Totempole/No
+                 ; 0003 012D // Pin7 Input/Sense configuration: Sense both edges
+                 ; 0003 012E // Pin7 Inverted: Off
+                 ; 0003 012F PORTE.PIN7CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001b5 93e0 0697 	STS  1687,R30
+                 ; 0003 0130 // PORTE Peripheral Output Remapping
+                 ; 0003 0131 // OC0A Output: Pin 0
+                 ; 0003 0132 // OC0B Output: Pin 1
+                 ; 0003 0133 // OC0C Output: Pin 2
+                 ; 0003 0134 // OC0D Output: Pin 3
+                 ; 0003 0135 // USART0 XCK: Pin 1
+                 ; 0003 0136 // USART0 RXD: Pin 2
+                 ; 0003 0137 // USART0 TXD: Pin 3
+                 ; 0003 0138 // SPI MOSI: Pin -1
+                 ; 0003 0139 // SPI SCK: Pin -1
+                 ; 0003 013A PORTE.REMAP=(0<<PORT_SPI_bp) | (0<<PORT_USART0_bp) | (0<<PORT_TC0D_bp) | (0<<PORT_TC0C_bp) | (0<<PORT_TC0B_bp) | (0<<POR ...
+0001b7 93e0 068e 	STS  1678,R30
+                 ; 0003 013B // Interrupt 0 level: Disabled
+                 ; 0003 013C // Interrupt 1 level: Disabled
+                 ; 0003 013D PORTE.INTCTRL=(PORTE.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 013E 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+0001b9 91e0 0689 	LDS  R30,1673
+0001bb 7fe0      	ANDI R30,LOW(0xF0)
+0001bc 93e0 0689 	STS  1673,R30
+                 ; 0003 013F // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 0140 // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 0141 // Pin2 Pin Change interrupt 0: Off
+                 ; 0003 0142 // Pin3 Pin Change interrupt 0: Off
+                 ; 0003 0143 // Pin4 Pin Change interrupt 0: Off
+                 ; 0003 0144 // Pin5 Pin Change interrupt 0: Off
+                 ; 0003 0145 // Pin6 Pin Change interrupt 0: Off
+                 ; 0003 0146 // Pin7 Pin Change interrupt 0: Off
+                 ; 0003 0147 PORTE.INT0MASK=0x00;
+0001be e0e0      	LDI  R30,LOW(0)
+0001bf 93e0 068a 	STS  1674,R30
+                 ; 0003 0148 // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 0149 // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 014A // Pin2 Pin Change interrupt 1: Off
+                 ; 0003 014B // Pin3 Pin Change interrupt 1: Off
+                 ; 0003 014C // Pin4 Pin Change interrupt 1: Off
+                 ; 0003 014D // Pin5 Pin Change interrupt 1: Off
+                 ; 0003 014E // Pin6 Pin Change interrupt 1: Off
+                 ; 0003 014F // Pin7 Pin Change interrupt 1: Off
+                 ; 0003 0150 PORTE.INT1MASK=0x00;
+0001c1 93e0 068b 	STS  1675,R30
+                 ; 0003 0151 
+                 ; 0003 0152 // PORTG initialization
+                 ; 0003 0153 // OUT register
+                 ; 0003 0154 PORTG.OUT=0x00;
+0001c3 93e0 06c4 	STS  1732,R30
+                 ; 0003 0155 // Pin0: Input
+                 ; 0003 0156 // Pin1: Input
+                 ; 0003 0157 // Pin2: Input
+                 ; 0003 0158 // Pin3: Input
+                 ; 0003 0159 // Pin4: Input
+                 ; 0003 015A // Pin5: Input
+                 ; 0003 015B // Pin6: Input
+                 ; 0003 015C // Pin7: Input
+                 ; 0003 015D PORTG.DIR=0x00;
+0001c5 93e0 06c0 	STS  1728,R30
+                 ; 0003 015E // Pin0 Output/Pull configuration: Totempole/No
+                 ; 0003 015F // Pin0 Input/Sense configuration: Sense both edges
+                 ; 0003 0160 // Pin0 Inverted: Off
+                 ; 0003 0161 PORTG.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001c7 93e0 06d0 	STS  1744,R30
+                 ; 0003 0162 // Pin1 Output/Pull configuration: Totempole/No
+                 ; 0003 0163 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 0164 // Pin1 Inverted: Off
+                 ; 0003 0165 PORTG.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001c9 93e0 06d1 	STS  1745,R30
+                 ; 0003 0166 // Pin2 Output/Pull configuration: Totempole/No
+                 ; 0003 0167 // Pin2 Input/Sense configuration: Sense both edges
+                 ; 0003 0168 // Pin2 Inverted: Off
+                 ; 0003 0169 PORTG.PIN2CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001cb 93e0 06d2 	STS  1746,R30
+                 ; 0003 016A // Pin3 Output/Pull configuration: Totempole/No
+                 ; 0003 016B // Pin3 Input/Sense configuration: Sense both edges
+                 ; 0003 016C // Pin3 Inverted: Off
+                 ; 0003 016D PORTG.PIN3CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001cd 93e0 06d3 	STS  1747,R30
+                 ; 0003 016E // Pin4 Output/Pull configuration: Totempole/No
+                 ; 0003 016F // Pin4 Input/Sense configuration: Sense both edges
+                 ; 0003 0170 // Pin4 Inverted: Off
+                 ; 0003 0171 PORTG.PIN4CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001cf 93e0 06d4 	STS  1748,R30
+                 ; 0003 0172 // Pin5 Output/Pull configuration: Totempole/No
+                 ; 0003 0173 // Pin5 Input/Sense configuration: Sense both edges
+                 ; 0003 0174 // Pin5 Inverted: Off
+                 ; 0003 0175 PORTG.PIN5CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001d1 93e0 06d5 	STS  1749,R30
+                 ; 0003 0176 // Pin6 Output/Pull configuration: Totempole/No
+                 ; 0003 0177 // Pin6 Input/Sense configuration: Sense both edges
+                 ; 0003 0178 // Pin6 Inverted: Off
+                 ; 0003 0179 PORTG.PIN6CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001d3 93e0 06d6 	STS  1750,R30
+                 ; 0003 017A // Pin7 Output/Pull configuration: Totempole/No
+                 ; 0003 017B // Pin7 Input/Sense configuration: Sense both edges
+                 ; 0003 017C // Pin7 Inverted: Off
+                 ; 0003 017D PORTG.PIN7CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001d5 93e0 06d7 	STS  1751,R30
+                 ; 0003 017E // Interrupt 0 level: Disabled
+                 ; 0003 017F // Interrupt 1 level: Disabled
+                 ; 0003 0180 PORTG.INTCTRL=(PORTG.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 0181 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+0001d7 91e0 06c9 	LDS  R30,1737
+0001d9 7fe0      	ANDI R30,LOW(0xF0)
+0001da 93e0 06c9 	STS  1737,R30
+                 ; 0003 0182 // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 0183 // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 0184 // Pin2 Pin Change interrupt 0: Off
+                 ; 0003 0185 // Pin3 Pin Change interrupt 0: Off
+                 ; 0003 0186 // Pin4 Pin Change interrupt 0: Off
+                 ; 0003 0187 // Pin5 Pin Change interrupt 0: Off
+                 ; 0003 0188 // Pin6 Pin Change interrupt 0: Off
+                 ; 0003 0189 // Pin7 Pin Change interrupt 0: Off
+                 ; 0003 018A PORTG.INT0MASK=0x00;
+0001dc e0e0      	LDI  R30,LOW(0)
+0001dd 93e0 06ca 	STS  1738,R30
+                 ; 0003 018B // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 018C // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 018D // Pin2 Pin Change interrupt 1: Off
+                 ; 0003 018E // Pin3 Pin Change interrupt 1: Off
+                 ; 0003 018F // Pin4 Pin Change interrupt 1: Off
+                 ; 0003 0190 // Pin5 Pin Change interrupt 1: Off
+                 ; 0003 0191 // Pin6 Pin Change interrupt 1: Off
+                 ; 0003 0192 // Pin7 Pin Change interrupt 1: Off
+                 ; 0003 0193 PORTG.INT1MASK=0x00;
+0001df 93e0 06cb 	STS  1739,R30
+                 ; 0003 0194 
+                 ; 0003 0195 // PORTM initialization
+                 ; 0003 0196 // OUT register
+                 ; 0003 0197 PORTM.OUT=0x00;
+0001e1 93e0 0764 	STS  1892,R30
+                 ; 0003 0198 // Pin0: Input
+                 ; 0003 0199 // Pin1: Input
+                 ; 0003 019A // Pin2: Input
+                 ; 0003 019B // Pin3: Input
+                 ; 0003 019C // Pin4: Input
+                 ; 0003 019D // Pin5: Input
+                 ; 0003 019E // Pin6: Input
+                 ; 0003 019F // Pin7: Input
+                 ; 0003 01A0 PORTM.DIR=0x00;
+0001e3 93e0 0760 	STS  1888,R30
+                 ; 0003 01A1 // Pin0 Output/Pull configuration: Totempole/No
+                 ; 0003 01A2 // Pin0 Input/Sense configuration: Sense both edges
+                 ; 0003 01A3 // Pin0 Inverted: Off
+                 ; 0003 01A4 PORTM.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001e5 93e0 0770 	STS  1904,R30
+                 ; 0003 01A5 // Pin1 Output/Pull configuration: Totempole/No
+                 ; 0003 01A6 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 01A7 // Pin1 Inverted: Off
+                 ; 0003 01A8 PORTM.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001e7 93e0 0771 	STS  1905,R30
+                 ; 0003 01A9 // Pin2 Output/Pull configuration: Totempole/No
+                 ; 0003 01AA // Pin2 Input/Sense configuration: Sense both edges
+                 ; 0003 01AB // Pin2 Inverted: Off
+                 ; 0003 01AC PORTM.PIN2CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001e9 93e0 0772 	STS  1906,R30
+                 ; 0003 01AD // Pin3 Output/Pull configuration: Totempole/No
+                 ; 0003 01AE // Pin3 Input/Sense configuration: Sense both edges
+                 ; 0003 01AF // Pin3 Inverted: Off
+                 ; 0003 01B0 PORTM.PIN3CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001eb 93e0 0773 	STS  1907,R30
+                 ; 0003 01B1 // Pin4 Output/Pull configuration: Totempole/No
+                 ; 0003 01B2 // Pin4 Input/Sense configuration: Sense both edges
+                 ; 0003 01B3 // Pin4 Inverted: Off
+                 ; 0003 01B4 PORTM.PIN4CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001ed 93e0 0774 	STS  1908,R30
+                 ; 0003 01B5 // Pin5 Output/Pull configuration: Totempole/No
+                 ; 0003 01B6 // Pin5 Input/Sense configuration: Sense both edges
+                 ; 0003 01B7 // Pin5 Inverted: Off
+                 ; 0003 01B8 PORTM.PIN5CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001ef 93e0 0775 	STS  1909,R30
+                 ; 0003 01B9 // Pin6 Output/Pull configuration: Totempole/No
+                 ; 0003 01BA // Pin6 Input/Sense configuration: Sense both edges
+                 ; 0003 01BB // Pin6 Inverted: Off
+                 ; 0003 01BC PORTM.PIN6CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001f1 93e0 0776 	STS  1910,R30
+                 ; 0003 01BD // Pin7 Output/Pull configuration: Totempole/No
+                 ; 0003 01BE // Pin7 Input/Sense configuration: Sense both edges
+                 ; 0003 01BF // Pin7 Inverted: Off
+                 ; 0003 01C0 PORTM.PIN7CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+0001f3 93e0 0777 	STS  1911,R30
+                 ; 0003 01C1 // Interrupt 0 level: Disabled
+                 ; 0003 01C2 // Interrupt 1 level: Disabled
+                 ; 0003 01C3 PORTM.INTCTRL=(PORTM.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 01C4 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+0001f5 91e0 0769 	LDS  R30,1897
+0001f7 7fe0      	ANDI R30,LOW(0xF0)
+0001f8 93e0 0769 	STS  1897,R30
+                 ; 0003 01C5 // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 01C6 // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 01C7 // Pin2 Pin Change interrupt 0: Off
+                 ; 0003 01C8 // Pin3 Pin Change interrupt 0: Off
+                 ; 0003 01C9 // Pin4 Pin Change interrupt 0: Off
+                 ; 0003 01CA // Pin5 Pin Change interrupt 0: Off
+                 ; 0003 01CB // Pin6 Pin Change interrupt 0: Off
+                 ; 0003 01CC // Pin7 Pin Change interrupt 0: Off
+                 ; 0003 01CD PORTM.INT0MASK=0x00;
+0001fa e0e0      	LDI  R30,LOW(0)
+0001fb 93e0 076a 	STS  1898,R30
+                 ; 0003 01CE // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 01CF // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 01D0 // Pin2 Pin Change interrupt 1: Off
+                 ; 0003 01D1 // Pin3 Pin Change interrupt 1: Off
+                 ; 0003 01D2 // Pin4 Pin Change interrupt 1: Off
+                 ; 0003 01D3 // Pin5 Pin Change interrupt 1: Off
+                 ; 0003 01D4 // Pin6 Pin Change interrupt 1: Off
+                 ; 0003 01D5 // Pin7 Pin Change interrupt 1: Off
+                 ; 0003 01D6 PORTM.INT1MASK=0x00;
+0001fd 93e0 076b 	STS  1899,R30
+                 ; 0003 01D7 
+                 ; 0003 01D8 // PORTR initialization
+                 ; 0003 01D9 // OUT register
+                 ; 0003 01DA PORTR.OUT=0x00;
+0001ff 93e0 07e4 	STS  2020,R30
+                 ; 0003 01DB // Pin0: Input
+                 ; 0003 01DC // Pin1: Input
+                 ; 0003 01DD PORTR.DIR=0x00;
+000201 93e0 07e0 	STS  2016,R30
+                 ; 0003 01DE // Pin0 Output/Pull configuration: Totempole/No
+                 ; 0003 01DF // Pin0 Input/Sense configuration: Sense both edges
+                 ; 0003 01E0 // Pin0 Inverted: Off
+                 ; 0003 01E1 PORTR.PIN0CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000203 93e0 07f0 	STS  2032,R30
+                 ; 0003 01E2 // Pin1 Output/Pull configuration: Totempole/No
+                 ; 0003 01E3 // Pin1 Input/Sense configuration: Sense both edges
+                 ; 0003 01E4 // Pin1 Inverted: Off
+                 ; 0003 01E5 PORTR.PIN1CTRL=PORT_OPC_TOTEM_gc | PORT_ISC_BOTHEDGES_gc;
+000205 93e0 07f1 	STS  2033,R30
+                 ; 0003 01E6 // Interrupt 0 level: Disabled
+                 ; 0003 01E7 // Interrupt 1 level: Disabled
+                 ; 0003 01E8 PORTR.INTCTRL=(PORTR.INTCTRL & (~(PORT_INT1LVL_gm | PORT_INT0LVL_gm))) |
+                 ; 0003 01E9 	PORT_INT1LVL_OFF_gc | PORT_INT0LVL_OFF_gc;
+000207 91e0 07e9 	LDS  R30,2025
+000209 7fe0      	ANDI R30,LOW(0xF0)
+00020a 93e0 07e9 	STS  2025,R30
+                 ; 0003 01EA // Pin0 Pin Change interrupt 0: Off
+                 ; 0003 01EB // Pin1 Pin Change interrupt 0: Off
+                 ; 0003 01EC PORTR.INT0MASK=0x00;
+00020c e0e0      	LDI  R30,LOW(0)
+00020d 93e0 07ea 	STS  2026,R30
+                 ; 0003 01ED // Pin0 Pin Change interrupt 1: Off
+                 ; 0003 01EE // Pin1 Pin Change interrupt 1: Off
+                 ; 0003 01EF PORTR.INT1MASK=0x00;
+00020f 93e0 07eb 	STS  2027,R30
+                 ; 0003 01F0 }
+000211 9508      	RET
+                 ; .FEND
+                 ;
+                 ;// Virtual Ports initialization
+                 ;void vports_init(void)
+                 ; 0003 01F4 {
+                 _vports_init:
+                 ; .FSTART _vports_init
+                 ; 0003 01F5 // PORTA mapped to VPORT0
+                 ; 0003 01F6 // PORTB mapped to VPORT1
+                 ; 0003 01F7 PORTCFG.VPCTRLA=PORTCFG_VP13MAP_PORTB_gc | PORTCFG_VP02MAP_PORTA_gc;
+000212 e1e0      	LDI  R30,LOW(16)
+000213 93e0 00b2 	STS  178,R30
+                 ; 0003 01F8 // PORTC mapped to VPORT2
+                 ; 0003 01F9 // PORTD mapped to VPORT3
+                 ; 0003 01FA PORTCFG.VPCTRLB=PORTCFG_VP13MAP_PORTD_gc | PORTCFG_VP02MAP_PORTC_gc;
+000215 e3e2      	LDI  R30,LOW(50)
+000216 93e0 00b3 	STS  179,R30
+                 ; 0003 01FB }
+000218 9508      	RET
+                 ; .FEND
+                 ;
+                 ;/*******************************************************
+                 ;Timers/Counters initialization created by the
+                 ;CodeWizardAVR V3.32 Automatic Program Generator
+                 ;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+                 ;http://www.hpinfotech.com
+                 ;
+                 ;Project :
+                 ;*******************************************************/
+                 ;
+                 ;// I/O Registers definitions
+                 ;#include <xmega128b1.h>
+                 ;
+                 ;// Disable a Timer/Counter type TC0
+                 ;void tc0_disable(TC0_t *ptc)
+                 ; 0004 000F {
+                 
+                 	.CSEG
+                 _tc0_disable:
+                 ; .FSTART _tc0_disable
+                 ; 0004 0010 // Timer/Counter off
+                 ; 0004 0011 ptc->CTRLA=TC_CLKSEL_OFF_gc;
+000219 d0c4      	RCALL SUBOPT_0x0
+                 ;	*ptc -> R16,R17
+                 ; 0004 0012 // Issue a reset command
+                 ; 0004 0013 ptc->CTRLFSET=TC_CMD_RESET_gc;
+                 ; 0004 0014 }
+00021a c05e      	RJMP _0x2000001
+                 ; .FEND
+                 ;
+                 ;// Disable a Timer/Counter type TC1
+                 ;void tc1_disable(TC1_t *ptc)
+                 ; 0004 0018 {
+                 _tc1_disable:
+                 ; .FSTART _tc1_disable
+                 ; 0004 0019 // Timer/Counter off
+                 ; 0004 001A ptc->CTRLA=TC_CLKSEL_OFF_gc;
+00021b d0c2      	RCALL SUBOPT_0x0
+                 ;	*ptc -> R16,R17
+                 ; 0004 001B // Issue a reset command
+                 ; 0004 001C ptc->CTRLFSET=TC_CMD_RESET_gc;
+                 ; 0004 001D }
+00021c c05c      	RJMP _0x2000001
+                 ; .FEND
+                 ;
+                 ;// Timer/Counter TCC0 initialization
+                 ;void tcc0_init(void)
+                 ; 0004 0021 {
+                 _tcc0_init:
+                 ; .FSTART _tcc0_init
+                 ; 0004 0022 unsigned char s;
+                 ; 0004 0023 unsigned char n;
+                 ; 0004 0024 
+                 ; 0004 0025 // Note: The correct PORTC direction for the Compare Channels
+                 ; 0004 0026 // outputs is configured in the ports_init function.
+                 ; 0004 0027 
+                 ; 0004 0028 // Save interrupts enabled/disabled state
+                 ; 0004 0029 s=SREG;
+00021d 931a      	ST   -Y,R17
+00021e 930a      	ST   -Y,R16
+                 ;	s -> R17
+                 ;	n -> R16
+00021f b71f      	IN   R17,63
+                 ; 0004 002A // Disable interrupts
+                 ; 0004 002B #asm("cli")
+000220 94f8      	CLI
+                 ; 0004 002C 
+                 ; 0004 002D // Disable and reset the timer/counter just to be sure
+                 ; 0004 002E tc0_disable(&TCC0);
+000221 e0a0      	LDI  R26,LOW(2048)
+000222 e0b8      	LDI  R27,HIGH(2048)
+000223 dff5      	RCALL _tc0_disable
+                 ; 0004 002F // Clock source: ClkPer/1
+                 ; 0004 0030 TCC0.CTRLA=TC_CLKSEL_DIV1_gc;
+000224 e0e1      	LDI  R30,LOW(1)
+000225 93e0 0800 	STS  2048,R30
+                 ; 0004 0031 // Mode: Normal Operation, Overflow Int./Event on TOP
+                 ; 0004 0032 // Compare/Capture on channel A: Off
+                 ; 0004 0033 // Compare/Capture on channel B: Off
+                 ; 0004 0034 // Compare/Capture on channel C: Off
+                 ; 0004 0035 // Compare/Capture on channel D: Off
+                 ; 0004 0036 TCC0.CTRLB=(0<<TC0_CCDEN_bp) | (0<<TC0_CCCEN_bp) | (0<<TC0_CCBEN_bp) | (0<<TC0_CCAEN_bp) |
+                 ; 0004 0037 	TC_WGMODE_NORMAL_gc;
+000227 e0e0      	LDI  R30,LOW(0)
+000228 93e0 0801 	STS  2049,R30
+                 ; 0004 0038 // Capture event source: None
+                 ; 0004 0039 TCC0.CTRLD=TC_EVACT_OFF_gc | TC_EVSEL_OFF_gc;
+00022a 93e0 0803 	STS  2051,R30
+                 ; 0004 003A 
+                 ; 0004 003B // Set Timer/Counter in Normal mode
+                 ; 0004 003C TCC0.CTRLE=TC_BYTEM_NORMAL_gc;
+00022c 93e0 0804 	STS  2052,R30
+                 ; 0004 003D 
+                 ; 0004 003E // Overflow interrupt: High Level
+                 ; 0004 003F // Error interrupt: Disabled
+                 ; 0004 0040 TCC0.INTCTRLA=TC_ERRINTLVL_OFF_gc | TC_OVFINTLVL_HI_gc;
+00022e e0e3      	LDI  R30,LOW(3)
+00022f 93e0 0806 	STS  2054,R30
+                 ; 0004 0041 
+                 ; 0004 0042 // Compare/Capture channel A interrupt: Disabled
+                 ; 0004 0043 // Compare/Capture channel B interrupt: Disabled
+                 ; 0004 0044 // Compare/Capture channel C interrupt: Disabled
+                 ; 0004 0045 // Compare/Capture channel D interrupt: Disabled
+                 ; 0004 0046 TCC0.INTCTRLB=TC_CCDINTLVL_OFF_gc | TC_CCCINTLVL_OFF_gc | TC_CCBINTLVL_OFF_gc | TC_CCAINTLVL_OFF_gc;
+000231 e0e0      	LDI  R30,LOW(0)
+000232 93e0 0807 	STS  2055,R30
+                 ; 0004 0047 
+                 ; 0004 0048 // High resolution extension: Off
+                 ; 0004 0049 HIRESC.CTRLA&= ~HIRES_HREN0_bm;
+000234 91e0 0890 	LDS  R30,2192
+000236 7fee      	ANDI R30,0xFE
+000237 93e0 0890 	STS  2192,R30
+                 ; 0004 004A 
+                 ; 0004 004B // Advanced Waveform Extension initialization
+                 ; 0004 004C // Optimize for speed
+                 ; 0004 004D #pragma optsize-
+                 ; 0004 004E // Disable locking the AWEX configuration registers just to be sure
+                 ; 0004 004F n=MCU.AWEXLOCK & (~MCU_AWEXCLOCK_bm);
+000239 91e0 0099 	LDS  R30,153
+00023b 7fee      	ANDI R30,0xFE
+00023c 2f0e      	MOV  R16,R30
+                 ; 0004 0050 CCP=CCP_IOREG_gc;
+00023d ede8      	LDI  R30,LOW(216)
+00023e bfe4      	OUT  0x34,R30
+                 ; 0004 0051 MCU.AWEXLOCK=n;
+00023f 9300 0099 	STS  153,R16
+                 ; 0004 0052 // Restore optimization for size if needed
+                 ; 0004 0053 #pragma optsize_default
+                 ; 0004 0054 
+                 ; 0004 0055 // Pattern generation: Off
+                 ; 0004 0056 // Dead time insertion: Off
+                 ; 0004 0057 AWEXC.CTRL=(0<<AWEX_PGM_bp) | (0<<AWEX_CWCM_bp) | (0<<AWEX_DTICCDEN_bp) | (0<<AWEX_DTICCCEN_bp) |
+                 ; 0004 0058 	(0<<AWEX_DTICCBEN_bp) | (0<<AWEX_DTICCAEN_bp);
+000241 e0e0      	LDI  R30,LOW(0)
+000242 93e0 0880 	STS  2176,R30
+                 ; 0004 0059 
+                 ; 0004 005A // Fault protection initialization
+                 ; 0004 005B // Fault detection on OCD Break detection: On
+                 ; 0004 005C // Fault detection restart mode: Latched Mode
+                 ; 0004 005D // Fault detection action: None (Fault protection disabled)
+                 ; 0004 005E AWEXC.FDCTRL=(AWEXC.FDCTRL & (~(AWEX_FDDBD_bm | AWEX_FDMODE_bm | AWEX_FDACT_gm))) |
+                 ; 0004 005F 	(0<<AWEX_FDDBD_bp) | (0<<AWEX_FDMODE_bp) | AWEX_FDACT_NONE_gc;
+000244 91e0 0883 	LDS  R30,2179
+000246 7ee8      	ANDI R30,LOW(0xE8)
+000247 93e0 0883 	STS  2179,R30
+                 ; 0004 0060 // Fault detect events:
+                 ; 0004 0061 // Event channel 0: Off
+                 ; 0004 0062 // Event channel 1: Off
+                 ; 0004 0063 // Event channel 2: Off
+                 ; 0004 0064 // Event channel 3: Off
+                 ; 0004 0065 // Event channel 4: Off
+                 ; 0004 0066 // Event channel 5: Off
+                 ; 0004 0067 // Event channel 6: Off
+                 ; 0004 0068 // Event channel 7: Off
+                 ; 0004 0069 AWEXC.FDEMASK=0b00000000;
+000249 e0e0      	LDI  R30,LOW(0)
+00024a 93e0 0882 	STS  2178,R30
+                 ; 0004 006A // Make sure the fault detect flag is cleared
+                 ; 0004 006B AWEXC.STATUS|=AWEXC.STATUS & AWEX_FDF_bm;
+00024c e8a4      	LDI  R26,LOW(2180)
+00024d e0b8      	LDI  R27,HIGH(2180)
+00024e 2e0a      	MOV  R0,R26
+00024f 91ac      	LD   R26,X
+000250 91e0 0884 	LDS  R30,2180
+000252 70e4      	ANDI R30,LOW(0x4)
+000253 2bea      	OR   R30,R26
+000254 2da0      	MOV  R26,R0
+000255 93ec      	ST   X,R30
+                 ; 0004 006C 
+                 ; 0004 006D // Clear the interrupt flags
+                 ; 0004 006E TCC0.INTFLAGS=TCC0.INTFLAGS;
+000256 91e0 080c 	LDS  R30,2060
+000258 93e0 080c 	STS  2060,R30
+                 ; 0004 006F // Set Counter register
+                 ; 0004 0070 TCC0.CNT=0x0000;
+00025a e0e0      	LDI  R30,LOW(0)
+00025b e0f0      	LDI  R31,HIGH(0)
+00025c 93e0 0820 	STS  2080,R30
+00025e 93f0 0821 	STS  2080+1,R31
+                 ; 0004 0071 // Set Period register
+                 ; 0004 0072 TCC0.PER=0x07CF;
+000260 ecef      	LDI  R30,LOW(1999)
+000261 e0f7      	LDI  R31,HIGH(1999)
+000262 93e0 0826 	STS  2086,R30
+000264 93f0 0827 	STS  2086+1,R31
+                 ; 0004 0073 // Set channel A Compare/Capture register
+                 ; 0004 0074 TCC0.CCA=0x0000;
+000266 e0e0      	LDI  R30,LOW(0)
+000267 e0f0      	LDI  R31,HIGH(0)
+000268 93e0 0828 	STS  2088,R30
+00026a 93f0 0829 	STS  2088+1,R31
+                 ; 0004 0075 // Set channel B Compare/Capture register
+                 ; 0004 0076 TCC0.CCB=0x0000;
+00026c 93e0 082a 	STS  2090,R30
+00026e 93f0 082b 	STS  2090+1,R31
+                 ; 0004 0077 // Set channel C Compare/Capture register
+                 ; 0004 0078 TCC0.CCC=0x0000;
+000270 93e0 082c 	STS  2092,R30
+000272 93f0 082d 	STS  2092+1,R31
+                 ; 0004 0079 // Set channel D Compare/Capture register
+                 ; 0004 007A TCC0.CCD=0x0000;
+000274 93e0 082e 	STS  2094,R30
+000276 93f0 082f 	STS  2094+1,R31
+                 ; 0004 007B 
+                 ; 0004 007C // Restore interrupts enabled/disabled state
+                 ; 0004 007D SREG=s;
+000278 bf1f      	OUT  0x3F,R17
+                 ; 0004 007E }
+                 _0x2000001:
+000279 9109      	LD   R16,Y+
+00027a 9119      	LD   R17,Y+
+00027b 9508      	RET
+                 ; .FEND
+                 ;
+                 ;// Timer/Counter TCC0 Overflow/Underflow interrupt service routine
+                 ;interrupt [TCC0_OVF_vect] void tcc0_overflow_isr(void)
+                 ; 0004 0082 {
+                 _tcc0_overflow_isr:
+                 ; .FSTART _tcc0_overflow_isr
+                 ; 0004 0083 // Write your code here
+                 ; 0004 0084 
+                 ; 0004 0085 }
+00027c 9518      	RETI
+                 ; .FEND
+                 ;
+                 ;// Timer/Counter TCC1 initialization
+                 ;void tcc1_init(void)
+                 ; 0004 0089 {
+                 _tcc1_init:
+                 ; .FSTART _tcc1_init
+                 ; 0004 008A unsigned char s;
+                 ; 0004 008B 
+                 ; 0004 008C // Note: The correct PORTC direction for the Compare Channels
+                 ; 0004 008D // outputs is configured in the ports_init function.
+                 ; 0004 008E 
+                 ; 0004 008F // Save interrupts enabled/disabled state
+                 ; 0004 0090 s=SREG;
+00027d 931a      	ST   -Y,R17
+                 ;	s -> R17
+00027e b71f      	IN   R17,63
+                 ; 0004 0091 // Disable interrupts
+                 ; 0004 0092 #asm("cli")
+00027f 94f8      	CLI
+                 ; 0004 0093 
+                 ; 0004 0094 // Disable and reset the timer/counter just to be sure
+                 ; 0004 0095 tc1_disable(&TCC1);
+000280 e4a0      	LDI  R26,LOW(2112)
+000281 e0b8      	LDI  R27,HIGH(2112)
+000282 df98      	RCALL _tc1_disable
+                 ; 0004 0096 // Clock source: ClkPer/256
+                 ; 0004 0097 TCC1.CTRLA=TC_CLKSEL_DIV256_gc;
+000283 e0e6      	LDI  R30,LOW(6)
+000284 93e0 0840 	STS  2112,R30
+                 ; 0004 0098 // Mode: Normal Operation, Overflow Int./Event on TOP
+                 ; 0004 0099 // Compare/Capture on channel A: On
+                 ; 0004 009A // Compare/Capture on channel B: Off
+                 ; 0004 009B TCC1.CTRLB=(0<<TC1_CCBEN_bp) | (1<<TC1_CCAEN_bp) |
+                 ; 0004 009C 	TC_WGMODE_NORMAL_gc;
+000286 e1e0      	LDI  R30,LOW(16)
+000287 93e0 0841 	STS  2113,R30
+                 ; 0004 009D // Capture event source: Event Channel 0
+                 ; 0004 009E TCC1.CTRLD=TC_EVACT_CAPT_gc | TC_EVSEL_CH0_gc;
+000289 e2e8      	LDI  R30,LOW(40)
+00028a 93e0 0843 	STS  2115,R30
+                 ; 0004 009F 
+                 ; 0004 00A0 // Set Timer/Counter in Normal mode
+                 ; 0004 00A1 TCC1.CTRLE=TC_BYTEM_NORMAL_gc;
+00028c e0e0      	LDI  R30,LOW(0)
+00028d 93e0 0844 	STS  2116,R30
+                 ; 0004 00A2 
+                 ; 0004 00A3 // Overflow interrupt: Disabled
+                 ; 0004 00A4 // Error interrupt: Disabled
+                 ; 0004 00A5 TCC1.INTCTRLA=TC_ERRINTLVL_OFF_gc | TC_OVFINTLVL_OFF_gc;
+00028f 93e0 0846 	STS  2118,R30
+                 ; 0004 00A6 
+                 ; 0004 00A7 // Compare/Capture channel A interrupt: High Level
+                 ; 0004 00A8 // Compare/Capture channel B interrupt: Disabled
+                 ; 0004 00A9 TCC1.INTCTRLB=TC_CCBINTLVL_OFF_gc | TC_CCAINTLVL_HI_gc;
+000291 e0e3      	LDI  R30,LOW(3)
+000292 93e0 0847 	STS  2119,R30
+                 ; 0004 00AA 
+                 ; 0004 00AB // High resolution extension: Off
+                 ; 0004 00AC HIRESC.CTRLA&= ~HIRES_HREN1_bm;
+000294 91e0 0890 	LDS  R30,2192
+000296 7fed      	ANDI R30,0xFD
+000297 93e0 0890 	STS  2192,R30
+                 ; 0004 00AD 
+                 ; 0004 00AE // Clear the interrupt flags
+                 ; 0004 00AF TCC1.INTFLAGS=TCC1.INTFLAGS;
+000299 91e0 084c 	LDS  R30,2124
+00029b 93e0 084c 	STS  2124,R30
+                 ; 0004 00B0 // Set Counter register
+                 ; 0004 00B1 TCC1.CNT=0x0000;
+00029d e0e0      	LDI  R30,LOW(0)
+00029e e0f0      	LDI  R31,HIGH(0)
+00029f 93e0 0860 	STS  2144,R30
+0002a1 93f0 0861 	STS  2144+1,R31
+                 ; 0004 00B2 // Set Period register
+                 ; 0004 00B3 TCC1.PER=0xFFFF;
+0002a3 efef      	LDI  R30,LOW(65535)
+0002a4 efff      	LDI  R31,HIGH(65535)
+0002a5 93e0 0866 	STS  2150,R30
+0002a7 93f0 0867 	STS  2150+1,R31
+                 ; 0004 00B4 // Set channel A Compare/Capture register
+                 ; 0004 00B5 TCC1.CCA=0x0000;
+0002a9 e0e0      	LDI  R30,LOW(0)
+0002aa e0f0      	LDI  R31,HIGH(0)
+0002ab 93e0 0868 	STS  2152,R30
+0002ad 93f0 0869 	STS  2152+1,R31
+                 ; 0004 00B6 // Set channel B Compare/Capture register
+                 ; 0004 00B7 TCC1.CCB=0x0000;
+0002af 93e0 086a 	STS  2154,R30
+0002b1 93f0 086b 	STS  2154+1,R31
+                 ; 0004 00B8 
+                 ; 0004 00B9 // Restore interrupts enabled/disabled state
+                 ; 0004 00BA SREG=s;
+0002b3 bf1f      	OUT  0x3F,R17
+                 ; 0004 00BB }
+0002b4 9119      	LD   R17,Y+
+0002b5 9508      	RET
+                 ; .FEND
+                 ;
+                 ;// Timer/Counter TCC1 Compare/Capture A interrupt service routine
+                 ;interrupt [TCC1_CCA_vect] void tcc1_compare_capture_a_isr(void)
+                 ; 0004 00BF {
+                 _tcc1_compare_capture_a_isr:
+                 ; .FSTART _tcc1_compare_capture_a_isr
+0002b6 93ea      	ST   -Y,R30
+0002b7 b7ef      	IN   R30,SREG
+0002b8 93ea      	ST   -Y,R30
+                 ; 0004 00C0 // Ensure that the Compare/Capture A interrupt flag is cleared
+                 ; 0004 00C1 if (TCC1.INTFLAGS & TC1_CCAIF_bm) TCC1.INTFLAGS|=TC1_CCAIF_bm;
+0002b9 91e0 084c 	LDS  R30,2124
+0002bb 71e0      	ANDI R30,LOW(0x10)
+0002bc f029      	BREQ _0x80003
+0002bd 91e0 084c 	LDS  R30,2124
+0002bf 61e0      	ORI  R30,0x10
+0002c0 93e0 084c 	STS  2124,R30
+                 ; 0004 00C2 // Write your code here
+                 ; 0004 00C3 
+                 ; 0004 00C4 }
+                 _0x80003:
+0002c2 91e9      	LD   R30,Y+
+0002c3 bfef      	OUT  SREG,R30
+0002c4 91e9      	LD   R30,Y+
+0002c5 9518      	RETI
+                 ; .FEND
+                 ;
+                 ;/*******************************************************
+                 ;USARTs initialization created by the
+                 ;CodeWizardAVR V3.32 Automatic Program Generator
+                 ;© Copyright 1998-2017 Pavel Haiduc, HP InfoTech s.r.l.
+                 ;http://www.hpinfotech.com
+                 ;
+                 ;Project :
+                 ;*******************************************************/
+                 ;
+                 ;// I/O Registers definitions
+                 ;#include <xmega128b1.h>
+                 ;
+                 ;// USARTs initialization functions
+                 ;#include "usarts_init.h"
+                 ;
+                 ;// USARTC0 initialization
+                 ;void usartc0_init(void)
+                 ; 0005 0012 {
+                 
+                 	.CSEG
+                 _usartc0_init:
+                 ; .FSTART _usartc0_init
+                 ; 0005 0013 // Note: The correct PORTC direction for the RxD, TxD and XCK signals
+                 ; 0005 0014 // is configured in the ports_init function.
+                 ; 0005 0015 
+                 ; 0005 0016 // Transmitter is enabled
+                 ; 0005 0017 // Set TxD=1
+                 ; 0005 0018 PORTC.OUTSET=0x08;
+0002c6 e0e8      	LDI  R30,LOW(8)
+0002c7 93e0 0645 	STS  1605,R30
+                 ; 0005 0019 
+                 ; 0005 001A // Communication mode: Asynchronous USART
+                 ; 0005 001B // Data bits: 8
+                 ; 0005 001C // Stop bits: 1
+                 ; 0005 001D // Parity: Disabled
+                 ; 0005 001E USARTC0.CTRLC=USART_CMODE_ASYNCHRONOUS_gc | USART_PMODE_DISABLED_gc | USART_CHSIZE_8BIT_gc;
+0002c9 e0e3      	LDI  R30,LOW(3)
+0002ca 93e0 08a5 	STS  2213,R30
+                 ; 0005 001F 
+                 ; 0005 0020 // Receive complete interrupt: Disabled
+                 ; 0005 0021 // Transmit complete interrupt: Disabled
+                 ; 0005 0022 // Data register empty interrupt: Disabled
+                 ; 0005 0023 USARTC0.CTRLA=(USARTC0.CTRLA & (~(USART_RXCINTLVL_gm | USART_TXCINTLVL_gm | USART_DREINTLVL_gm))) |
+                 ; 0005 0024 	USART_RXCINTLVL_OFF_gc | USART_TXCINTLVL_OFF_gc | USART_DREINTLVL_OFF_gc;
+0002cc 91e0 08a3 	LDS  R30,2211
+0002ce 7ce0      	ANDI R30,LOW(0xC0)
+0002cf 93e0 08a3 	STS  2211,R30
+                 ; 0005 0025 
+                 ; 0005 0026 // Required Baud rate: 600
+                 ; 0005 0027 // Real Baud Rate: 600.1 (x1 Mode), Error: 0.0 %
+                 ; 0005 0028 USARTC0.BAUDCTRLA=0xF5;
+0002d1 efe5      	LDI  R30,LOW(245)
+0002d2 93e0 08a6 	STS  2214,R30
+                 ; 0005 0029 USARTC0.BAUDCTRLB=((0x0C << USART_BSCALE_gp) & USART_BSCALE_gm) | 0x0C;
+0002d4 ecec      	LDI  R30,LOW(204)
+0002d5 93e0 08a7 	STS  2215,R30
+                 ; 0005 002A 
+                 ; 0005 002B // Receiver: Off
+                 ; 0005 002C // Transmitter: On
+                 ; 0005 002D // Double transmission speed mode: Off
+                 ; 0005 002E // Multi-processor communication mode: Off
+                 ; 0005 002F USARTC0.CTRLB=(USARTC0.CTRLB & (~(USART_RXEN_bm | USART_TXEN_bm | USART_CLK2X_bm | USART_MPCM_bm | USART_TXB8_bm))) |
+                 ; 0005 0030 	USART_TXEN_bm;
+0002d7 91e0 08a4 	LDS  R30,2212
+0002d9 7ee0      	ANDI R30,LOW(0xE0)
+0002da 60e8      	ORI  R30,8
+0002db 93e0 08a4 	STS  2212,R30
+                 ; 0005 0031 }
+0002dd 9508      	RET
+                 ; .FEND
+                 ;
+                 ;// Write a character to the USARTC0 Transmitter
+                 ;#pragma used+
+                 ;void putchar_usartc0(char c)
+                 ; 0005 0036 {
+                 ; 0005 0037 while ((USARTC0.STATUS & USART_DREIF_bm) == 0);
+                 ;	c -> R17
+                 ; 0005 0038 USARTC0.DATA=c;
+                 ; 0005 0039 }
+                 ;#pragma used-
+                 ;
+                 
+                 	.CSEG
+                 ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:7 WORDS
+                 SUBOPT_0x0:
+0002de 931a      	ST   -Y,R17
+0002df 930a      	ST   -Y,R16
+0002e0 018d      	MOVW R16,R26
+0002e1 e0e0      	LDI  R30,LOW(0)
+0002e2 93ec      	ST   X,R30
+0002e3 9619      	ADIW R26,9
+0002e4 e0ec      	LDI  R30,LOW(12)
+0002e5 93ec      	ST   X,R30
+0002e6 9508      	RET
+                 
+                 ;RUNTIME LIBRARY
+                 
+                 	.CSEG
+                 ;END OF CODE MARKER
+                 __END_OF_CODE:
+
+
+RESOURCE USE INFORMATION
+------------------------
+
+Notice:
+The register and instruction counts are symbol table hit counts,
+and hence implicitly used resources are not counted, eg, the
+'lpm' instruction without operands implicitly uses r0 and z,
+none of which are counted.
+
+x,y,z are separate entities in the symbol table and are
+counted separately from r26..r31 here.
+
+.dseg memory usage only counts static data declared with .byte
+
+ATxmega128B1 register use summary:
+r0 :   2 r1 :   0 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
+r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
+r16:   9 r17:  16 r18:   0 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r24:   3 r25:   1 r26:  10 r27:   4 r28:   1 r29:   1 r30: 290 r31:  21 
+x  :   5 y  :  14 z  :   0 
+Registers used: 13 out of 35 (37.1%)
+
+ATxmega128B1 instruction use summary:
+.lds  :   0 .lds.l:   0 .sts  :   0 .sts.l:   0 adc   :   0 add   :   0 
+adiw  :   1 and   :   0 andi  :  26 asr   :   0 bclr  :   0 bld   :   0 
+brbc  :   0 brbs  :   0 brcc  :   0 brcs  :   0 break :   0 breq  :   2 
+brge  :   0 brhc  :   0 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 
+brlt  :   0 brmi  :   0 brne  :   1 brpl  :   0 brsh  :   0 brtc  :   0 
+brts  :   0 brvc  :   0 brvs  :   0 bset  :   0 bst   :   0 call  :   0 
+cbi   :   0 cbr   :   0 clc   :   0 clh   :   0 cli   :   5 cln   :   0 
+clr   :   1 cls   :   0 clt   :   0 clv   :   0 clz   :   0 com   :   0 
+cp    :   0 cpc   :   0 cpi   :   0 cpse  :   0 dec   :   0 des   :   0 
+eicall:   0 eijmp :   0 elpm  :   0 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   4 inc   :   0 jmp   :  82 
+ld    :   6 ldd   :   0 ldi   :  73 lds   :  31 lpm   :   0 lsl   :   0 
+lsr   :   0 mov   :   6 movw  :   1 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   0 nop   :   0 or    :   1 ori   :   6 out   :  16 pop   :   0 
+push  :   0 rcall :  11 ret   :   7 reti  :   2 rjmp  :   5 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
+sbiw  :   1 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
+sei   :   1 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
+sez   :   0 sleep :   0 spm   :   0 st    :  13 std   :   0 sts   : 164 
+sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
+Instructions used: 24 out of 119 (20.2%)
+
+ATxmega128B1 memory use summary [bytes]:
+Segment   Begin    End      Code   Data   Used    Size   Use%
+---------------------------------------------------------------
+[.cseg] 0x000000 0x0005ce   1486      0   1486  139264   1.1%
+[.dseg] 0x002000 0x002800      0      0      0    8192   0.0%
+[.eseg] 0x000000 0x000000      0      0      0    2048   0.0%
+
+Assembly complete, 0 errors, 0 warnings

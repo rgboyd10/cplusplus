@@ -90,6 +90,19 @@ usartc0_init();
 while (1)
       {
       // Place your code here
-
+		if(wheelRotationCaptured())
+		{
+		
+			uint32_t newRotationCount;
+			uint32_t rotationDuration;
+			newRotationCount = getWheelRotationCount();
+			rotationDuration = new RotationCount - lastRotationCount;
+			lastRotationCount = new RotationCount;
+			turnOffLedTime = 250 + getTime();
+			putchar_usartc0('U');
+			putchar_usartc0((uint8_t)(0xFF & (rotationDuration >> 8)));
+			putchar_usartc0((uint8_t)(0xFF & (rotationDuration)));
+			putchar_usartc0(0);
+		}
       }
 }

@@ -13,10 +13,15 @@ Variable                                                                        
 FLASH Allocation [words]
 Function                                                                          Address   Size
 ------------------------------------------------------------------------------------------------
-main                                                                              0x000CB     20
-system_clocks_init                                                                0x000DF     44
-ports_init                                                                        0x0010B    227
-vports_init                                                                       0x001EE      7
-tc0_disable                                                                       0x001F5      9
-tcc0_init                                                                         0x001FE     95
-tcc0_overflow_isr                                                                 0x0025D      1
+main                                                                              0x000C2     23
+system_clocks_init                                                                0x000D9     44
+event_system_init                                                                 0x00105     38
+ports_init                                                                        0x0012B    231
+vports_init                                                                       0x00212      7
+tc0_disable                                                                       0x00219      2
+tc1_disable                                                                       0x0021B      2
+tcc0_init                                                                         0x0021D     95
+tcc0_overflow_isr                                                                 0x0027C      1
+tcc1_init                                                                         0x0027D     57
+tcc1_compare_capture_a_isr                                                        0x002B6     16
+usartc0_init                                                                      0x002C6     24

@@ -211,18 +211,18 @@
 ; 0003 0095 
 ; 0003 0096 // PORTC initialization
 ; 0003 0097 // OUT register
-; 0003 0098 PORTC.OUT=0x00;
+; 0003 0098 PORTC.OUT=0x08;
 ;PCODE: $0000003C VOL: 0
 ;PCODE: $0000003D VOL: 1
 ; 0003 0099 // Pin0: Input
 ; 0003 009A // Pin1: Input
 ; 0003 009B // Pin2: Input
-; 0003 009C // Pin3: Input
+; 0003 009C // Pin3: Output
 ; 0003 009D // Pin4: Input
 ; 0003 009E // Pin5: Input
 ; 0003 009F // Pin6: Input
 ; 0003 00A0 // Pin7: Input
-; 0003 00A1 PORTC.DIR=0x00;
+; 0003 00A1 PORTC.DIR=0x08;
 ;PCODE: $0000003E VOL: 0
 ;PCODE: $0000003F VOL: 1
 ; 0003 00A2 // Pin0 Output/Pull configuration: Totempole/No
