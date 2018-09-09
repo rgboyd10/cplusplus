@@ -54,7 +54,6 @@ TCC0.CTRLA=TC_CLKSEL_DIV1_gc;
 TCC0.CTRLB=(0<<TC0_CCDEN_bp) | (0<<TC0_CCCEN_bp) | (0<<TC0_CCBEN_bp) | (0<<TC0_CCAEN_bp) |
 	TC_WGMODE_NORMAL_gc;
 // Capture event source: None
-// Capture event action: None
 TCC0.CTRLD=TC_EVACT_OFF_gc | TC_EVSEL_OFF_gc;
 
 // Set Timer/Counter in Normal mode
@@ -156,7 +155,6 @@ TCC1.CTRLA=TC_CLKSEL_DIV256_gc;
 TCC1.CTRLB=(0<<TC1_CCBEN_bp) | (1<<TC1_CCAEN_bp) |
 	TC_WGMODE_NORMAL_gc;
 // Capture event source: Event Channel 0
-// Capture event action: Input Capture
 TCC1.CTRLD=TC_EVACT_CAPT_gc | TC_EVSEL_CH0_gc;
 
 // Set Timer/Counter in Normal mode
@@ -188,42 +186,12 @@ TCC1.CCB=0x0000;
 SREG=s;
 }
 
-static uint16_t newCaptureCount = 0;
-static uint8_t newCapture = 0;
 // Timer/Counter TCC1 Compare/Capture A interrupt service routine
 interrupt [TCC1_CCA_vect] void tcc1_compare_capture_a_isr(void)
 {
 // Ensure that the Compare/Capture A interrupt flag is cleared
 if (TCC1.INTFLAGS & TC1_CCAIF_bm) TCC1.INTFLAGS|=TC1_CCAIF_bm;
-//Store the new captured counter value
-newCaptureCount = TCC1.CNT; 
-//set a flag to indicate the event
-newCapture = 1;
-}
+// Write your code here
 
-uint8_t wheelRotationCaptured(void)
-{
-	//check the flag to see if a new wheel rotation has completed
-	return newCapture;
-}
-
-uint16_t getWheelRotationCount(void)
-{
-	unsigned char s;
-	uint16_t t tempCount;
-	//Save interrupts enabled/disab;ed state
-	s=SREG;
-	//Disable interrupts
-	#asm("cli")
-	
-	//save a temporary copy while interrupts are disabled
-	tempCount = newCaptureCount;
-	//clear the flag as well
-	newCapture = 0;
-	
-	//Restore interrupts enabled/disabled state
-	SREG=s;
-	return tempCount;
-}
 }
 

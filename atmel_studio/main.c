@@ -22,9 +22,6 @@ Data Stack size         : 2048
 // I/O Registers definitions
 #include <xmega128b1.h>
 
-// Standard Input/Output functions
-#include <stdio.h>
-
 // Clock System initialization function
 #include "clock_init.h"
 
@@ -36,6 +33,9 @@ Data Stack size         : 2048
 
 // Timers/Counters initialization functions
 #include "timers_init.h"
+
+// USARTs initialization functions
+#include "usarts_init.h"
 
 // Declare your global variables here
 
@@ -81,38 +81,15 @@ tcc0_init();
 // Timer/Counter TCC1 initialization
 tcc1_init();
 
+// USARTC0 initialization
+usartc0_init();
+
 // Globally enable interrupts
 #asm("sei")
 
 while (1)
       {
-		  static uint32_t turnOffLedTime = 0;
-		  static uint16_t lastRotationCount = 0;
-		  
-		  if(getTime() >= turnOffLedTime)
-		  {
-			PORTB.OUT=0xF0; 
-		 }
-		 else
-		 {
-			 PORTB.OUT=0x00;
-		 }
-		 
-		 if(wheelRotationCaptured())
-		 {
-			uint32_t newRotationCount;
-			uint32_t rotationDuration;
-			newRotationCount = getWheelRotationCount();
-			rotationDuration = newRotationCount - lastRotationCount;
-			lastRotationCount = newRotationCount;
-			turnOffLedTime	= 250 + getTime();
-		 }
       // Place your code here
-	  if((PORTE.IN & 0x01) && (getTime() & 0x100))
-	  {
-		PORTB.OUT=0xF0;	  
-	  }
-	  
-	  }
+
       }
 }

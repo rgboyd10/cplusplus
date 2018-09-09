@@ -149,16 +149,16 @@ PORTB.INT1MASK=0x00;
 
 // PORTC initialization
 // OUT register
-PORTC.OUT=0x00;
+PORTC.OUT=0x08;
 // Pin0: Input
 // Pin1: Input
 // Pin2: Input
-// Pin3: Input
+// Pin3: Output
 // Pin4: Input
 // Pin5: Input
 // Pin6: Input
 // Pin7: Input
-PORTC.DIR=0x00;
+PORTC.DIR=0x08;
 // Pin0 Output/Pull configuration: Totempole/No
 // Pin0 Input/Sense configuration: Sense both edges
 // Pin0 Inverted: Off
