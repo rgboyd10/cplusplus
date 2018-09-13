@@ -103,6 +103,7 @@ while (1)
 			putchar_usartc0((uint8_t)(0xFF & (rotationDuration >> 8)));
 			putchar_usartc0((uint8_t)(0xFF & (rotationDuration)));
 			putchar_usartc0(0);
+			adca_conv_start();
 		}
       }
 }
