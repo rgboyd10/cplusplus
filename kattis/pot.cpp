@@ -23,36 +23,33 @@ Sample Input 1
 Sample Output 1
 1953566
 */
-
+#include <string>
 #include <iostream>
 #include <cmath>
 using namespace std;
 
 int main()
 {
+  string strval;
+  string strbase;
+  string strexp;
   int number_of_values;
-  int counter;
-  int value;
-  char exp;
-  int exponent;
+  int counter = 0;
   int result;
-  int base;
-  
-  //take the end of an integer and raise it as an exponent of the previous digits in the integer
-  //modulo approach 
+  int intbase;
+  int intexp;
   
   cin >> number_of_values;
 
   while(counter < number_of_values)
     {
-      cin >> value;
-      exponent = value % 10;
-      base = 
-      // - ideas for how to calculate the base number
-      // - integer parser to get everything except the last value
-      // - mathematical formula??
-      
-      result = pow(base, exponent);
+      cin >> strval;
+      strexp = strval.back();
+      strval.erase(strval.find(strval.back()));
+      strbase = strval;
+      intbase = stoi(strbase, nullptr, 0);
+      intexp = stoi(strexp, nullptr, 0);    
+      result += pow(intbase, intexp);
       counter++;
     }
   cout << result << endl;
