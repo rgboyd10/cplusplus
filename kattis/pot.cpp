@@ -33,6 +33,7 @@ int main()
   string strval;
   string strbase;
   string strexp;
+  string strvalcopy;
   int number_of_values;
   int counter = 0;
   int result;
@@ -44,11 +45,14 @@ int main()
   while(counter < number_of_values)
     {
       cin >> strval;
+      strvalcopy = strval;
       strexp = strval.back();
-      strval.erase(strval.find(strval.back()));
-      strbase = strval;
+      strvalcopy.erase(strvalcopy.find(strvalcopy.back()),1);
+      strbase = strvalcopy;
       intbase = stoi(strbase, nullptr, 0);
-      intexp = stoi(strexp, nullptr, 0);    
+      intexp = stoi(strexp, nullptr, 0);
+      cout << intbase << endl;
+      cout << intexp << endl;
       result += pow(intbase, intexp);
       counter++;
     }
