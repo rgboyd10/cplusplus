@@ -23,11 +23,12 @@ Mirko-Slavko    MS
 Sample Input 3 	Sample Output 3
 
 Pasko-Patak     PP
-
-
 */
+
 #include <iostream>
 #include <string>
+#include <algorithm>
+
 using namespace std;
 
 int main()
@@ -42,6 +43,12 @@ int main()
   hyphen = "-";
   first_letter = name.at(i);
   abbreviation = first_letter;
-  abbreviation += name.at(find(hyphen,0) + 1);
+  for(int x = 0; x < name.size(); x++)
+    {
+      if(name.at(x) == '-')
+	{
+	  abbreviation += name.at(x + 1);
+	}
+    }
   cout << abbreviation << endl;
 }
