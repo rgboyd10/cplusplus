@@ -11,8 +11,14 @@ Output
 Output should consist of a single integer: the number of carrots that will be handed out during the contest.
 */
 
-
+#include <iostream>
+using namespace std;
 int main()
 {
   //wtf?
+  string description;
+  int number_of_contestants;
+  int number_of_solved_problems;
+  cin >> number_of_contestants >> number_of_solved_problems >> description;
+  cout << number_of_solved_problems << endl;
 }
