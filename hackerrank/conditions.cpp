@@ -116,17 +116,14 @@ int main()
     {
       cout << "four" << endl;
     }
-
   else if(x == 5)
     {
       cout << "five" << endl;
     }
-
   else if(x == 6)
     {
       cout << "six" << endl;
     }
-
   else if(x == 7)
     {
       cout << "seven" << endl;
