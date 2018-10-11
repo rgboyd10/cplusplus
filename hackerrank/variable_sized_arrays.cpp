@@ -46,8 +46,19 @@ We perform the following queries:
 
 */
 #include <iostream>
+#include <vector>
 using namespace std;
 int main()
 {
+  int n, q, k, counter = 0;
+  vector<int> origin;
+  cin >> n >> q;
+
+  while(counter < n)
+    {
+      origin.push_back(vector<int> 
+      counter++;
+    }
+
   
 }
