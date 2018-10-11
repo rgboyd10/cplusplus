@@ -34,8 +34,24 @@ Sample Output
 
 */
 #include <iostream>
+#include <vector>
+
 using namespace std;
 int main()
 {
+  int num_ints, x;
+  vector<int> vec;
 
+  cin >> num_ints;
+
+  while(vec.size() < num_ints)
+    {
+      cin >> x;
+      vec.push_back(x);
+    }
+
+  for(int b = vec.size(); b > 0 ; b--)
+    {
+      cout << vec[b] << " ";
+    }
 }
