@@ -34,24 +34,25 @@ Sample Output
 
 */
 #include <iostream>
-#include <vector>
-
 using namespace std;
 int main()
 {
   int num_ints, x;
-  vector<int> vec;
+  int counter = 0;
 
   cin >> num_ints;
+  auto arr = new int[num_ints];
 
-  while(vec.size() < num_ints)
+  while(counter < num_ints)
     {
       cin >> x;
-      vec.push_back(x);
+      arr[counter] = x;
+      counter++;
     }
-
-  for(int b = vec.size(); b > 0 ; b--)
+  counter--;
+  while(counter >= 0)
     {
-      cout << vec[b] << " ";
+      cout << arr[counter] << " ";
+      counter--;
     }
 }
