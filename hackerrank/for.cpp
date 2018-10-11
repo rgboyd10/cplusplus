@@ -50,45 +50,12 @@ int main()
   cin >> x >> y;
 
   for(int z = x; z <= y; z++)
-  {
-    if (z == 1)
     {
-      cout  << "one" << endl;
+      if(z < 10)
+	{
+      	cout << z << endl;
+	}
     }
-  else if(z == 2)
-    {
-      cout << "two" << endl;
-    }
-  else if(z == 3)
-    {
-      cout << "three" << endl;
-    }
-  else if(z == 4)
-    {
-      cout << "four" << endl;
-    }
-  else if(z == 5)
-    {
-      cout << "five" << endl;
-    }
-  else if(z == 6)
-    {
-      cout << "six" << endl;
-    }
-  else if(z == 7)
-    {
-      cout << "seven" << endl;
-    }
-  else if(z == 8)
-    {
-      cout << "eight" << endl;
-    }
-  else if(z == 9)
-    {
-      cout << "nine" << endl;
-    }
-  }
-  
   for(int z = x; z <= y; z++)
     {
       if(z < 10){
