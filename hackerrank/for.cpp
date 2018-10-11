@@ -91,7 +91,7 @@ int main()
   
   for(int z = x; z <= y; z++)
     {
-      if(z < 10){
+      if(z > 9){
       if(z % 2 == 0)
   	{
 	  cout << "even" << endl;
