@@ -50,6 +50,9 @@ We perform the following queries:
 using namespace std;
 int main()
 {
+  //n = number of variable length array
+  //q = number of queries
+  //
   int n, q, k, counter = 0;
   vector<int> origin;
   cin >> n >> q;
