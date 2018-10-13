@@ -20,7 +20,8 @@ Output Format
 
 For each pair of and values (i.e., for each query), print a single integer denoting the element located at index of the array referenced by . There should be a total of lines of output.
 
-Sample Input
+Sample Inputk
+
 
 2 2
 3 1 5 4
@@ -35,7 +36,8 @@ Sample Output
 
 Explanation
 
-The diagram below depicts our assembled Sample Input:
+The diagram below depicts our assembled 
+Sample Input:
 
 variable-length-arrays.png
 
@@ -52,14 +54,13 @@ int main()
 {
   //n = number of variable length array
   //q = number of queries
-  //
   int n, q, k, counter = 0;
   vector<int> origin;
   cin >> n >> q;
 
   while(counter < n)
     {
-      origin.push_back(vector<int> 
+      origin.push_back();
       counter++;
     }
 
