@@ -20,7 +20,7 @@ Output Format
 
 For each pair of and values (i.e., for each query), print a single integer denoting the element located at index of the array referenced by . There should be a total of lines of output.
 
-Sample Inputk
+Sample Input
 
 
 2 2
@@ -52,17 +52,30 @@ We perform the following queries:
 using namespace std;
 int main()
 {
-  //n = number of variable length array
-  //q = number of queries
-  int n, q, k, counter = 0;
-  vector<int> origin;
-  cin >> n >> q;
+  int number_of_arrays, number_of_queries, arr_element, arr_size, arr_index, element_to_return;
+  
+  cin >> number_of_arrays >> number_of_queries;
 
-  while(counter < n)
+  vector<vector<int> >origin(number_of_arrays);
+
+  for(int a = 0; a < number_of_arrays; a++)
     {
-      origin.push_back();
-      counter++;
+      cin >> arr_size;
+
+      for(int y = 0; y < number_of_arrays; y++)
+	{
+	  for(int x = 0; x < arr_size; x++)
+	    {
+	      cin >> arr_element;
+	      origin[y].push_back(arr_element);
+	    }
+	}
     }
 
+  for(int b = 0; b < number_of_queries; b++)
+    {
+      cin >> arr_index >> element_to_return;
+      cout << origin[arr_index][element_to_return] << endl;
+    }
   
 }
