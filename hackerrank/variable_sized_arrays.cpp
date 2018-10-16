@@ -56,6 +56,7 @@ int main()
   
   cin >> number_of_arrays >> number_of_queries;
 
+  vector<int> results;
   vector<vector<int>> origin(number_of_arrays,vector<int>(number_of_arrays));
 
       for(int y = 0; y < number_of_arrays; y++)
@@ -72,7 +73,13 @@ int main()
   for(int b = 0; b < number_of_queries; b++)
     {
       cin >> arr_index >> element_to_return;
-      cout << origin[arr_index][element_to_return] << endl;
+      results.push_back(origin[arr_index][element_to_return]);
     }
+
+  for(int r = 0; r < results.size(); r++)
+    {
+      cout << results[r] << endl;
+    }
+  
   return 0;
 }
