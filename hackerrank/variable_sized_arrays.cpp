@@ -58,19 +58,16 @@ int main()
 
   vector<vector<int>> origin(number_of_arrays,vector<int>(number_of_arrays));
 
-  for(int a = 0; a < number_of_arrays; a++)
-    {
-      cin >> arr_size;
-
       for(int y = 0; y < number_of_arrays; y++)
 	{
+	  cin >> arr_size;
+	    
 	  for(int x = 0; x < arr_size; x++)
 	    {
 	      cin >> arr_element;
 	      (origin[y])[x] = arr_element;
 	    }
 	}
-    }
 
   for(int b = 0; b < number_of_queries; b++)
     {
