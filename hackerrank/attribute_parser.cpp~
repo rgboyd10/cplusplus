@@ -66,61 +66,9 @@ using namespace std;
 int main()
 {
   int number_of_lines, number_of_queries;
-  int g = 0;
-  int j = 0;
   string stri;
   char x;
   stringstream ss(stri);
-  string results[][];
-  bool begin_write = false;
-  
-  //write the first value based on the number of lines
-  for(int q = 0; q < number_of_lines; q++)
-    {
-      results[q][0] = q;
-    }
-  
-  while(g < number_of_lines)
-    {
-      ss >> x;
-      if(x == '<')
-	{
-	  ss >> x;
-	  if(x == '/')
-	    {
-	      break;
-	    }
-	  while(x != '=')
-	    {
-	      if(x == ' ')
-		{
-		  x = '~';
-		}
-	      stri += x;
-     	      ss >> x;
-	    }
-	  results[g][0] = stri;
-	  stri = "";
-	}
-      
-      if(x == '\"')
-	{
-	  ss >> x;
-	  while(x != '\"')
-	    {
-	      stri += x;
-	      ss >> x;
-	    }
-	  results[g][1];
-	}
-      g++;
-      
-     }
-}
-int u = 0;
-while(u < number_of_queries)
-  {
-    cin >> ;
-    u++;
-  }
+
+  if(x == '<' || x == '>' || x == '/')
 }
