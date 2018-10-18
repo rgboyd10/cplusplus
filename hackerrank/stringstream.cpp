@@ -48,16 +48,15 @@ using namespace std;
 vector<int> parseInts(string st)
 {
   vector<int> results;
-  int x = 1;
+  int x;
+  char ch;
   stringstream ss(st);
-  ss >> x;
+  //ss >> x >> ch;
   while(ss.good())
     {
+      ss >> x >> ch;
       results.push_back(x);
-      ss >> x;
-      x++;
     }
-  results.push_back(x);
   return results;
 }
 
@@ -72,10 +71,6 @@ int main()
       if(integers[i] == ',')
 	{
 	  cout << "\n" << endl;
-	}
-      else
-	{
-	  cout << integers[i] << "\n";
 	}
     }
 }
