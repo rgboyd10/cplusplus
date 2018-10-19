@@ -62,6 +62,10 @@ HelloWorld
 */
 
 #include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <array>
 using namespace std;
 int main()
 {
@@ -71,7 +75,8 @@ int main()
   string stri;
   char x;
   stringstream ss(stri);
-  string results[][];
+  string results[number_of_lines][number_of_lines];
+  vector<string> output;
   bool begin_write = false;
   
   //write the first value based on the number of lines
@@ -116,11 +121,21 @@ int main()
       g++;
       
      }
-}
+
 int u = 0;
 while(u < number_of_queries)
   {
-    cin >> ;
+    cin >> stri;
+    if(results[0][u].find(stri))
+      {
+	output.push_back(results[1][u]);
+      }
     u++;
   }
+
+for(int i = 0; i < output.size(); i++)
+  {
+    cout  << output[i] << endl;
+  }
+
 }
