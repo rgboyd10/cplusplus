@@ -75,17 +75,20 @@ int main()
   string stri;
   char x;
   stringstream ss(stri);
+  cin >> number_of_lines >> number_of_queries;
   string results[number_of_lines][number_of_lines];
   vector<string> output;
   bool begin_write = false;
   
   //write the first value based on the number of lines
-  for(int q = 0; q < number_of_lines; q++)
+  /*  for(int q = 0; q < number_of_lines; q++)
     {
       results[q][0] = q;
+      cout << results[q][0] << endl; //for testing
     }
+  *///unncessary because we want to write the actual value and name to index 0
   
-  while(g < number_of_lines)
+  while(ss.good())
     {
       ss >> x;
       if(x == '<')
@@ -107,6 +110,7 @@ int main()
 	  results[g][0] = stri;
 	  stri = "";
 	}
+      cout << results[g][0] << endl; //for testing
       
       if(x == '\"')
 	{
@@ -118,6 +122,7 @@ int main()
 	    }
 	  results[g][1];
 	}
+      cout << results[g][1] << endl; //for testing
       g++;
       
      }
