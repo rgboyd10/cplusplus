@@ -36,53 +36,66 @@ using namespace std;
 
 class Box
 {
-
-  Box()
-  {
-    int length = 0;
-    int breadth = 0;
-    int height = 0;
-  };
-
-  Box(int length, int breadth, int height)
-  {
-    length = l;
-    breadth = b;
-    height = h;
-  }
-  
-  Box(Box B)
-  {
-    length = B.length;
-    height = B.height;
-    breadth = B.breadth;
-  }
 private:
   int l, b, h;
 
 public:
+  Box()
+  {
+    int l = 0;
+    int b = 0;
+    int h = 0;
+  };
+
+  Box(int length, int breadth, int height)
+  {
+    l = length;
+    b = breadth;
+    h = height;
+  };
+  
+  Box(const Box& r)
+  {
+    l = r.l;
+    h = r.h;
+    b = r.b;
+  };
+
   int getLength()
   {
-    return length;
+    return l;
   }
 
   int getBreadth()
   {
-    return breadth;
+    return b;
   }
 
   int getHeight()
   {
-    return height;
+    return h;
   }
 
   long long CalculateVolume()
   {
     long long vol;
 
-    
+    vol = length * breadth * height;
     
     return vol;
+  }
+
+  bool operator<(Box& b)
+  {
+    int bvol = b.l * b.h * b.b;
+    int avol = a.l * a.h * a.b;
+    bool lessthan = bvol < avol;
+    return lessthan;
+  }
+
+  ostream& operator<<(ostream& out, Box& b)
+  {
+    return cout << b.l << " " << b.b << " " << b.h << endl;
   }
 };
 
