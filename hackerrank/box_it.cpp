@@ -38,6 +38,7 @@ class Box
 {
 private:
   int l, b, h;
+  
 
 public:
   Box()
@@ -87,6 +88,7 @@ public:
 
   bool operator<(Box& b)
   {
+    if(
     int bvol = b.l * b.h * b.b;
     int avol = a.l * a.h * a.b;
     bool lessthan = bvol < avol;
@@ -95,7 +97,8 @@ public:
 
   ostream& operator<<(ostream& out, Box& b)
   {
-    return cout << b.l << " " << b.b << " " << b.h << endl;
+    out = cout << b.l << " " << b.b << " " << b.h << endl;
+    return out;
   }
 };
 
