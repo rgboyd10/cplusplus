@@ -32,6 +32,7 @@ Two boxes being compared using the operator will not have all three dimensions e
 */
 
 #include <iostream>
+#
 using namespace std;
 
 class Box
@@ -39,7 +40,6 @@ class Box
 private:
   int l, b, h;
   
-
 public:
   Box()
   {
@@ -81,23 +81,25 @@ public:
   {
     long long vol;
 
-    vol = length * breadth * height;
+    vol = l * b * h;
     
     return vol;
   }
 
   bool operator<(Box& b)
   {
-    if(
-    int bvol = b.l * b.h * b.b;
-    int avol = a.l * a.h * a.b;
+    Box a;
+    int bvol;
+    bvol = b.l * b.h * b.b;
+    int avol;
+    avol = a.l * a.h * a.b;
     bool lessthan = bvol < avol;
     return lessthan;
   }
 
-  ostream& operator<<(ostream& out, Box& b)
+  friend ostream& operator << (ostream& out, const Box& B)
   {
-    out = cout << b.l << " " << b.b << " " << b.h << endl;
+    out << B.l << " " << B.b << " " << B.h << endl;
     return out;
   }
 };
@@ -113,7 +115,7 @@ void check2()
       cin >>type;
       if(type == 1)
 	{
-	  cout << temp < endl;
+	  cout << temp << endl;
 	}
       if(type == 2)
 	{
