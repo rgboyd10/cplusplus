@@ -32,7 +32,6 @@ Two boxes being compared using the operator will not have all three dimensions e
 */
 
 #include <iostream>
-#
 using namespace std;
 
 class Box
@@ -94,12 +93,27 @@ public:
     int avol;
     avol = a.l * a.h * a.b;
     bool lessthan = bvol < avol;
-    return lessthan;
+    bool greaterthan = avol < bvol;
+    
+    if(a.l < b.l)
+      {
+      return greaterthan;
+      }
+    else if(a.b < b.b && a.l == b.l)
+      {
+	return greaterthan;
+      }
+    else if(a.h < b.h && a.b == b.b && a.l == b.l)
+      {
+	return greaterthan;
+      }
+    else
+      return lessthan;
   }
 
   friend ostream& operator << (ostream& out, const Box& B)
   {
-    out << B.l << " " << B.b << " " << B.h << endl;
+    out << B.l << " " << B.b << " " << B.h;
     return out;
   }
 };
