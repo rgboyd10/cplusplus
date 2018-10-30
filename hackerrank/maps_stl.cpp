@@ -101,7 +101,7 @@ int main()
 	  cin >> name;
 	  sum = 0;
 	  grade_map.insert(make_pair(name, 0));
-	  for(auto& x: grade_map)
+	  for(auto x: grade_map)
 	  {
 	    if(x.first == name)
 	      {
