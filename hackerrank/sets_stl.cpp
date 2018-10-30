@@ -64,19 +64,36 @@ No
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <set>
 using namespace std;
 int main()
 {
   set<int> seet;
-  int sval,numqs,x,y,counter;
+  int sval,numqs,x,y,counter=0;
   cin >> numqs;
   while(counter < numqs)
     {
       cin >> y >> x;
-      seet.insert(x);
-      if(y == 3 &&)
+      set<int>::iterator itr = seet.find(x);
+      if(y == 1)
 	{
-	  cout << 
+	  seet.insert(x);
+	}
+      else if(y == 2 && itr != seet.end())
+	{
+	  seet.erase(x);
+	}
+      else if(y ==2 && itr == seet.end())
+	{
+	  ;
+	}
+      else if(y == 3 && itr != seet.end())
+	{
+	  cout << "Yes" << endl;
+	}
+      else if(y == 3 && itr == seet.end())
+	{
+	  cout << "No" << endl;
 	}
       counter++;
     }
