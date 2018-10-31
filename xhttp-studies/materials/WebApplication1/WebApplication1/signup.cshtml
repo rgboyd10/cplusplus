@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Signup</title>
+    </head>
+    <body>
+        <form method="post">
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" id="firstName"/>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" id="lastName"/>
+
+            <input type="submit"/>
+        </form>
+        
+        @if (IsPost)
+        {
+            Session["firstName"] = Request.Form["firstName"];
+            Session["lastName"] = Request.Form["lastName"];
+            Response.Redirect("signedup.cshtml");
+        }
+
+    </body>
+</html>
