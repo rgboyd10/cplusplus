@@ -74,7 +74,10 @@ Sample Output
 #include <algorithm>
 
 using namespace std;
-
+/*
+TODO
+-Figure out a way to keep track of the sum of the marks for each unique name. a separate marks map?
+*/
 int main()
 {
   int type,num_queries,marks, counter = 0, sum = 0;
@@ -99,7 +102,6 @@ int main()
       else if(type == 3)
 	{
 	  cin >> name;
-	  sum = 0;
 	  grade_map.insert(make_pair(name, 0));
 	  for(auto x: grade_map)
 	  {
@@ -111,5 +113,6 @@ int main()
 	  cout << sum << endl;
 	}
       counter++;
+      sum = 0;
 	}
 }
