@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,8 +21,8 @@ namespace ConsoleApplication4
         {
             var host = uri.Host;
             var resource = uri.PathAndQuery;
-            var hostEntry = Dns.GetHostEntry();
-            var socket = CreateSock(hostEntry);
+            var hostEntry = Dns.EndGetHostEntry();
+            var socket = CreateSocket(hostEntry);
             SendRequest(socket, host, resource);
             return GetResponse(socket);
         }
