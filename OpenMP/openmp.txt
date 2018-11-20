@@ -1,0 +1,6 @@
+Imperative and Declarative Parallelism
+
+Imperative - when you do everything by hand. You separate the data set into several independent parts. You create threads for each of the parts(std::threads, pthreads, etc.) You would run the computation on each thread. You deal with issues related to data sharing across threads. You might use libraries such as Microsoft PPL, Intel TBB, etc.)
+
+Declarative approach - you leave existing sequential code as-is but you decorate the code with compiler hints such as 'parallelize this'. The compiler splits your code(ex - a for loop) into several threads.
+
