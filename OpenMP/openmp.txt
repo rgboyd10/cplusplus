@@ -6,4 +6,4 @@ Declarative approach - you leave existing sequential code as-is but you decorate
 
 Open MP - a standard or API for decorating code for multiprocessing. You can use it for data parellelism(parallelize this loop) or task parallelism(run this block of code in a separate thread). It is a compiler+library solution. It supports C/C++ and Fortran, and works on most architectures and OSs. C++ uses the #pragma directives. There are plenty of compiler clauses supported. Data sharing, synchronization and scheduling etc.
 
-
+Automatic compiler parallelization uses OpenMP behind the scenes so you should learn it anyways.
