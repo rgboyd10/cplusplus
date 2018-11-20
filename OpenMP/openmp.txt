@@ -7,3 +7,16 @@ Declarative approach - you leave existing sequential code as-is but you decorate
 Open MP - a standard or API for decorating code for multiprocessing. You can use it for data parellelism(parallelize this loop) or task parallelism(run this block of code in a separate thread). It is a compiler+library solution. It supports C/C++ and Fortran, and works on most architectures and OSs. C++ uses the #pragma directives. There are plenty of compiler clauses supported. Data sharing, synchronization and scheduling etc.
 
 Automatic compiler parallelization uses OpenMP behind the scenes so you should learn it anyways.
+
+omp for and omp do - parallelize loops. section(s) - assign different code blocks to different threads.
+
+single-block executed by only one thread. There is an implied barrier in the end. 
+
+master - executed by the master thread. There is no implied barried at the end of the block.
+
+Synchronization - critical - block executed by one thread at a time. 
+atomic - next memory update is atomic.
+ordered - block executed in same order as if it were sequential.
+barrier - all threads wait until each one has reached this point. 
+nowait - threads can proceed without waiting on other threads. 
+
