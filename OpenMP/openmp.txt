@@ -20,3 +20,10 @@ ordered - block executed in same order as if it were sequential.
 barrier - all threads wait until each one has reached this point. 
 nowait - threads can proceed without waiting on other threads. 
 
+Data Sharing
+shared - used to indicate that an item is accessible by all threads simultaneously. All variables except loop counters shared by default.
+private - item is thread-local, no inited or avaiable outside parallel region. 
+firstprivate - like private but inited to original value.
+lastprivate - like private except the original value updated on exit.
+default - defines whether, by default, variables are shared or not(none).
+
