@@ -1,0 +1,12 @@
+MPI
+
+Multithreading is confined to a single device/process. What about communication between processes? You would run many processes on many machines/devices. You would have many machines on a network, where each have more than one gpu so you have to use multithreading. Run the same process on all devices(divide and conquer). Some sort of IPC is required - executables and data need to cross intranet/internet boundaries. Some sort of IPC required because executables and data need to cross intranet/internet boundaries. 
+
+MPI - Message Passing Interface - a standard protocol for message passing.
+
+All forms of parallelism can be used at the same time. 
+
+Communicator - a group of processes. A default communicator is MPI_COMM_WORLD, 'all the processes'.
+Rank - the process' position within the communicator. Starts with 0, contiguous. 
+
+API commands prefixed by MPI_. MPI uses its own typedefs(e.g., MPI_CHAR)
