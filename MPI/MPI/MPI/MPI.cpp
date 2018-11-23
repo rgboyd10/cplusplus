@@ -1,6 +1,15 @@
 //I can't compile any of this because I don't have intel's mpi libs
 #include "stdafx.h"
 #include <iostream>
+#include <mpi.h>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/mpi.hpp>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 struct Person
@@ -17,6 +26,28 @@ struct Person
 };
 int main(int argc, char* argv[])
 {
+	namespace mpi = boost::mpi;
+	mpi::environment env;
+	mpi::communicator world;
+
+	if (world.rank() == 0)
+	{
+		Person p;
+		p.name = "Dmitri";
+		p.age = 123;
+		for (size_t i = 1; i < world.size(); i++)
+		{
+			world.send(i, 0, p);
+		}
+	else
+	{
+		Person p;
+		world.recv(0, 0, p);
+		cout << "Hello, " << p.name << endl;
+	}
+	}
+
+	/*
 	MPI_Init(&argc, &argv);
 	int size, rank;
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -62,6 +93,7 @@ int main(int argc, char* argv[])
 
 
 	}
+	*/
 
 	/*
 	MPI_Init(&argc, &argv);
