@@ -1,0 +1,4 @@
+Introduction
+-History - 1970s and 1980s had largely structured analysis and design. in the late 1980s and 90s, OOA and OOD became popular. In 1997, there was a call for  papers to standardize a UML. 3 amigos - Jim Rumbaugh, Grady Booch, and Ivar Jacobson. They created UML that was standardized in 1997. 
+
+-Tools - Visual Studio and Visio.
