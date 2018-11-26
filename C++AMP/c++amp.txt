@@ -1,0 +1,43 @@
+C++AMP
+
+GPU Computing
+- Why? - GPUs are a highly parallel architecture. They are not just for games/graphics. 
+- They have a different programming model. SIMT(Single Instruction, Multiple Threads).
+Two main companies in GPUS - Nvidia, AMD
+
+CUDA - Commercially successful, NVIDIA-only.
+
+OpenCL - Supports AMD, NVIDIA, Xeon Phi,...
+
+Both technologies use special compilers and proprietary language extensions.
+
+C++AMP - C++ Standard for Accelerated Massive Parallelism
+-A Compiler+Library solution for heterogeneous computing.
+-Leverage data-parallel hardware (GPUs)
+-Uses mostely ordinary C++
+-Some language enhancements
+	-restrict(amp)
+	-tile_static
+
+Attempt to restrict C++ features when running on the GPU.
+
+GPU Memory
+-several different types of memmory
+-global memory - slow access, available to all threads.
+-thread-local memory - fast(register) but per thread access only.
+-shared(tile-static) memory - shared between a group of threads, fast but limited in scope, beneficial when several reads/writes are taking place.
+
+Tiling
+-Tiling splits the overall extend into several tiles.
+-Takes a 4x4 extent and splits it into four 2x2 tiles. Now it has 2 sets of indices. Now each element has a global index and a local index.
+
+Tile-Static Specifics
+-Partition an extent into tiles with const int TS = 16; foo.extent.tile<TS, TS>().
+-The index variable will now be tiled_index<TS,TS> idx.
+-Query its global and local position idx.local[0], idx.global[1], etc.
+
+Allocate tile-static memory! - tile_static float stuff[123];
+-get all the threads in a tile to finish their calculations, you use idx.barrier.wait();
+
+Matrix Multiplication
+-consider a simple case of multiplying two square (NxN) matrices.
