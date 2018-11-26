@@ -34,7 +34,7 @@ int reduce(int argc, char *argv[])
 	int globalSum;
 	MPI_Reduce(&localSum, &globalSum, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
 
-	if (rank == 0)
+	if (rank == 0) 
 	{
 		cout << "Total sum " << globalSum << endl;
 		delete[] data;

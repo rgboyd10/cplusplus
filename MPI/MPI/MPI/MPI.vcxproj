@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collective.cpp" />
     <ClCompile Include="MPI.cpp" />
   </ItemGroup>
   <ItemGroup>
