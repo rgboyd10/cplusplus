@@ -10,3 +10,36 @@ Communicator - a group of processes. A default communicator is MPI_COMM_WORLD, '
 Rank - the process' position within the communicator. Starts with 0, contiguous. 
 
 API commands prefixed by MPI_. MPI uses its own typedefs(e.g., MPI_CHAR)
+
+Communication Types
+-Point to Point Communication - process A sends a message to process B.
+	- Point to Point Modes - Standard - returns as soon as message is sent.
+				- Synchronous - returns only when the exchange is complete (handshake).
+				- Buffered - returns immediately, buffers the message. 
+				- Ready - Initiated only when receiving is set up. Finishes immediately.
+MPI_{I}[R,S,B]Send
+
+MPI_{I}Recv
+
+The {I} stands for immediate - non blocking. 
+
+-Collective Communication - Process broadcasts a message to anyone willing to listen. A message from a single process can be sent to several processes. MPI_Bcast - Broadcast - a process broadcasts a message to all other processes in the communicator. This is used both for broadcasting and receiving! The operation is determined by the root parameter. If you put a 0 in there, then you would imply that rank 0 is doing the broadcasting.
+
+MPI_Barrier - Barrier synchronization.
+	-Ensures every process reaches this point. 
+
+MPI_{All}gather{v} - gets the data from a group of processes.
+MPI_Scatter{v} - sends the data from one process to every other process.
+MPI_{All}Reduce{_scatter} - performs a reduction operation. Define your own with MPI_Op_create() and MPI_Op_free().
+MPI_Scan - partial reduction operation.
+
+The All prefix  means that the result of prefixing is sent to every other process in the communicator.
+
+MPI_Alltoall{v} - simply sends data from all processes to all processes. 
+
+-v - vectorized variants allows you to send data sets of different sizes. 
+
+There are even more variations.
+
+
+
