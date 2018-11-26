@@ -44,6 +44,67 @@ void native_multiply(float* a, float* b, float* c, const int dim)
 	cv.synchronize();
 }
 
+template <int ts>
+
+void tiled_multiply(float* a, float* b, float* c, const int dim)
+{
+	array_view<float, 2> av(dim, dim, a);
+	array_view<float, 2> bv(dim, dim, b);
+	array_view<float, 2> cv(dim, dim, c);
+	cv.discard_data();
+
+	parallel_for_each(cv.extent.tile<ts, ts>, 
+		[=](tiled.index<ts,ts> idx) restrict(amp)
+	{
+		tile_static float al[ts][ts];
+		tile_static float bl[ts][ts];
+
+		int rl = idx.local[0];
+		int cl = idx.local[1];
+		int rg = idx.global[0];
+		int cg = idx.global[1];
+
+		auto sum = 0.f;
+		
+		for(int i = 0;  i < dim; i+= ts)
+		{
+			al[rl][cl] = av(rg, cl + i);
+			bl[rl][cl] = bv(rl + i, cg);
+			idx.barrier.wait();
+			for (int j = 0; j < ts; ++j)
+			{
+				sum += al[rl[j] * bl[j][cl];
+			}
+
+			idx.barrier.wait();
+		}
+
+		cv[idx.global] = sum;
+
+	});
+	cv.synchronize();
+}
+
+void matrix_multiplication()
+{
+	const int dim = 4;
+	float a[dim * dim];
+	float b[dim * dim];
+	float c[dim * dim];
+
+	for (int i = 0; i < length; i++)
+	{
+		for (size_t j = 0; i < length; i++)
+		{
+			a[i*dim + j] = i * dim + j;
+			b[i*dim + j] = j * dim + i;
+		}
+	}
+	native_multiply(a, b, c, dim);
+
+	cout << "The product of " << print_matrix(a, dim) << " and " << print_matrix(b, dim) << " is " << print_matrix(c, dim) << endl;
+}
+
 
 accelerator_view setup()
 {
@@ -99,9 +160,6 @@ void add_in_amp(accelerator_view acc_view)
 
 	cout << endl; 
 }
-
-
-
 void add_in_cpp()
 {
 	//h = host, d = device
@@ -122,7 +180,6 @@ void add_in_cpp()
 	cout << endl;
 
 }
-
 void matrix_multiplication()
 {
 	const int dim = 4;
@@ -138,11 +195,12 @@ void matrix_multiplication()
 			b[i*dim + j] = j * dim + i;
 		}
 	}
-	native_multiply(a, b, c, dim);
+	//native_multiply(a, b, c, dim);
+	
+	tiled_multiply<2>(a, b, c, dim);
 
 	cout << "The product of " << print_matrix(a, dim) << " and " << print_matrix(b, dim) << " is " << print_matrix(c, dim) << endl;
 }
-
 int main(int argc, char* argv[])
 {
 	//auto acc_view = setup();
