@@ -134,6 +134,7 @@ accelerator_view setup()
 
 	return gpu.default_view;
 }
+
 void add_in_amp(accelerator_view acc_view)
 {
 	int ah[] = { 1,2,3 };
@@ -160,6 +161,7 @@ void add_in_amp(accelerator_view acc_view)
 
 	cout << endl; 
 }
+
 void add_in_cpp()
 {
 	//h = host, d = device
@@ -180,6 +182,7 @@ void add_in_cpp()
 	cout << endl;
 
 }
+
 void matrix_multiplication()
 {
 	const int dim = 4;
@@ -201,6 +204,37 @@ void matrix_multiplication()
 
 	cout << "The product of " << print_matrix(a, dim) << " and " << print_matrix(b, dim) << " is " << print_matrix(c, dim) << endl;
 }
+
+void consume_library()
+{
+	const int count = 1024;
+	array<float> data(count);
+	array_view<float, 1> view(data);
+	amp_stl_algorithms::iota(begin(view), end(view), 1.0f);
+	auto last = amp_stl_algorithms::remove_if(
+		begin(view), end(view),
+		[](const float& v) restrict(amp)
+	{
+		return int(v) % 2 == 1; 
+	}
+	);
+
+	float total = amp_stl_algorithms::reduce(begin(view), last, 0.0f);
+
+	cout << setprecision(0) << fixed << total << endl;
+
+	vector<float> v(count);
+
+	std::iota(begin(v), end(v), 1.0);
+
+	auto l = std::remove_if(begin(v), end(v), [](const float& f)
+	{
+		return int(f) % 2 == 1;
+	});
+	float t = accumulate(begin(v), l, 0.0f, [](float f1, float f2) {return f1 + f2; });
+	cout << setprecision(0) << fixed << t << endl;
+}
+
 int main(int argc, char* argv[])
 {
 	//auto acc_view = setup();

@@ -41,3 +41,10 @@ Allocate tile-static memory! - tile_static float stuff[123];
 
 Matrix Multiplication
 -consider a simple case of multiplying two square (NxN) matrices.
+
+c++ AMP Summary
+-it's a msvc c++ colution for massive parallelism.
+-Code needs to be written using AMP constructs such as array/array_view
+-execute it with parallel_for_each
+-Use tiling and tile_static variables
+-there are libraries available
