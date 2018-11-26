@@ -41,5 +41,18 @@ MPI_Alltoall{v} - simply sends data from all processes to all processes.
 
 There are even more variations.
 
+Odd & Ends
+Tags - programmer defined integers used to identify a message. 
+Communicators - can define groups of processes. 
+Topologies - cartesian, graph. 
+Custom data types - just use boost.
+Defining hosts - provide a separate hosts file; or provided by your scheduling mechanism (e.g., $PBS_NODEFILE).
+
+Summary -
+MPI is a mechanism for having many processes running on one or more machines. 
+You can send and receive data point-to-point.
+Perform collective operations.
+Remember to initialize/finalize.
+Use Boost if you can!
 
 
