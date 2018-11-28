@@ -1,0 +1,34 @@
+Arrays
+Array elements are stored in a contiguous memory block. Arrays allow fast access to elements with an index. Array indexes are zero based. Directly accessing array elements do not depend on the size of the array. Arrays have a constant O(1) is the runtime in big O. Linked Lists will be 0(N), linear. Linked Lists are not faster than Arrays. Built-in array allocations include a stack and a heap. A stack has fast allocations and a heap has slower allocations. Stack has limited space and heap has much more room.
+
+for an array of Pixel pointers, be sure to release the memory after use.
+Pixel* imageData = new Pixel[30'000'000];
+delete [] imageData;
+
+if you don't delete, you will have a memory leak.
+
+g++ -fsanitize=address -g -O1 <program name> will provide information about memory leaks.
+
+Buffer overruns happen when you try to access an element outside of the array bounds.
+
+Improving Array Implementation
+You can overload << (the insertion operator) to print an entire array so you don't have to make a for loop to iterate through and print each element.
+
+ostream& operator <<(ostream& os, const IntArray& a)
+{//code to print the IntArray objects to 'os' stream}
+
+Implementing a Custom Copy Constructor
+IntArray(const IntArray& source)
+{
+	//allocate memory to store array element
+	//copy elements from source to this.
+}
+
+To do a copy and swap idiom-
+implement a copy constructor.
+swap() will swap the array elements with another array. You need to destruct the previous array.
+implement a destructor.
+
+
+
+
