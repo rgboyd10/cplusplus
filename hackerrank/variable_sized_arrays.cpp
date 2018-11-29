@@ -48,34 +48,21 @@ We perform the following queries:
 
 */
 #include <iostream>
-#include <array>
 #include <vector>
 using namespace std;
 int main()
 {
-  int number_of_arrays, number_of_queries, arr_element, arr_size, arr_index, element_to_return;
-  
+  int number_of_arrays, number_of_queries, arr_element, arr_size, arr_index, element;
   cin >> number_of_arrays >> number_of_queries;
-
-  int results[number_of_arrays];
-    
+  vector<vector<int>> origin;
   for(int y = 0; y < number_of_arrays; y++)
 	{
 	  cin >> arr_size;
+	  for(int x = 0; x < arr_size; x++)
+	  {
+		  cin >> element;
+	 	 origin[y][x].push_back(element);
+		 cout << origin[y][x] << endl;
+	  }
 	}
-
-      vector<vector<int>> origin(number_of_arrays);
-
-  for(int b = 0; b < number_of_queries; b++)
-    {
-      cin >> arr_index >> element_to_return;
-      results[b] = origin[arr_index][element_to_return];
-    }
-
-
-  for(int r = 0; r < number_of_arrays; r++)
-    {
-      cout << results[r] << endl;
-    }
-  return 0;
 }
