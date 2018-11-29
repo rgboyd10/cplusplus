@@ -49,6 +49,7 @@ We perform the following queries:
 */
 #include <iostream>
 #include <array>
+#include <vector>
 using namespace std;
 int main()
 {
@@ -56,20 +57,14 @@ int main()
   
   cin >> number_of_arrays >> number_of_queries;
 
-  int results[number_of_arrays];// = new int[number_of_arrays];
-  int origin[number_of_arrays][number_of_arrays];// = new int[number_of_arrays][number_of_arrays]; 
-   //]number_of_arrays,vector<int>(number_of_arrays));
-
-      for(int y = 0; y < number_of_arrays; y++)
+  int results[number_of_arrays];
+    
+  for(int y = 0; y < number_of_arrays; y++)
 	{
 	  cin >> arr_size;
-	    
-	  for(int x = 0; x < arr_size; x++)
-	    {
-	      cin >> arr_element;
-	      origin[y][x] = arr_element;
-	    }
 	}
+
+      vector<vector<int>> origin(number_of_arrays);
 
   for(int b = 0; b < number_of_queries; b++)
     {
