@@ -21,8 +21,6 @@ Output Format
 For each pair of and values (i.e., for each query), print a single integer denoting the element located at index of the array referenced by . There should be a total of lines of output.
 
 Sample Input
-
-
 2 2
 3 1 5 4
 5 1 2 8 9 3
@@ -30,7 +28,6 @@ Sample Input
 1 3
 
 Sample Output
-
 5
 9
 
@@ -47,22 +44,28 @@ We perform the following queries:
     Find the array located at index , which corresponds to . We must print the value at index of this array which, as you can see, is .
 
 */
+
 #include <iostream>
 #include <vector>
 using namespace std;
 int main()
 {
-  int number_of_arrays, number_of_queries, arr_element, arr_size, arr_index, element;
+  int  number_of_arrays, number_of_queries, arr_element, arr_size, arr_index, element;
   cin >> number_of_arrays >> number_of_queries;
-  vector<vector<int>> origin;
+  vector<vector<int>> origin(number_of_arrays);
   for(int y = 0; y < number_of_arrays; y++)
 	{
 	  cin >> arr_size;
+	  origin[y].resize(arr_size);
 	  for(int x = 0; x < arr_size; x++)
 	  {
-		  cin >> element;
-	 	 origin[y][x].push_back(element);
-		 cout << origin[y][x] << endl;
+		 cin >> origin[y][x];
 	  }
-	}
+	}	
+
+  for(int z = 0; z < number_of_queries; z++)
+  {
+  	cin >> arr_index >> arr_element;
+	cout << origin[arr_index][arr_element] << endl;
+  }
 }
