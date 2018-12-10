@@ -37,7 +37,7 @@ using namespace std;
 class Box
 {
 private:
-  int l, b, h;
+  long long l, b, h;
   
 public:
   Box()
@@ -61,7 +61,7 @@ public:
     b = r.b;
   };
 
-  int getLength()
+  int  getLength()
   {
     return l;
   }
@@ -70,7 +70,7 @@ public:
   {
     return b;
   }
-
+  
   int getHeight()
   {
     return h;
@@ -78,14 +78,10 @@ public:
 
   long long CalculateVolume()
   {
-    long long vol;
-
-    vol = l * b * h;
-    
-    return vol;
+  	return (long long)l*b*h;
   }
 
-  bool operator<(Box& b)
+  friend bool operator<(Box& b)
   {
     Box a;
     int bvol;
@@ -120,10 +116,10 @@ public:
 
 void check2()
 {
-  int n;
+  long long n;
   cin >> n;
   Box temp;
-  for(int i = 0; i < n; i++)
+  for(long long i = 0; i < n; i++)
     {
       int type;
       cin >>type;
@@ -133,7 +129,7 @@ void check2()
 	}
       if(type == 2)
 	{
-	  int l, b, h;
+	  long long l, b, h;
 	  cin >> l >> b >>h;
 	  Box NewBox(l,b,h);
 	  temp = NewBox;
@@ -141,7 +137,7 @@ void check2()
 	}
       if(type == 3)
 	{
-	  int l, b, h;
+	  long long l, b, h;
 	  cin >> l, b, h;
 	  Box NewBox(l, b, h);
 	  if(NewBox < temp)
