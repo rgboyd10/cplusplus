@@ -37,14 +37,14 @@ using namespace std;
 class Box
 {
 private:
-  long long l, b, h;
+  int l, b, h;
   
 public:
   Box()
   {
-    int l = 0;
-    int b = 0;
-    int h = 0;
+    l = 0;
+    b = 0;
+    h = 0;
   };
 
   Box(int length, int breadth, int height)
@@ -54,11 +54,11 @@ public:
     h = height;
   };
   
-  Box(const Box& r)
+  Box(const Box& B)
   {
-    l = r.l;
-    h = r.h;
-    b = r.b;
+    l = B.l;
+    h = B.h;
+    b = B.b;
   };
 
   int  getLength()
@@ -81,30 +81,16 @@ public:
   	return (long long)l*b*h;
   }
 
-  friend bool operator<(Box& b)
+  friend bool operator<(Box& A, Box& B)
   {
-    Box a;
-    int bvol;
-    bvol = b.l * b.h * b.b;
-    int avol;
-    avol = a.l * a.h * a.b;
-    bool lessthan = bvol < avol;
-    bool greaterthan = avol < bvol;
-    
-    if(a.l < b.l)
-      {
-      return greaterthan;
-      }
-    else if(a.b < b.b && a.l == b.l)
-      {
-	return greaterthan;
-      }
-    else if(a.h < b.h && a.b == b.b && a.l == b.l)
-      {
-	return greaterthan;
-      }
-    else
-      return lessthan;
+  	if((A.l < B.l) || ((A.b < B.b) && (A.l == B.l)) || ((A.h < B.h) && (A.l == B.l) && (A.b == B.b)))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
   }
 
   friend ostream& operator << (ostream& out, const Box& B)

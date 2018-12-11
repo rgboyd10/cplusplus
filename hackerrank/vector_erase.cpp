@@ -56,9 +56,9 @@ int main()
       vec.push_back(val);
     }
   cin >> pos;
-  vec.erase(vec.begin() + pos);
   cin >> start >> finish;
-  vec.erase(vec.begin() + start, vec.begin() + finish);
+	
+  vec.erase(vec.begin() + start - 1, vec.end() - (finish - start));
 
   cout << vec.size() << endl;
   
