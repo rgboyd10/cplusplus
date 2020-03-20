@@ -4,20 +4,23 @@ using namespace std;
 
 int FirstFactorial(int num)
 {
-	int result;
-	for(num; num >= 0; num--)
+	int result = num;
+	num = num - 1;	
+	while(num > 0)
 	{
 		result *= num;
+		num--;
 	}
-	num = result;
-	return num;
 
+	return result;
 }
 
 int main(void) { 
    
   // keep this function call here
-  cout << FirstFactorial(gets(stdin));
+  int num;
+  cin >> num;
+  cout << FirstFactorial(num) << endl;
   return 0;
     
 }
