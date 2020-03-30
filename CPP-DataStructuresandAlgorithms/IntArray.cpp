@@ -84,7 +84,7 @@ int main()
 		cout << '\n';
 
 		cout << "Array size " << a.Size() << "\n";
-		cout << "Please enter an array index: ";
+		cout << "Please enter an array index to search: ";
 		int index{};
 		cin >> index;
 
